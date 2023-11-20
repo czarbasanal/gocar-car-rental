@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="assets/gocar-branding/gocar-logo-full.png" alt="Gocar" width="220" height="52">
@@ -7,19 +7,26 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">About us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">How to Rent</a>
-                </li>
 
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="width: 492px;">
+
+
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav nav-pills nav-fill ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Much longer nav link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="d-flex" role="login">
+                <button class="btn btn-primary" type="submit">Login</button>
             </form>
         </div>
     </div>
