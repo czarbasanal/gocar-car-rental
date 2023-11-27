@@ -7,7 +7,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { Signup2Component } from './signup2/signup2.component';
+import { SignupDetailsComponent } from './signup-details/signup-details.component';
+import { SignupDetails2Component } from './signup-details-2/signup-details-2.component';
+import { SignupCommunicationService } from './signup-communication.service';
 
 @NgModule({
   declarations: [
@@ -15,14 +17,15 @@ import { Signup2Component } from './signup2/signup2.component';
     NavbarComponent,
     LoginComponent,
     SignupComponent,
-    Signup2Component
+    SignupDetailsComponent,
+    SignupDetails2Component
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [SignupCommunicationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
