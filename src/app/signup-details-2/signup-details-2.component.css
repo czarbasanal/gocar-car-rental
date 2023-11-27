@@ -41,6 +41,10 @@
     font-weight: 400;
 }
 
+.form-input:focus {
+    outline: none;
+}
+
 .form-button {
     width: 364px;
     height: 52px;

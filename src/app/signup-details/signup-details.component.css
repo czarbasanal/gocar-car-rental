@@ -42,6 +42,10 @@
     font-weight: 400;
 }
 
+.form-input:focus {
+    outline: none;
+}
+
 .bi-bi-arrow-right-short {
     margin-bottom: 2px;
 }
