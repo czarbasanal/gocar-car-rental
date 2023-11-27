@@ -1,3 +1,9 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     background: #F6F7F9;
 }
@@ -5,14 +11,15 @@ body {
 .LogInPage {
     width: 100%;
     height: 100%;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scale: 0.7;
 }
 
 .LogInContainer {
     width: 1409px;
     height: 734px;
-    left: 256px;
-    top: 173px;
     position: absolute;
     background: white;
     box-shadow: 3px 8px 20px 4px rgba(81.81, 81.81, 81.81, 0.16);
@@ -32,14 +39,12 @@ body {
 }
 
 .Welcome {
-    height: 51px;
     color: #1C1C1C;
     font-size: 72px;
     font-weight: 700;
 }
 
 .Welcome-message {
-    height: 24px;
     color: #1C1C1C;
     font-size: 16px;
     font-weight: 400;
@@ -70,13 +75,15 @@ body {
 .form-input {
     width: 300px;
     height: 52px;
-    
     border: none;
     background: #F2F2F2;
-    
     color: #1C1C1C;
     font-size: 12px;
     font-weight: 400;
+}
+
+.form-input:focus {
+    outline: none;
 }
 
 .form-button {
@@ -133,7 +140,7 @@ body {
 
 .side-text {
     height: 47px;
-    margin-top: 150px;
+    margin-top: 136px;
     margin-left: 725px;
     color: #596780;
     font-size: 32px;
@@ -142,3 +149,26 @@ body {
     position: absolute;
 }
 
+@media screen and (max-width: 1100px){
+    .triangle, .side-text, .car-model {
+        display: none;
+    }
+    .gocar-logo {
+        width: 350px;
+        margin-top: 0px;
+        margin-left: 135px;
+        position: absolute;
+    }
+    .LogInDetails {
+        top: 230px;
+    }
+
+    .LogInContainer {
+        width: 608px;
+        height: 797px;
+        position: absolute;
+        background: white;
+        box-shadow: 3px 8px 20px 4px rgba(81.81, 81.81, 81.81, 0.16);
+        border-radius: 42px;
+    }
+}
