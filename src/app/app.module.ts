@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GridCardComponent } from './grid-card/grid-card.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupDetailsComponent } from './signup-details/signup-details.component';
@@ -15,6 +16,7 @@ import { SignupCommunicationService } from './signup-communication.service';
   declarations: [
     AppComponent,
     NavbarComponent,
+    GridCardComponent,
     LoginComponent,
     SignupComponent,
     SignupDetailsComponent,
