@@ -3,19 +3,21 @@
     <form action="#" method="post">
         <div class="driver-license">
             <input type="license" class="form-input" placeholder="Driver's License Photo">
-        
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16">
-                <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0V3z"/>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-paperclip"
+                viewBox="0 0 16 16">
+                <path
+                    d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0V3z" />
             </svg>
 
         </div>
         <div class="password">
-            <input type="password" class="form-input" placeholder="Password">
+            <input type="password" class="form-input" placeholder="Password" name="password" [(ngModel)]="password">
         </div>
         <div class="confirm-password">
             <input type="password" class="form-input" placeholder="Confirm Password">
         </div>
-        <button type="submit" class="form-button">Sign up</button>
+        <button type="submit" class="form-button" (click)="register()">Sign up</button>
     </form>
     <div class="divider"></div>
     <div class="bottom-text">

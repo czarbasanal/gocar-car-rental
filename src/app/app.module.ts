@@ -11,6 +11,7 @@ import { SignupComponent } from './signup/signup.component';
 import { SignupDetailsComponent } from './signup-details/signup-details.component';
 import { SignupDetails2Component } from './signup-details-2/signup-details-2.component';
 import { SignupCommunicationService } from './signup-communication.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SignupCommunicationService } from './signup-communication.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [SignupCommunicationService],
   bootstrap: [AppComponent]
