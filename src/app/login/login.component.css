@@ -46,9 +46,9 @@ body {
 
 .Welcome-message {
     color: #1C1C1C;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
-    margin-bottom: 35px;
+    margin-bottom: 40px;
 }
 
 .Email,
@@ -111,11 +111,19 @@ body {
     background: #1965c1;
 }
 
-.bottom-text {
+.bottom-text,
+.forgot-password {
     height: 21px;
     color: #1C1C1C;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
+    text-decoration: none;
+}
+
+
+.register-here {
+    text-decoration: none;
+    font-weight: 600;
 }
 
 .divider {
@@ -167,13 +175,13 @@ body {
 
     .gocar-logo {
         width: 300px;
-        margin-top: 0px;
-        margin-left: 135px;
+        margin-top: 30px;
+        margin-left: 250px;
         position: absolute;
     }
 
     .LogInDetails {
-        top: 230px;
+        top: 200px;
     }
 
     .LogInContainer {

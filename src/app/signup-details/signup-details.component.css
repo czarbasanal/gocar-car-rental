@@ -17,7 +17,7 @@
     color: #1C1C1C;
     font-size: 72px;
     font-weight: 700;
-    margin-bottom: 71px;
+    margin-bottom: 100px;
 }
 
 .lastname,
@@ -68,8 +68,13 @@
 .bottom-text {
     height: 21px;
     color: #1C1C1C;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
+}
+
+.login-here {
+    text-decoration: none;
+    font-weight: 600;
 }
 
 .divider {
