@@ -74,6 +74,12 @@ body {
     position: absolute;
 }
 
+.bi-bi-arrow-left-short:hover {
+    cursor: pointer;
+}
+
+
+
 .form-input {
     width: 300px;
     height: 52px;
@@ -128,16 +134,16 @@ body {
 }
 
 .gocar-logo {
-    width: 350px;
-    margin-top: -100px;
-    margin-left: 1043px;
+    width: 300px;
+    margin-top: 30px;
+    margin-left: 1050px;
     position: absolute;
 }
 
 .car-model {
-    width: 880px;
-    margin-top: 189px;
-    margin-left: 549px;
+    width: 1740px;
+    margin-top: -100px;
+    margin-left: -100px;
 }
 
 .side-text {
@@ -160,7 +166,7 @@ body {
     }
 
     .gocar-logo {
-        width: 350px;
+        width: 300px;
         margin-top: 0px;
         margin-left: 135px;
         position: absolute;
