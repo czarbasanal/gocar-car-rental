@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "gocar-car-rental": {
+      "hosting": {
+        "gocar-car-rental": [
+          "gocar-car-rental"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "gocar-car-rental"
+  }
+}
