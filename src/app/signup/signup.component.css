@@ -28,9 +28,9 @@ body {
 }
 
 .gocar-logo {
-    width: 350px;
-    margin-top: -100px;
-    margin-left: 1043px;
+    width: 300px;
+    margin-top: 30px;
+    margin-left: 1050px;
     position: absolute;
 }
 
@@ -57,16 +57,25 @@ body {
     position: absolute;
 }
 
-@media screen and (max-width: 1100px){
-    .triangle, .side-text, .car-model {
+.bi-bi-arrow-left-short:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1100px) {
+
+    .triangle,
+    .side-text,
+    .car-model {
         display: none;
     }
+
     .gocar-logo {
-        width: 350px;
-        margin-top: 0px;
-        margin-left: 135px;
+        width: 300px;
+        margin-top: 30px;
+        margin-left: 250px;
         position: absolute;
     }
+
     .SignUpContainer {
         width: 608px;
         height: 797px;
