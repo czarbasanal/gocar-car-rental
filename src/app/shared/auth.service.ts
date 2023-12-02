@@ -14,7 +14,7 @@ export class AuthService {
   login(email: string, password: string) {
     this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
       localStorage.setItem('token', 'true');
-      this.router.navigate(['grid-card']);
+      this.router.navigate(['main-feed']);
     }, err => {
       alert(err.message);
       this.router.navigate(['login']);
