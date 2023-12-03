@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { Signup2Component } from './signup2/signup2.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { Signup2Component } from './signup2/signup2.component';
     NavbarComponent,
     LoginComponent,
     SignupComponent,
-    Signup2Component
+    Signup2Component,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
