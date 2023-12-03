@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { UserMainFeedComponent } from './user-main-feed/user-main-feed.component';
 import { UserSidebarComponent } from './user-main-feed/user-sidebar/user-sidebar.component';
 import { UserNavbarComponent } from './user-main-feed/user-navbar/user-navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UserNavbarComponent } from './user-main-feed/user-navbar/user-navbar.co
     UserNavbarComponent,
     GridCardComponent,
     UserMainFeedComponent,
-    UserSidebarComponent
+    UserSidebarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
