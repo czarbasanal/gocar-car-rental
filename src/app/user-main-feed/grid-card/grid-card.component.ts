@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./grid-card.component.css']
 })
 export class GridCardComponent {
-  toggleButtonText: string = 'See More';
+  toggleButtonText: string = 'Show More Cars';
 
   toggleCollapse(): void {
-    this.toggleButtonText = this.toggleButtonText === 'See More' ? 'See Less' : 'See More';
+    this.toggleButtonText = this.toggleButtonText === 'Show More Cars' ? 'Show Less Cars' : 'Show More Cars';
   }
 }
