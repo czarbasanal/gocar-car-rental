@@ -1,0 +1,23 @@
+* {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+}
+
+.nav-link {
+    color: #596780;
+
+}
+
+.nav-item:hover {
+    cursor: pointer;
+}
+
+.btn-primary {
+    font-weight: 500;
+}
+
+.rounded-btn {
+    border-radius: 10px;
+}

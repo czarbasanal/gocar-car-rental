@@ -1,9 +1,26 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+p {
+    margin: 0;
+}
+
+ul,
+ol {
+    list-style-type: none;
+}
+
 .YourJourneyText {
     font-size: 48px;
     color: #596780;
-    margin: 0;
     line-height: 59.04px;
+    font-weight: 300;
     word-wrap: break-word;
+}
+
+.LandingPageTop {
+    background-color: #F6F7F9;
 }
 
 .FindText {
@@ -24,6 +41,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-left: 50px;
 }
 
 .WeOfferText {
@@ -40,6 +58,7 @@
 
 .FirstDisplay {
     display: flex;
+    position: relative;
 }
 
 .threeCars {
@@ -47,24 +66,142 @@
 }
 
 .CarCompanyLogos {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.rentCards {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 71px;
 }
 
-.rentCards>p:first-child {
-    margin-right: 10px;
+.CarCompanyLogos div {
+    height: 100%;
+    align-items: center;
 }
 
-.rentCards>p:last-child {
-    color: #2081F9;
+.CarCompanyLogos img {
+    max-height: 100%;
+    width: auto;
 }
 
-.playStore,
-.appStore {
+.CarCompanyLogos img:hover {
+    transform: scale(1.15);
     cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.playStore:hover,
+.appStore:hover {
+    cursor: pointer;
+    transform: scale(1.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.content-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.LeftContainer {
+    z-index: 2;
+    position: relative;
+}
+
+.RightContainer {
+    position: absolute;
+    top: 0;
+    left: 290px;
+    z-index: 1;
+}
+
+.extend {
+    height: 123px;
+}
+
+.HowToRent {
+    margin-top: 150px;
+    margin-bottom: 82px;
+}
+
+.HowToRent :first-child {
+    color: #596780;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 39.36px;
+    text-align: center;
+}
+
+.HowToRent :nth-child(2) {
+    color: #0072FF;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 59.04px;
+    text-align: center;
+}
+
+.HowToRent :nth-child(3) {
+    color: #F99820;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 59.04px;
+    text-align: center;
+}
+
+.Easy {
+    position: relative
+}
+
+.Easy img {
+    position: absolute;
+}
+
+.icon-container {
+    width: 230px;
+    height: 230px;
+    background: white;
+    box-shadow: 0px 6px 25px 6px rgba(0, 0, 0, 0.14);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
+
+.icon-container2 {
+    width: 230px;
+    height: 230px;
+    background: rgb(14, 122, 255);
+    background: linear-gradient(328deg, #0072FF -30%, rgba(92, 147, 215, 0.00) 182.92%, rgba(14, 122, 255, 0.00) 182.94%);
+    box-shadow: 0px 6px 25px 6px rgba(0, 0, 0, 0.14);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
+
+.SetPickupCard :nth-child(2),
+.BookCarCard :nth-child(2),
+.ChooseCarCard :nth-child(2) {
+    color: #596780;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29.52px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.SetPickupCard :last-child,
+.BookCarCard :last-child,
+.BookCarCard :nth-last-child(2),
+.ChooseCarCard :last-child {
+    color: #90A3BF;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+}
+
+.Steps {
+    justify-content: space-between;
 }
