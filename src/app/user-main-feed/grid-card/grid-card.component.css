@@ -22,6 +22,10 @@ p.price-label {
     font-weight: 700;
 }
 
+.card-img-overlay {
+    height: 100px;
+}
+
 .car-brand,
 .car-model {
     margin: 0;
