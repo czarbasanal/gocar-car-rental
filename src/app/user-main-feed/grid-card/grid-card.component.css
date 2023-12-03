@@ -1,3 +1,5 @@
+/* styling */
+
 .specification {
     width: 24px;
     height: auto;
@@ -18,4 +20,36 @@ p.price-label {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 20px;
     font-weight: 700;
+}
+
+.car-brand,
+.car-model {
+    margin: 0;
+}
+
+.car-brand {
+    font-size: 11px;
+}
+
+.car-model {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.car-type {
+    margin-top: 2px;
+    font-size: 16px;
+}
+
+
+
+/* animations */
+
+.favorite-car-icon {
+    transition: transform 0.3s ease-in-out;
+}
+
+.favorite-car-icon:hover {
+    cursor: pointer;
+    transform: translateY(-5px);
 }
