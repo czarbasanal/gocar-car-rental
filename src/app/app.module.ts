@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GridCardComponent } from './user-main-feed/grid-card/grid-card.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignupDetailsComponent } from './signup-details/signup-details.component';
 import { SignupDetails2Component } from './signup-details-2/signup-details-2.component';
 import { SignupCommunicationService } from './signup-communication.service';
@@ -16,7 +17,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { UserMainFeedComponent } from './user-main-feed/user-main-feed.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +24,7 @@ import { UserMainFeedComponent } from './user-main-feed/user-main-feed.component
     GridCardComponent,
     LoginComponent,
     SignupComponent,
+    LandingPageComponent
     SignupDetailsComponent,
     SignupDetails2Component,
     UserMainFeedComponent
