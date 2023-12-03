@@ -5,95 +5,19 @@ body {
 .SignUpPage {
     width: 100%;
     height: 100%;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scale: 0.7;
 }
 
 .SignUpContainer {
     width: 1409px;
     height: 734px;
-    left: 256px;
-    top: 173px;
     position: absolute;
     background: white;
     box-shadow: 3px 8px 20px 4px rgba(81.81, 81.81, 81.81, 0.16);
     border-radius: 42px;
-}
-
-.SignUpDetails {
-    width: 364px;
-    height: 465px;
-    left: 122px;
-    top: 134px;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.signup {
-    width: 364px;
-    text-align: start;
-    height: 51px;
-    color: #1C1C1C;
-    font-size: 72px;
-    font-weight: 700;
-    margin-bottom: 71px;
-}
-
-.lastname, .firstname, .email {
-    width: 364px;
-    height: 52px;
-    background: #F2F2F2;
-    display: flex;
-    align-items: center;
-    margin-bottom: 24px;
-    border-radius: 13px;
-}
-
-
-.form-input {
-    width: 300px;
-    height: 52px;
-    margin-left: 18px;
-    border: none;
-    background: #F2F2F2;
-    color: #1C1C1C;
-    font-size: 12px;
-    font-weight: 400;
-}
-
-.bi-bi-arrow-right-short {
-    top: 342px;
-    margin-left: 10px;
-    position: absolute;
-}
-
-.form-button {
-    width: 364px;
-    height: 52px;
-    border-radius: 13px;
-    border: none;
-    margin-top: 16px;
-    margin-bottom: 34px;
-    background-color: #FFF;
-    color: #F99820;
-    font-size: 24px;
-    font-weight: 600;
-}
-
-.bottom-text {
-    height: 21px;
-    color: #1C1C1C;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-.divider {
-    width: 364px;
-    height: 1px;
-    background: #F0EDFF;
-    margin-bottom: 23px;
 }
 
 .triangle {
@@ -104,9 +28,9 @@ body {
 }
 
 .gocar-logo {
-    width: 350px;
-    margin-top: -100px;
-    margin-left: 1043px;
+    width: 300px;
+    margin-top: 30px;
+    margin-left: 1050px;
     position: absolute;
 }
 
@@ -118,7 +42,7 @@ body {
 
 .side-text {
     height: 47px;
-    margin-top: 150px;
+    margin-top: 136px;
     margin-left: 725px;
     color: #596780;
     font-size: 32px;
@@ -131,4 +55,33 @@ body {
     margin-top: 54px;
     margin-left: 54px;
     position: absolute;
+}
+
+.bi-bi-arrow-left-short:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1100px) {
+
+    .triangle,
+    .side-text,
+    .car-model {
+        display: none;
+    }
+
+    .gocar-logo {
+        width: 300px;
+        margin-top: 30px;
+        margin-left: 250px;
+        position: absolute;
+    }
+
+    .SignUpContainer {
+        width: 608px;
+        height: 797px;
+        position: absolute;
+        background: white;
+        box-shadow: 3px 8px 20px 4px rgba(81.81, 81.81, 81.81, 0.16);
+        border-radius: 42px;
+    }
 }
