@@ -1,17 +1,17 @@
 <div class="SignUpDetails">
     <div class="signup">Sign up</div>
-    <form action="#" method="post">
+    <form action="#" method="post" (submit)="register()">
         <div class="email">
-            <input type="email" class="form-input" placeholder="Email" name="email" [(ngModel)]="email">
+            <input type="email" class="form-input" placeholder="Email" name="email" [(ngModel)]="userDetails.email">
         </div>
 
         <div class="password">
-            <input type="password" class="form-input" placeholder="Password" name="password" [(ngModel)]="password">
+            <input type="password" class="form-input" placeholder="Password" name="password" [(ngModel)]="userDetails.password">
         </div>
         <div class="confirm-password">
-            <input type="password" class="form-input" placeholder="Confirm Password">
+            <input type="password" class="form-input" placeholder="Confirm Password" name="confirmPassword" [(ngModel)]="confirmPassword">
         </div>
-        <button type="submit" class="form-button" (click)="register()">Sign up</button>
+        <button type="submit" class="form-button">Sign up</button>
     </form>
     <div class="divider"></div>
     <div class="bottom-text">
