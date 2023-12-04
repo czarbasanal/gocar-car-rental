@@ -17,6 +17,11 @@ export class SignupComponent implements OnInit{
     this.signupCommunicationService.detailsButtonClick$.subscribe(() => {
       this.toggleDetails();
     });
+    this.resetComponentState();
+  }
+
+  private resetComponentState() {
+    this.showDetails = true;
   }
 
   toggleDetails() {
@@ -30,4 +35,5 @@ export class SignupComponent implements OnInit{
       this.toggleDetails();
     }
   }
+  
 }

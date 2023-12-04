@@ -32,6 +32,32 @@
     border-radius: 13px;
 }
 
+.icon > input
+{
+    display: none;
+}
+
+.icon svg
+{
+    width: 80px;
+    cursor: pointer;
+}
+.license {
+    width: 300px;
+    height: 52px;
+    margin-left: 18px;
+    border: none;
+    background: #F2F2F2;
+    color: #6f6e6e;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 
 .form-input {
     width: 300px;

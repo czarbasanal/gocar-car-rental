@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
+import { UserDetails } from './shared/user-details.model';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class SignupCommunicationService {
-  private detailsButtonClickSubject = new Subject<void>();
+  private detailsButtonClickSubject = new ReplaySubject<UserDetails>(1);
 
   detailsButtonClick$ = this.detailsButtonClickSubject.asObservable();
 
-  notifyDetailsButtonClick() {
-    this.detailsButtonClickSubject.next();
+  notifyDetailsButtonClick(userDetails: UserDetails) {
+    this.detailsButtonClickSubject.next(userDetails);
   }
 }

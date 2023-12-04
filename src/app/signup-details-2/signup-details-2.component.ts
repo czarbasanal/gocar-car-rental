@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/auth.service';
+import { UserDetails } from '../shared/user-details.model';
+import { SignupCommunicationService } from '../signup-communication.service';
 
 @Component({
   selector: 'app-signup-details-2',
@@ -8,30 +10,43 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class SignupDetails2Component implements OnInit {
 
-  email: string = '';
-  password: string = '';
+  confirmPassword: string = '';
+  userDetails!: UserDetails;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private signupCommunicationService: SignupCommunicationService) { 
+  }
 
   ngOnInit(): void {
+    this.signupCommunicationService.detailsButtonClick$.subscribe(
+      (userDetails: UserDetails) => {
+        this.userDetails = userDetails;
+      }
+    );
   }
 
   register() {
-
-    if (this.email == '') {
+    if (this.userDetails.email == '') {
       alert('Please enter email');
       return;
     }
 
-    if (this.password == '') {
+    if (this.userDetails.password == '') {
       alert('Please enter password');
       return;
     }
 
-    this.auth.register(this.email, this.password);
+    if (this.confirmPassword == '') {
+      alert('Please confirm your password');
+      return;
+    }
 
-    this.email = '';
-    this.password = '';
+    if (this.userDetails.password !== this.confirmPassword) {
+      alert("Password and Confirm Password do not match.");
+      return;
+    }
+
+    this.auth.register(this.userDetails);
+
+    this.userDetails == null;
   }
-
 }
