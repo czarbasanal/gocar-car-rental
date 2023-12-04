@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider } from '@angular/fire/auth'
+import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider } from 'firebase/auth'
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { UserDetails } from './user-details.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private fireauth: AngularFireAuth, private router: Router) { }
+  constructor(
+    private fireauth: AngularFireAuth, 
+    private firestore: AngularFirestore,
+    private router: Router) 
+    { }
 
   // login method
   login(email: string, password: string) {
@@ -22,15 +28,23 @@ export class AuthService {
   }
 
   // register method
-  register(email: string, password: string) {
-    this.fireauth.createUserWithEmailAndPassword(email, password).then(res => {
+  register(userDetails: UserDetails) {
+    this.fireauth.createUserWithEmailAndPassword(userDetails.email, userDetails.password).then(res => {
+      // Access userDetails.firstname and userDetails.lastname here
+      const { firstname, lastname } = userDetails;
+      const uid = res.user?.uid;
+      this.firestore.collection('users').add({
+        userDetails,
+        uid
+      });
+  
       alert('Registration Successful');
       // this.sendEmailForVarification(res.user);
       this.router.navigate(['login']);
     }, err => {
       alert(err.message);
       this.router.navigate(['signup']);
-    })
+    });
   }
 
   // sign out

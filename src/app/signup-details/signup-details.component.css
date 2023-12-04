@@ -1,0 +1,117 @@
+.SignUpDetails {
+    width: 364px;
+    height: 465px;
+    left: 122px;
+    top: 134px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup {
+    width: 364px;
+    text-align: start;
+    height: 51px;
+    color: #1C1C1C;
+    font-size: 72px;
+    font-weight: 700;
+    margin-bottom: 100px;
+}
+
+.lastname,
+.firstname,
+.driver-license {
+    width: 364px;
+    height: 52px;
+    background: #F2F2F2;
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    border-radius: 13px;
+}
+
+.icon > input
+{
+    display: none;
+}
+
+.icon svg
+{
+    width: 80px;
+    cursor: pointer;
+}
+.license {
+    width: 300px;
+    height: 52px;
+    margin-left: 18px;
+    border: none;
+    background: #F2F2F2;
+    color: #6f6e6e;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.form-input {
+    width: 300px;
+    height: 52px;
+    margin-left: 18px;
+    border: none;
+    background: #F2F2F2;
+    color: #1C1C1C;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.form-input:focus {
+    outline: none;
+}
+
+.bi-bi-arrow-right-short {
+    margin-bottom: 2px;
+}
+
+.form-button {
+    width: 364px;
+    height: 52px;
+    border-radius: 13px;
+    border: none;
+    margin-top: 16px;
+    margin-bottom: 34px;
+    background-color: #FFF;
+    color: #F99820;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.bottom-text {
+    height: 21px;
+    color: #1C1C1C;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.login-here {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.divider {
+    width: 364px;
+    height: 1px;
+    background: #F0EDFF;
+    margin-bottom: 23px;
+}
+
+@media screen and (max-width: 1100px) {
+    .SignUpDetails {
+        top: 230px;
+    }
+}
