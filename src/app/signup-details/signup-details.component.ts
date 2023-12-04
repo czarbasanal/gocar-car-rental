@@ -24,9 +24,10 @@ export class SignupDetailsComponent {
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (file) {
-      const imagePath = file.name;
+      const imageName = file.name;
+      const imagePath = `assets/photos/${imageName}`;
     this.userDetails.imagePath = imagePath;
-    this.uploadedFileName = file.name;
+    this.uploadedFileName = imageName;
     }
   }
 
