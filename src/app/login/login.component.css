@@ -1,3 +1,9 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     background: #F6F7F9;
 }
@@ -5,14 +11,15 @@ body {
 .LogInPage {
     width: 100%;
     height: 100%;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scale: 0.7;
 }
 
 .LogInContainer {
     width: 1409px;
     height: 734px;
-    left: 256px;
-    top: 173px;
     position: absolute;
     background: white;
     box-shadow: 3px 8px 20px 4px rgba(81.81, 81.81, 81.81, 0.16);
@@ -32,21 +39,20 @@ body {
 }
 
 .Welcome {
-    height: 51px;
     color: #1C1C1C;
     font-size: 72px;
     font-weight: 700;
 }
 
 .Welcome-message {
-    height: 24px;
     color: #1C1C1C;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
-    margin-bottom: 35px;
+    margin-bottom: 40px;
 }
 
-.Email, .Password {
+.Email,
+.Password {
     width: 364px;
     height: 52px;
     background: #F2F2F2;
@@ -56,7 +62,8 @@ body {
     border-radius: 13px;
 }
 
-.bi-bi-person, .bi-bi-lock {
+.bi-bi-person,
+.bi-bi-lock {
     margin-left: 18px;
     margin-right: 6px;
 }
@@ -67,16 +74,24 @@ body {
     position: absolute;
 }
 
+.bi-bi-arrow-left-short:hover {
+    cursor: pointer;
+}
+
+
+
 .form-input {
     width: 300px;
     height: 52px;
-    
     border: none;
     background: #F2F2F2;
-    
     color: #1C1C1C;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
+}
+
+.form-input:focus {
+    outline: none;
 }
 
 .form-button {
@@ -96,11 +111,19 @@ body {
     background: #1965c1;
 }
 
-.bottom-text {
+.bottom-text,
+.forgot-password {
     height: 21px;
     color: #1C1C1C;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
+    text-decoration: none;
+}
+
+
+.register-here {
+    text-decoration: none;
+    font-weight: 600;
 }
 
 .divider {
@@ -119,21 +142,21 @@ body {
 }
 
 .gocar-logo {
-    width: 350px;
-    margin-top: -100px;
-    margin-left: 1043px;
+    width: 300px;
+    margin-top: 30px;
+    margin-left: 1050px;
     position: absolute;
 }
 
 .car-model {
-    width: 880px;
-    margin-top: 189px;
-    margin-left: 549px;
+    width: 1740px;
+    margin-top: -100px;
+    margin-left: -100px;
 }
 
 .side-text {
     height: 47px;
-    margin-top: 150px;
+    margin-top: 136px;
     margin-left: 725px;
     color: #596780;
     font-size: 32px;
@@ -142,3 +165,31 @@ body {
     position: absolute;
 }
 
+@media screen and (max-width: 1100px) {
+
+    .triangle,
+    .side-text,
+    .car-model {
+        display: none;
+    }
+
+    .gocar-logo {
+        width: 300px;
+        margin-top: 30px;
+        margin-left: 250px;
+        position: absolute;
+    }
+
+    .LogInDetails {
+        top: 200px;
+    }
+
+    .LogInContainer {
+        width: 608px;
+        height: 797px;
+        position: absolute;
+        background: white;
+        box-shadow: 3px 8px 20px 4px rgba(81.81, 81.81, 81.81, 0.16);
+        border-radius: 42px;
+    }
+}

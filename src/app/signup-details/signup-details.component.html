@@ -1,0 +1,34 @@
+<div class="SignUpDetails">
+    <div class="signup">Sign up</div>
+    <form (submit)="onFormSubmit($event)">
+        <div class="lastname">
+            <input type="lastname" class="form-input" placeholder="Lastname">
+        </div>
+        <div class="firstname">
+            <input type="firstname" class="form-input" placeholder="Firstname">
+        </div>
+        <div class="driver-license">
+            <input type="license" class="form-input" placeholder="Driver's License Photo">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-paperclip"
+                viewBox="0 0 16 16">
+                <path
+                    d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0V3z" />
+            </svg>
+
+        </div>
+        <button class="form-button">next
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                class="bi-bi-arrow-right-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
+            </svg>
+
+        </button>
+    </form>
+    <div class="divider"></div>
+    <div class="bottom-text">
+        Already have an account? <a routerLink="/login" class="login-here">Login here</a>
+    </div>
+</div>

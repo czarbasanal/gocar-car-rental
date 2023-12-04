@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "gocar-car-rental",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}
