@@ -83,18 +83,28 @@ ol {
     width: auto;
 }
 
-.CarCompanyLogos img:hover {
-    transform: scale(1.15);
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
+.playStore,
+.appStore {
+    transition: transform 0.5s ease-in-out;
 }
 
 .playStore:hover,
 .appStore:hover {
+    transform: scale(1.05);
     cursor: pointer;
-    transform: scale(1.15);
-    transition: transform 0.3s ease-in-out;
+    transition: transform .3s ease-in-out;
 }
+
+.CarCompanyLogos img {
+    transition: transform 0.5s ease-in-out;
+}
+
+.CarCompanyLogos img:hover {
+    transform: scale(1.15);
+    cursor: pointer;
+    transition: transform .3s ease-in-out;
+}
+
 
 .content-wrapper {
     width: 100%;
