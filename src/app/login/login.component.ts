@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor(private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -38,5 +39,7 @@ export class LoginComponent implements OnInit {
   signInWithGoogle() {
     this.auth.googleSignIn();
   }
-
+  goToLanding() {
+    this.router.navigate(['landing-page']);
+  }
 }

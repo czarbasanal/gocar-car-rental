@@ -5,11 +5,9 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { UserMainFeedComponent } from './user-main-feed/user-main-feed.component';
 import { GridCardComponent } from './user-main-feed/grid-card/grid-card.component';
-import { LandingNavComponent } from './landing-nav/landing-nav.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing-page', pathMatch: 'full' },
-  { path: 'landing-nav', component: LandingNavComponent },
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
