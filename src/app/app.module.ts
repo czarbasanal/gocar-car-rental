@@ -30,6 +30,8 @@ import { getRemoteConfig, provideRemoteConfig } from '@angular/fire/remote-confi
 import { UserSidebarComponent } from './user-main-feed/user-sidebar/user-sidebar.component';
 import { UserNavbarComponent } from './user-main-feed/user-navbar/user-navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { FooterComponent } from './footer/footer.component';
     UserSidebarComponent,
     UserNavbarComponent,
     FooterComponent,
+    AdminSidebarComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,
