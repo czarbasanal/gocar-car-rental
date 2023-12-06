@@ -8,5 +8,5 @@ import { Component, computed, signal } from '@angular/core';
 export class AdminDashboardComponent {
 
   collapsed = signal(false);
-  sidenavWidth = computed(() => this.collapsed() ? '75px' : '320px');
+  sidenavWidth = computed(() => this.collapsed() ? '68px' : '320px');
 }

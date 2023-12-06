@@ -24,8 +24,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { CustomSidenavComponent } from './custom-sidenav/custom-sidenav.component';
+import { CustomSidenavComponent } from './admin-dashboard/custom-sidenav/custom-sidenav.component';
 import { MatListModule } from '@angular/material/list';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { InventoryComponent } from './pages/inventory/inventory.component';
+import { UsersComponent } from './pages/users/users.component';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
 
 
 
@@ -46,6 +50,10 @@ import { MatListModule } from '@angular/material/list';
     FooterComponent,
     AdminDashboardComponent,
     CustomSidenavComponent,
+    AnalyticsComponent,
+    InventoryComponent,
+    UsersComponent,
+    TransactionsComponent,
   ],
   imports: [
     BrowserModule,
