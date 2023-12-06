@@ -1,0 +1,18 @@
+<div class="sidenav-header">
+    <img [width]="profilePicSize()" [height]="profilePicSize()" src="/assets/gocar-branding/sample-admin-profile.png"
+        alt="Admin Profile">
+    <div class="header-text" [class.hide-header-text]="sideNavCollapsed()">
+        <h2>Welcome Admin!</h2>
+        <p>Czar Basanal</p>
+    </div>
+</div>
+<mat-nav-list class="navlinks">
+    <a mat-list-item *ngFor="let item of menuItems()">
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle *ngIf="!sideNavCollapsed()">{{ item.label }}</span>
+    </a>
+    <a mat-list-item class="logout">
+        <mat-icon matListItemIcon>exit_to_app</mat-icon>
+        <span matListItemTitle *ngIf="!sideNavCollapsed()">Logout</span>
+    </a>
+</mat-nav-list>

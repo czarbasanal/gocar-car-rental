@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AdminDashboardComponent {
 
+  collapsed = signal(false);
+  sidenavWidth = computed(() => this.collapsed() ? '75px' : '320px');
 }

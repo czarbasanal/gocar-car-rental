@@ -24,6 +24,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CustomSidenavComponent } from './custom-sidenav/custom-sidenav.component';
+import { MatListModule } from '@angular/material/list';
 
 
 
@@ -43,6 +45,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     UserNavbarComponent,
     FooterComponent,
     AdminDashboardComponent,
+    CustomSidenavComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    MatListModule,
   ],
   providers: [SignupCommunicationService, ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent]
