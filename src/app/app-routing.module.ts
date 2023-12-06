@@ -5,6 +5,10 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { UserMainFeedComponent } from './user-main-feed/user-main-feed.component';
 import { GridCardComponent } from './user-main-feed/grid-card/grid-card.component';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { InventoryComponent } from './pages/inventory/inventory.component';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing-page', pathMatch: 'full' },
@@ -13,6 +17,10 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'grid-card', component: GridCardComponent },
   { path: 'main-feed', component: UserMainFeedComponent },
+  { path: 'analytics', component: AnalyticsComponent },
+  { path: 'inventory', component: InventoryComponent },
+  { path: 'transactions', component: TransactionsComponent },
+  { path: 'users', component: UsersComponent },
 ];
 
 @NgModule({
