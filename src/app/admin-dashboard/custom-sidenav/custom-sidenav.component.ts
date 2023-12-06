@@ -1,6 +1,5 @@
 import { Component, Input, computed, signal } from '@angular/core';
 
-
 export type MenuItem = {
   icon: string;
   label: string;
@@ -13,7 +12,6 @@ export type MenuItem = {
   styleUrls: ['./custom-sidenav.component.css']
 })
 export class CustomSidenavComponent {
-
   sideNavCollapsed = signal(false);
   @Input() set collapsed(val: boolean) {
     this.sideNavCollapsed.set(val);
@@ -43,4 +41,5 @@ export class CustomSidenavComponent {
   ]);
 
   profilePicSize = computed(() => this.sideNavCollapsed() ? '40' : '100');
+
 }

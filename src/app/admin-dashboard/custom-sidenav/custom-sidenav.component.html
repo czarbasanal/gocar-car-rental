@@ -7,11 +7,13 @@
     </div>
 </div>
 <mat-nav-list class="navlinks">
-    <a mat-list-item *ngFor="let item of menuItems()" [routerLink]="item.route">
-        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+    <a mat-list-item class="menu-item" *ngFor="let item of menuItems()" [routerLink]="item.route"
+        routerLinkActive="selected-menu-item" #rla="routerLinkActive" [activated]="rla.isActive">
+        <mat-icon [fontSet]="rla.isActive ? 'material-icons' : 'material-icons-outlined'" matListItemIcon>{{ item.icon
+            }}</mat-icon>
         <span matListItemTitle *ngIf="!sideNavCollapsed()">{{ item.label }}</span>
     </a>
-    <a mat-list-item class="logout" routerLink="landing-page">
+    <a mat-list-item class="logout">
         <mat-icon matListItemIcon>exit_to_app</mat-icon>
         <span matListItemTitle *ngIf="!sideNavCollapsed()">Logout</span>
     </a>
