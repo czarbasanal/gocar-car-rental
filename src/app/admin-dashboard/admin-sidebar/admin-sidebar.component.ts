@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-sidebar.component.css']
 })
 export class AdminSidebarComponent {
+  toggled = false;
 
+  toggleSidebar() {
+    this.toggled = !this.toggled;
+  }
 }
