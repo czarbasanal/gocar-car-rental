@@ -20,9 +20,11 @@ import { UserSidebarComponent } from './user-main-feed/user-sidebar/user-sidebar
 import { UserNavbarComponent } from './user-main-feed/user-navbar/user-navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { AdminSidebarComponent } from './admin-dashboard/admin-sidebar/admin-sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 
 
 
@@ -41,9 +43,6 @@ import { MatIconModule } from '@angular/material/icon';
     UserNavbarComponent,
     FooterComponent,
     AdminDashboardComponent,
-    AdminSidebarComponent,
-
-
   ],
   imports: [
     BrowserModule,
@@ -52,6 +51,8 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     MatSidenavModule,
+    MatButtonModule,
+    MatToolbarModule,
     MatIconModule,
   ],
   providers: [SignupCommunicationService, ScreenTrackingService, UserTrackingService],
