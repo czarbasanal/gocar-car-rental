@@ -5,6 +5,12 @@
     line-height: 21px;
 }
 
+.navbar {
+
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.16);
+
+}
+
 .nav-link {
     color: #596780;
 

@@ -8,39 +8,129 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="width: 492px;">
+        <div class="search-bar">
+            <input class="search-input" type="text" placeholder="Search your ride here">
+            <div class="search-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+                        stroke="#596780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22 22L20 20" stroke="#596780" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+        </div>
 
-        <ul class="navbar-nav d-flex flex-row me-1 ">
-            <li class="nav-item me-3 me-lg-0">
-                <a class="nav-link text-white" href="#">
-                    <img src="assets/gocar-branding/Car.png" alt="" width="40" height="40">
+
+        <ul class="navbar-nav d-flex flex-row me-1 align-items-center">
+            <!-- CAR -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" id="carDropdown" role="button" (mouseenter)="openCarDropdown()"
+                    (mouseleave)="closeCarDropdown()" aria-haspopup="true" aria-expanded="false">
+                    <div class="icon-circle">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M29.3577 14.6621C28.8996 14.054 27.1977 13.6352 26.4777 12.5409C25.7577 11.4465 25.1683 9.07648 23.3358 8.16585C21.5033 7.25523 18.0008 6.9996 16.0008 6.9996C14.0008 6.9996 10.5008 7.2496 8.66582 8.16398C6.83082 9.07835 6.24394 11.4465 5.52394 12.539C4.80394 13.6315 3.10207 14.054 2.64394 14.6621C2.18582 15.2702 1.86332 19.1146 2.05957 20.9996C2.25582 22.8846 2.62207 23.9996 2.62207 23.9996H7.99707C8.87707 23.9996 9.16332 23.669 10.9633 23.4996C12.9383 23.3121 14.8758 23.2496 16.0008 23.2496C17.1258 23.2496 19.1258 23.3121 21.0996 23.4996C22.8996 23.6702 23.1952 23.9996 24.0658 23.9996H29.3783C29.3783 23.9996 29.7446 22.8846 29.9408 20.9996C30.1371 19.1146 29.8133 15.2702 29.3577 14.6621Z"
+                                fill="#596780" stroke="#F3F3FB" stroke-width="1.00189" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M28.51 23.9993H25V25.0021H28.51V23.9993Z" fill="#596780" />
+                            <path d="M7.011 23.9993H3.50098V25.0021H7.011V23.9993Z" fill="#596780" />
+                            <path
+                                d="M22.7798 19.3219C22.4105 18.895 21.2067 18.5388 19.613 18.3C18.0192 18.0613 17.438 17.9994 16.013 17.9994C14.588 17.9994 13.9398 18.1019 12.4123 18.3C10.8848 18.4981 9.73795 18.8506 9.24608 19.3219C8.50795 20.0369 9.5892 20.8394 10.438 20.9369C11.2605 21.0306 12.9048 20.9963 16.0198 20.9963C19.1348 20.9963 20.7792 21.0306 21.6017 20.9369C22.4492 20.8338 23.453 20.0869 22.7798 19.3219Z"
+                                fill="white" />
+                            <path
+                                d="M26.9772 15.1898C26.9737 15.1401 26.952 15.0935 26.9162 15.0589C26.8804 15.0242 26.8331 15.004 26.7834 15.0021C26.0447 14.9759 25.2948 15.0284 23.9644 15.4206C23.2857 15.6187 22.6483 15.9378 22.083 16.3625C21.9404 16.4739 21.9911 16.7747 22.17 16.8066C23.2665 16.9352 24.3696 17 25.4736 17.0005C26.136 17.0005 26.8196 16.8129 26.9466 16.2224C27.0113 15.882 27.0217 15.5335 26.9772 15.1898V15.1898Z"
+                                fill="white" />
+                            <path
+                                d="M5.02754 15.1898C5.03105 15.1401 5.05279 15.0935 5.08857 15.0589C5.12436 15.0242 5.17167 15.004 5.22144 15.0021C5.9601 14.9759 6.71003 15.0284 8.04038 15.4206C8.71911 15.6187 9.35647 15.9378 9.92177 16.3625C10.0644 16.4739 10.0137 16.7747 9.83483 16.8066C8.73829 16.9352 7.6352 17 6.53115 17.0005C5.86879 17.0005 5.18516 16.8129 5.05819 16.2224C4.99346 15.882 4.98311 15.5335 5.02754 15.1898V15.1898Z"
+                                fill="white" />
+                            <path d="M27 11.9994H28.0102" stroke="white" stroke-width="1.00189" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M3.99976 11.9994H5.00998" stroke="white" stroke-width="1.00189"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M4.875 13.1874C4.875 13.1874 7.77188 12.4374 16 12.4374C24.2281 12.4374 27.125 13.1874 27.125 13.1874"
+                                fill="#596780" />
+                            <path
+                                d="M4.875 13.1874C4.875 13.1874 7.77188 12.4374 16 12.4374C24.2281 12.4374 27.125 13.1874 27.125 13.1874"
+                                stroke="#596780" stroke-width="1.00189" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
                 </a>
+                <ul class="dropdown-menu dropdown-menu-end" [class.show]="isCarDropdownOpen"
+                    aria-labelledby="carDropdown" (mouseenter)="openCarDropdown()" (mouseleave)="closeCarDropdown()">
+                    <li *ngFor="let car of cars">
+                        <a class="dropdown-item" href="#">
+                            <img [src]="car.image" [alt]="car.name" width="30" height="30">
+                            {{ car.name }}
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li class="nav-item me-3 me-lg-0">
-                <a class="nav-link text-white" href="#">
-                    <img src="assets/gocar-branding/Like.png" alt="" width="40" height="40" class="me-1">
+            <!-- HEART -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" id="favDropDown" role="button" (mouseenter)="openFavDropdown()"
+                    (mouseleave)="closeFavDropdown()" aria-haspopup="true" aria-expanded="false">
+                    <div class="icon-circle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M16.44 3.10001C14.63 3.10001 13.01 3.98001 12 5.33001C10.99 3.98001 9.37 3.10001 7.56 3.10001C4.49 3.10001 2 5.60001 2 8.69001C2 9.88001 2.19 10.98 2.52 12C4.1 17 8.97 19.99 11.38 20.81C11.72 20.93 12.28 20.93 12.62 20.81C15.03 19.99 19.9 17 21.48 12C21.81 10.98 22 9.88001 22 8.69001C22 5.60001 19.51 3.10001 16.44 3.10001Z"
+                                fill="#596780" />
+                        </svg>
+
+                    </div>
                 </a>
+                <ul class="dropdown-menu dropdown-menu-end" [class.show]="isFavDropdownOpen"
+                    aria-labelledby="favDropdown" (mouseenter)="openFavDropdown()" (mouseleave)="closeFavDropdown()">
+                    <li *ngFor="let fav of favorites">
+                        <a class="dropdown-item" href="#">
+                            <img [src]="fav.image" [alt]="fav.name" width="30" height="30">
+                            {{ fav.name }}
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li class="nav-item me-3 me-lg-0">
-                <a class="nav-link text-white" href="#">
-                    <img src="assets/gocar-branding/Notification.png" alt="" width="40" height="40" class="me-1">
+            <!-- NOTIFICATION -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" id="notifDropdown" role="button" (mouseenter)="openNotifDropdown()"
+                    (mouseleave)="closeNotifDropdown()" aria-haspopup="true" aria-expanded="false">
+                    <div class="icon-circle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M19.3399 14.49L18.3399 12.83C18.1299 12.46 17.9399 11.76 17.9399 11.35V8.82C17.9399 6.47 16.5599 4.44 14.5699 3.49C14.0499 2.57 13.0899 2 11.9899 2C10.8999 2 9.91994 2.59 9.39994 3.52C7.44994 4.49 6.09994 6.5 6.09994 8.82V11.35C6.09994 11.76 5.90994 12.46 5.69994 12.82L4.68994 14.49C4.28994 15.16 4.19994 15.9 4.44994 16.58C4.68994 17.25 5.25994 17.77 5.99994 18.02C7.93994 18.68 9.97994 19 12.0199 19C14.0599 19 16.0999 18.68 18.0399 18.03C18.7399 17.8 19.2799 17.27 19.5399 16.58C19.7999 15.89 19.7299 15.13 19.3399 14.49Z"
+                                fill="#596780" />
+                            <path
+                                d="M14.8299 20.01C14.4099 21.17 13.2999 22 11.9999 22C11.2099 22 10.4299 21.68 9.87993 21.11C9.55993 20.81 9.31993 20.41 9.17993 20C9.30993 20.02 9.43993 20.03 9.57993 20.05C9.80993 20.08 10.0499 20.11 10.2899 20.13C10.8599 20.18 11.4399 20.21 12.0199 20.21C12.5899 20.21 13.1599 20.18 13.7199 20.13C13.9299 20.11 14.1399 20.1 14.3399 20.07C14.4999 20.05 14.6599 20.03 14.8299 20.01Z"
+                                fill="#596780" />
+                        </svg>
+                    </div>
                 </a>
+                <ul class="dropdown-menu dropdown-menu-end" [class.show]="isNotifDropdownOpen"
+                    aria-labelledby="notifDropdown" (mouseenter)="openNotifDropdown()"
+                    (mouseleave)="closeNotifDropdown()">
+                    <li *ngFor="let notif of notifications">
+                        <a class="dropdown-item" href="#">
+                            <img [src]="notif.image" [alt]="notif.name" width="30" height="30">
+                            {{ notif.name }}
+                        </a>
+                    </li>
+                </ul>
             </li>
+            <!-- PROFILE -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
-                    data-mdb-toggle="dropdown" aria-expanded="false">
-                    <img src="assets/gocar-branding/sample-profile.png" alt="" width="45" height="45">
+                    (mouseenter)="openProfileDropdown()" (mouseleave)="closeProfileDropdown()" aria-haspopup="true"
+                    aria-expanded="false">
+                    <div class="icon-circle">
+                        <img src="assets/gocar-branding/sample-profile.png" alt="" width="45" height="45">
+                    </div>
                 </a>
-
-                <!-- Dropdown menu -->
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li>
-                        <a class="dropdown-item" href="#">My account</a>
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item" href="#">Log out</a>
-                    </li>
+                <ul class="dropdown-menu dropdown-menu-end" [class.show]="isProfileDropdownOpen"
+                    aria-labelledby="navbarDropdown" (mouseenter)="openProfileDropdown()"
+                    (mouseleave)="closeProfileDropdown()">
+                    <li><a class="dropdown-item" href="#">My account</a></li>
+                    <li><a class="dropdown-item" href="#">Log out</a></li>
                 </ul>
             </li>
         </ul>
