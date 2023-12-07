@@ -1,7 +1,12 @@
-.car-table-container {
-    margin: 20px;
+.table-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.add-car-btn {
-    margin-top: 20px;
+.add-car-button {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
 }

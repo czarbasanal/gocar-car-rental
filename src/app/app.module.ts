@@ -20,17 +20,21 @@ import { UserSidebarComponent } from './user-main-feed/user-sidebar/user-sidebar
 import { UserNavbarComponent } from './user-main-feed/user-navbar/user-navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { CustomSidenavComponent } from './admin-dashboard/custom-sidenav/custom-sidenav.component';
+import { AdminAddCarComponent } from './admin-dashboard/admin-add-car/admin-add-car.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { CustomSidenavComponent } from './admin-dashboard/custom-sidenav/custom-sidenav.component';
+import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { UsersComponent } from './pages/users/users.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
-import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -53,6 +57,7 @@ import { MatTableModule } from '@angular/material/table';
     InventoryComponent,
     UsersComponent,
     TransactionsComponent,
+    AdminAddCarComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +71,9 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatListModule,
     MatTableModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDialogModule,
   ],
   providers: [SignupCommunicationService, ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent]

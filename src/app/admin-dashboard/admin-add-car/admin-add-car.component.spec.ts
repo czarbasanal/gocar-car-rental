@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdminAddCarComponent } from './admin-add-car.component';
 
 describe('AdminAddCarComponent', () => {

@@ -1,0 +1,46 @@
+<div class="table-container">
+    <mat-table [dataSource]="cars">
+        <ng-container matColumnDef="brand">
+            <mat-header-cell *matHeaderCellDef> Brand </mat-header-cell>
+            <mat-cell *matCellDef="let car"> {{ car.brand }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="model">
+            <mat-header-cell *matHeaderCellDef> Model </mat-header-cell>
+            <mat-cell *matCellDef="let car"> {{ car.model }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="carType">
+            <mat-header-cell *matHeaderCellDef> Car Type </mat-header-cell>
+            <mat-cell *matCellDef="let car"> {{ car.carType }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="rentPrice">
+            <mat-header-cell *matHeaderCellDef> Rent Price </mat-header-cell>
+            <mat-cell *matCellDef="let car"> {{ car.rentPrice }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="maxSeats">
+            <mat-header-cell *matHeaderCellDef> Max Seats </mat-header-cell>
+            <mat-cell *matCellDef="let car"> {{ car.maxSeats }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fuelType">
+            <mat-header-cell *matHeaderCellDef> Fuel Type </mat-header-cell>
+            <mat-cell *matCellDef="let car"> {{ car.fuelType }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="transType">
+            <mat-header-cell *matHeaderCellDef> Transmission Type </mat-header-cell>
+            <mat-cell *matCellDef="let car"> {{ car.transType }} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
+<div class="add-car-btn">
+    <button mat-raised-button color="primary" (click)="addCar()">
+        <mat-icon>add</mat-icon> Add Car
+    </button>
+</div>
