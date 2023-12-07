@@ -11,10 +11,9 @@ import { UserDetails } from './user-details.model';
 export class AuthService {
 
   constructor(
-    private fireauth: AngularFireAuth, 
+    private fireauth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private router: Router) 
-    { }
+    private router: Router) { }
 
   // login method
   login(email: string, password: string) {
@@ -37,9 +36,8 @@ export class AuthService {
         userDetails,
         uid
       });
-  
+
       alert('Registration Successful');
-      // this.sendEmailForVarification(res.user);
       this.router.navigate(['login']);
     }, err => {
       alert(err.message);

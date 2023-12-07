@@ -13,7 +13,7 @@ export class SignupDetails2Component implements OnInit {
   confirmPassword: string = '';
   userDetails!: UserDetails;
 
-  constructor(private auth: AuthService, private signupCommunicationService: SignupCommunicationService) { 
+  constructor(private auth: AuthService, private signupCommunicationService: SignupCommunicationService) {
   }
 
   ngOnInit(): void {
@@ -41,7 +41,7 @@ export class SignupDetails2Component implements OnInit {
     }
 
     if (this.userDetails.password !== this.confirmPassword) {
-      alert("Password and Confirm Password do not match.");
+      alert("Password did not match.");
       return;
     }
 

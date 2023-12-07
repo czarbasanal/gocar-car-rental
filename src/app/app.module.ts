@@ -30,8 +30,7 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { UsersComponent } from './pages/users/users.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
-
-
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -66,6 +65,7 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
     MatToolbarModule,
     MatIconModule,
     MatListModule,
+    MatTableModule,
   ],
   providers: [SignupCommunicationService, ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent]
