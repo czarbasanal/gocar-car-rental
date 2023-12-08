@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Car } from 'src/app/shared/car.model';
 
@@ -12,9 +13,9 @@ export class GridCardComponent implements OnInit {
   displayedCars: Car[] = [];
   showSeeMoreButton: boolean = false;
   toggleButtonText: string = 'Show More Cars';
-  isCollapsed: boolean = true;
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private router: Router, private db: AngularFirestore) { }
+  isCollapsed: boolean = true;
 
   ngOnInit() {
     this.fetchCars();
@@ -38,4 +39,9 @@ export class GridCardComponent implements OnInit {
   updateDisplayedCars(): void {
     this.displayedCars = this.isCollapsed ? this.cars.slice(0, 6) : this.cars;
   }
+
+  goToCarRental() {
+    this.router.navigate(['/car-rental']);
+  }
+
 }

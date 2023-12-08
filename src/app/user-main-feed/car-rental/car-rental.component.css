@@ -1,0 +1,115 @@
+.container {
+  width: 60%;
+  background: white;
+  padding: 20px;
+  box-shadow: 3px 8px 20px 4px rgba(81.81, 81.81, 81.81, 0.16);
+}
+.specification {
+  width: 24px;
+  height: auto;
+  padding-right: 4px;
+}
+p.price-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.favorite-car-icon {
+  width: 24px;
+  height: auto;
+}
+.favorite-car-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.favorite-car-icon:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
+}
+
+
+p.card-text {
+  font-size: 12px;
+  color: #90A3BF;
+}
+.card-img-top {
+  scale: 1;
+}
+.car-brand,
+.car-model {
+    margin: 0;
+}
+.car-brand {
+    font-size: 11px;
+}
+.car-model {
+  font-size: 18px;
+  font-weight: 600;
+}
+.car-type {
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+.book1,
+#book2 {
+  width: 95%;
+  height: 52px;
+  border: none;
+  background: #F2F2F2;
+  color: #1C1C1C;
+  font-size: 14px;
+  font-weight: 400;
+}
+.book1:hover,
+#book2:hover {
+  cursor: pointer;
+}
+
+.book1:focus,
+#book2:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#details1,
+#details2 {
+  width: 45%;
+  height: 52px;
+  background: #F2F2F2;
+  display: flex;
+  align-items: center;
+  border-radius: 13px;
+  margin-left: 12px;
+}
+
+.form-check-label {
+  margin-left: 8px;
+}
+.form-check-input.no-focus-outline:hover {
+  cursor: pointer;
+}
+.form-check-input.no-focus-outline:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.extra,
+.final {
+  margin-top: 160px;
+}
+
+.return {
+  margin-top: 16px;
+}
+button{
+  margin-top: 16px;
+}
+.title {
+  font-weight: 600;
+}
+
+#total {
+  font-weight: 600;
+}

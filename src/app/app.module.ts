@@ -7,8 +7,8 @@ import { GridCardComponent } from './user-main-feed/grid-card/grid-card.componen
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { SignupDetailsComponent } from './signup-details/signup-details.component';
-import { SignupDetails2Component } from './signup-details-2/signup-details-2.component';
+import { SignupDetailsComponent } from './signup/signup-details/signup-details.component';
+import { SignupDetails2Component } from './signup/signup-details-2/signup-details-2.component';
 import { SignupCommunicationService } from './shared/signup-communication.service';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -20,6 +20,8 @@ import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analyt
 import { UserSidebarComponent } from './user-main-feed/user-sidebar/user-sidebar.component';
 import { UserNavbarComponent } from './user-main-feed/user-navbar/user-navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { CarRentalComponent } from './user-main-feed/car-rental/car-rental.component';
+import { ReceiptComponent } from './receipt/receipt.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { CustomSidenavComponent } from './admin-dashboard/custom-sidenav/custom-sidenav.component';
 import { AdminAddCarComponent } from './admin-dashboard/admin-add-car/admin-add-car.component';
@@ -55,6 +57,8 @@ import { ConfirmationDialogComponent } from './admin-dashboard/confirmation-dial
     UserSidebarComponent,
     UserNavbarComponent,
     FooterComponent,
+    CarRentalComponent,
+    ReceiptComponent,
     AdminDashboardComponent,
     CustomSidenavComponent,
     AnalyticsComponent,

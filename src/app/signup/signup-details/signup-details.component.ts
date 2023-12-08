@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SignupCommunicationService } from '../shared/signup-communication.service';
-import { UserDetails } from '../shared/user-details.model';
+import { SignupCommunicationService } from '../../signup-communication.service';
+import { UserDetails } from '../../shared/user-details.model';
 
 @Component({
   selector: 'app-signup-details',
@@ -24,7 +24,6 @@ export class SignupDetailsComponent {
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (file) {
-      console.log(file);
       const imageName = file.name;
       const imagePath = `assets/photos/${imageName}`;
       this.userDetails.imagePath = imagePath;
