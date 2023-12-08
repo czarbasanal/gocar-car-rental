@@ -1,226 +1,54 @@
 <div class="container mt-4">
     <div class="row">
-        <!-- First Row -->
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 mb-3" *ngFor="let car of displayedCars">
             <div class="card">
-                <img src="assets/car-catalogue/suv-toyota-fortuner.png" class="card-img-top" alt="Card Image">
+                <img [src]="car.imgPath" class="card-img-top" alt="{{ car.model }}">
                 <div class="card-img-overlay">
                     <div class="card-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <p class="car-brand">TOYOTA</p>
-                                <p class="car-model">Fortuner</p>
+                                <p class="car-brand">{{ car.brand }}</p>
+                                <p class="car-model">{{ car.model }}</p>
                             </div>
                             <div class="col-md-6 d-flex align-items-center justify-content-end">
                                 <img src="assets/favorite-car.png" class="favorite-car-icon" alt="Favorite">
                             </div>
                         </div>
-                        <p class="car-type">SUV</p>
+                        <p class="car-type">{{ car.carType }}</p>
                     </div>
                 </div>
                 <div class="card-body d-flex flex-column align-items-center justify-content-between">
                     <div class="row mb-4">
                         <div class="col-md-4 d-flex align-items-stretch justify-content-center">
                             <img src="assets/fuel-type.png" alt="Fuel Type" class="specification">
-                            <p class="card-text">Diesel</p>
+                            <p class="card-text">{{ car.fuelType }}</p>
                         </div>
                         <div class="col-md-4 d-flex align-items-stretch justify-content-center">
                             <img src="assets/trans-type.png" alt="Transmission Type" class="specification">
-                            <p class="card-text">Automatic</p>
+                            <p class="card-text">{{ car.transType }}</p>
                         </div>
                         <div class="col-md-4 d-flex align-items-stretch justify-content-center">
                             <img src="assets/max-persons.png" alt="Max Persons" class="specification">
-                            <p class="card-text">8 Pax</p>
+                            <p class="card-text">{{ car.maxSeats }} Pax</p>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6 d-flex align-items-center justify-content-start">
-                            <p class="price-label">&#8369;2999.00/<span
-                                    style="font-size: 14px; color: #90A3BF;">day</span>
-                            </p>
+                            <p class="price-label">&#8369;{{ car.rentPrice.toFixed(2) }}/day</p>
                         </div>
-                        <div class="col-md-6  d-flex align-items-center justify-content-end">
-                            <button class="btn btn-primary btn-md" type="button"><span
-                                    style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 500;">Rent
-                                    Now</span></button>
-
+                        <div class="col-md-6 d-flex align-items-center justify-content-end">
+                            <button class="btn btn-primary btn-md" type="button">Rent Now</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <img src="assets/car-catalogue/pickup-ford-raptor.png" class="card-img-top" alt="Card Image">
-                <div class="card-img-overlay">
-                    <div class="card-title">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="car-brand">FORD</p>
-                                <p class="car-model">Raptor</p>
-                            </div>
-                            <div class="col-md-6 d-flex align-items-center justify-content-end">
-                                <img src="assets/favorite-car.png" class="favorite-car-icon" alt="Favorite">
-                            </div>
-                        </div>
-                        <p class="car-type">Pickup</p>
-                    </div>
-                </div>
-                <div class="card-body d-flex flex-column align-items-center justify-content-between">
-                    <div class="row mb-4">
-                        <div class="col-md-4 d-flex align-items-stretch justify-content-center">
-                            <img src="assets/fuel-type.png" alt="Fuel Type" class="specification">
-                            <p class="card-text">Diesel</p>
-                        </div>
-                        <div class="col-md-4 d-flex align-items-stretch justify-content-center">
-                            <img src="assets/trans-type.png" alt="Transmission Type" class="specification">
-                            <p class="card-text">Automatic</p>
-                        </div>
-                        <div class="col-md-4 d-flex align-items-stretch justify-content-center">
-                            <img src="assets/max-persons.png" alt="Max Persons" class="specification">
-                            <p class="card-text">5 Pax</p>
-                        </div>
-                    </div>
+    </div>
 
-                    <div class="row">
-                        <div class="col-md-6 d-flex align-items-center justify-content-start">
-                            <p class="price-label">&#8369;3999.00/<span
-                                    style="font-size: 14px; color: #90A3BF;">day</span>
-                            </p>
-                        </div>
-                        <div class="col-md-6  d-flex align-items-center justify-content-end">
-                            <button class="btn btn-primary btn-md" type="button"><span
-                                    style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 500;">Rent
-                                    Now</span></button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <img src="assets/car-catalogue/sedan-nissan-almera.png" class="card-img-top" alt="Card Image">
-                <div class="card-img-overlay">
-                    <div class="card-title">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="car-brand">NISSAN</p>
-                                <p class="car-model">Almera</p>
-                            </div>
-                            <div class="col-md-6 d-flex align-items-center justify-content-end">
-                                <img src="assets/favorite-car.png" class="favorite-car-icon" alt="Favorite">
-                            </div>
-                        </div>
-                        <p class="car-type">Sedan</p>
-                    </div>
-                </div>
-                <div class="card-body d-flex flex-column align-items-center justify-content-between">
-                    <div class="row mb-4">
-                        <div class="col-md-4 d-flex align-items-stretch justify-content-center">
-                            <img src="assets/fuel-type.png" alt="Fuel Type" class="specification">
-                            <p class="card-text">Gas</p>
-                        </div>
-                        <div class="col-md-4 d-flex align-items-stretch justify-content-center">
-                            <img src="assets/trans-type.png" alt="Transmission Type" class="specification">
-                            <p class="card-text">Manual</p>
-                        </div>
-                        <div class="col-md-4 d-flex align-items-stretch justify-content-center">
-                            <img src="assets/max-persons.png" alt="Max Persons" class="specification">
-                            <p class="card-text">5 Pax</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 d-flex align-items-center justify-content-start">
-                            <p class="price-label">&#8369;1499.00/<span
-                                    style="font-size: 14px; color: #90A3BF;">day</span>
-                            </p>
-                        </div>
-                        <div class="col-md-6  d-flex align-items-center justify-content-end">
-                            <button class="btn btn-primary btn-md" type="button"><span
-                                    style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 500;">Rent
-                                    Now</span></button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Second Row -->
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Card Image">
-                <div class="card-body">
-                    <h5 class="card-title">Card 4</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Card Image">
-                <div class="card-body">
-                    <h5 class="card-title">Card 5</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Card Image">
-                <div class="card-body">
-                    <h5 class="card-title">Card 6</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Third Row (Collapsible) -->
-        <div id="collapseRow" class="collapse row w-100">
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Card Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Card 7</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Card Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Card 8</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Card Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Card 9</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- "See More" Button -->
-        <div class="col-12 d-flex justify-content-center">
-            <button class="btn btn-primary mt-3" type="button" (click)="toggleCollapse()" data-bs-toggle="collapse"
-                data-bs-target="#collapseRow" aria-expanded="false" aria-controls="collapseRow">
-                {{ toggleButtonText }}
-            </button>
-        </div>
+    <div class="col-12 d-flex justify-content-center">
+        <button class="btn btn-primary mt-3" type="button" *ngIf="showSeeMoreButton" (click)="toggleCollapse()"
+            data-bs-toggle="collapse" data-bs-target="#collapseRow" aria-expanded="false" aria-controls="collapseRow">
+            {{ toggleButtonText }}
+        </button>
     </div>
 </div>

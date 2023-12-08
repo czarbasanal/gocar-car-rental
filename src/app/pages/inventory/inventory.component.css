@@ -1,0 +1,26 @@
+.table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    margin-top: 2rem;
+}
+
+.car-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.delete-icon {
+    cursor: pointer;
+    color: #757575;
+    transition: color 0.3s ease;
+}
+
+.delete-icon:hover {
+    color: #d32f2f;
+}

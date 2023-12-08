@@ -1,0 +1,72 @@
+:host * {
+    transition: all 500ms ease-in-out;
+}
+
+.sidenav-header {
+    padding-top: 24px;
+    text-align: center;
+    margin-bottom: 1rem;
+
+    >img {
+        border-radius: 100%;
+        object-fit: cover;
+        margin-bottom: 16px;
+    }
+
+    .header-text {
+        >h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            line-height: 1.5rem;
+        }
+
+        >p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    }
+
+    .hide-header-text {
+        opacity: 0;
+        height: 0px !important;
+    }
+}
+
+.menu-item {
+    border-left: 5px solid;
+    border-left-color: rgba(0, 0, 0, 0);
+}
+
+.selected-menu-item {
+    border-left: 5px solid;
+    border-left-color: #2081F9;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.navlinks {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.navlinks a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+
+    >span {
+        padding: 0;
+        margin: 0;
+    }
+
+    >.mat-icon {
+        margin-right: 1rem;
+    }
+}
+
+
+.logout {
+    margin-top: 11.5rem;
+}

@@ -37,7 +37,6 @@ export class AuthService {
       });
 
       alert('Registration Successful');
-      // this.sendEmailForVarification(res.user);
       this.router.navigate(['login']);
     }, err => {
       alert(err.message);

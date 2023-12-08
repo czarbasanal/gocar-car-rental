@@ -1,0 +1,74 @@
+<form #carForm="ngForm" (ngSubmit)="onSubmit(carForm.value, carForm)" class="car-form">
+
+    <div class="form-row">
+        <mat-form-field class="full-width">
+            <mat-label>Brand</mat-label>
+            <input matInput type="text" name="brand" [(ngModel)]="car.brand" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Car Type</mat-label>
+            <mat-select name="carType" [(ngModel)]="car.carType" required>
+                <mat-option value="Crossover">Coupe</mat-option>
+                <mat-option value="Crossover">Crossover</mat-option>
+                <mat-option value="MPV">MPV</mat-option>
+                <mat-option value="Pickup">Pickup</mat-option>
+                <mat-option value="Sedan">Sedan</mat-option>
+                <mat-option value="SUV">SUV</mat-option>
+                <mat-option value="Van">Van</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="form-row">
+        <mat-form-field class="full-width">
+            <mat-label>Model</mat-label>
+            <input matInput type="text" name="model" [(ngModel)]="car.model" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Fuel Type</mat-label>
+            <mat-select name="fuelType" [(ngModel)]="car.fuelType" required>
+                <mat-option value="Gas">Gas</mat-option>
+                <mat-option value="Diesel">Diesel</mat-option>
+                <mat-option value="Hybrid">Hybrid</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="form-row">
+        <mat-form-field class="full-width">
+            <mat-label>Max Seats</mat-label>
+            <input matInput type="number" name="maxSeats" min="2" max="18" [(ngModel)]="car.maxSeats" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Transmission Type</mat-label>
+            <mat-select name="transType" [(ngModel)]="car.transType" required>
+                <mat-option value="Manual">Manual</mat-option>
+                <mat-option value="Automatic">Automatic</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="form-row">
+        <mat-form-field class="full-width">
+            <mat-label>Rent Price</mat-label>
+            <input matInput type="number" name="rentPrice" min="0" [(ngModel)]="car.rentPrice" required>
+        </mat-form-field>
+
+        <div class="file-input full-width">
+            <label>Display Photo:</label>
+            <input type="file" name="imgPath" (change)="onFileSelected($event)" #fileInput required>
+            <input type="hidden" name="isRented" [(ngModel)]="car.isRented">
+        </div>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!carForm.form.valid">
+        <mat-icon>add</mat-icon> Add Car
+    </button>
+
+    <div *ngIf="isLoading" class="loading-overlay">
+        <mat-spinner></mat-spinner>
+    </div>
+</form>

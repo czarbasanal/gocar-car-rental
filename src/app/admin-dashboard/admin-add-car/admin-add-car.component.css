@@ -1,0 +1,47 @@
+.car-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.full-width {
+    width: 48%;
+}
+
+.file-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    >input {
+        margin-top: 0.5rem;
+    }
+
+}
+
+.submit-button {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+}

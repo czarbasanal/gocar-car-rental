@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,26 +9,37 @@ import { SignupComponent } from './signup/signup.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignupDetailsComponent } from './signup-details/signup-details.component';
 import { SignupDetails2Component } from './signup-details-2/signup-details-2.component';
-import { SignupCommunicationService } from './signup-communication.service';
+import { SignupCommunicationService } from './shared/signup-communication.service';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
 import { UserMainFeedComponent } from './user-main-feed/user-main-feed.component';
 import { LandingNavComponent } from './landing-nav/landing-nav.component';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
-import { initializeAppCheck, ReCaptchaEnterpriseProvider, provideAppCheck } from '@angular/fire/app-check';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getDatabase, provideDatabase } from '@angular/fire/database';
-import { getFunctions, provideFunctions } from '@angular/fire/functions';
-import { getMessaging, provideMessaging } from '@angular/fire/messaging';
-import { getPerformance, providePerformance } from '@angular/fire/performance';
-import { getStorage, provideStorage } from '@angular/fire/storage';
-import { getRemoteConfig, provideRemoteConfig } from '@angular/fire/remote-config';
+import { ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { UserSidebarComponent } from './user-main-feed/user-sidebar/user-sidebar.component';
 import { UserNavbarComponent } from './user-main-feed/user-navbar/user-navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { CustomSidenavComponent } from './admin-dashboard/custom-sidenav/custom-sidenav.component';
+import { AdminAddCarComponent } from './admin-dashboard/admin-add-car/admin-add-car.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { InventoryComponent } from './pages/inventory/inventory.component';
+import { UsersComponent } from './pages/users/users.component';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { ConfirmationDialogComponent } from './admin-dashboard/confirmation-dialog/confirmation-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +55,14 @@ import { FooterComponent } from './footer/footer.component';
     UserSidebarComponent,
     UserNavbarComponent,
     FooterComponent,
+    AdminDashboardComponent,
+    CustomSidenavComponent,
+    AnalyticsComponent,
+    InventoryComponent,
+    UsersComponent,
+    TransactionsComponent,
+    AdminAddCarComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +70,18 @@ import { FooterComponent } from './footer/footer.component';
     BrowserAnimationsModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatTableModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [SignupCommunicationService, ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent]
