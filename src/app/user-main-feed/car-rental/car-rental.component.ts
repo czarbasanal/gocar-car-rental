@@ -190,7 +190,7 @@ export class CarRentalComponent implements OnInit {
     );
   }
 
-  goToLanding() {
+  goToReceipt() {
     this.modelUpdate();
     this.router.navigate(['receipt']);
   }
