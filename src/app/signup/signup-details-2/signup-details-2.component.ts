@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/auth.service';
-import { UserDetails } from '../shared/user-details.model';
-import { SignupCommunicationService } from '../shared/signup-communication.service';
+import { UserDetails } from '../../shared/user-details.model';
+import { SignupCommunicationService } from 'src/app/shared/signup-communication.service';
 
 @Component({
   selector: 'app-signup-details-2',
@@ -41,7 +41,7 @@ export class SignupDetails2Component implements OnInit {
     }
 
     if (this.userDetails.password !== this.confirmPassword) {
-      alert("Password did not match.");
+      alert("Password and Confirm Password do not match.");
       return;
     }
 

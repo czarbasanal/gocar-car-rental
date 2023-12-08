@@ -20,9 +20,9 @@
     margin-bottom: 100px;
 }
 
-.lastname,
-.firstname,
-.driver-license {
+.email,
+.password,
+.confirm-password {
     width: 364px;
     height: 52px;
     background: #F2F2F2;
@@ -31,33 +31,6 @@
     margin-bottom: 24px;
     border-radius: 13px;
 }
-
-.icon > input
-{
-    display: none;
-}
-
-.icon svg
-{
-    width: 80px;
-    cursor: pointer;
-}
-.license {
-    width: 300px;
-    height: 52px;
-    margin-left: 18px;
-    border: none;
-    background: #F2F2F2;
-    color: #6f6e6e;
-    font-size: 14px;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
 
 .form-input {
     width: 300px;
@@ -74,21 +47,21 @@
     outline: none;
 }
 
-.bi-bi-arrow-right-short {
-    margin-bottom: 2px;
-}
-
 .form-button {
     width: 364px;
     height: 52px;
     border-radius: 13px;
     border: none;
+    background: #F99820;
     margin-top: 16px;
-    margin-bottom: 34px;
-    background-color: #FFF;
-    color: #F99820;
+    margin-bottom: 16px;
+    color: #FFF;
     font-size: 24px;
     font-weight: 600;
+}
+
+.form-button:hover {
+    background: #9c5f14;
 }
 
 .bottom-text {
