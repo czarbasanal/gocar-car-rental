@@ -9,9 +9,10 @@ import { SignupComponent } from './signup/signup.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignupDetailsComponent } from './signup-details/signup-details.component';
 import { SignupDetails2Component } from './signup-details-2/signup-details-2.component';
-import { SignupCommunicationService } from './signup-communication.service';
+import { SignupCommunicationService } from './shared/signup-communication.service';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
 import { UserMainFeedComponent } from './user-main-feed/user-main-feed.component';
 import { LandingNavComponent } from './landing-nav/landing-nav.component';
@@ -31,10 +32,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { UsersComponent } from './pages/users/users.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { ConfirmationDialogComponent } from './admin-dashboard/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -58,6 +62,7 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
     UsersComponent,
     TransactionsComponent,
     AdminAddCarComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +70,7 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
     BrowserAnimationsModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     MatSidenavModule,
     MatButtonModule,
     MatToolbarModule,
@@ -74,6 +80,8 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
     MatInputModule,
     MatSelectModule,
     MatDialogModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [SignupCommunicationService, ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent]

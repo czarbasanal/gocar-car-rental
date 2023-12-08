@@ -1,5 +1,12 @@
 <div class="table-container">
     <mat-table [dataSource]="cars">
+        <ng-container matColumnDef="imgPath">
+            <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+            <mat-cell *matCellDef="let car">
+                <img *ngIf="car.imgPath" [src]="car.imgPath" alt="Car Image" class="car-image">
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="brand">
             <mat-header-cell *matHeaderCellDef> Brand </mat-header-cell>
             <mat-cell *matCellDef="let car"> {{ car.brand }} </mat-cell>
@@ -31,16 +38,28 @@
         </ng-container>
 
         <ng-container matColumnDef="transType">
-            <mat-header-cell *matHeaderCellDef> Transmission Type </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Transmission </mat-header-cell>
             <mat-cell *matCellDef="let car"> {{ car.transType }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="isRented">
+            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let car"> {{ car.isRented ? 'Not Available' : 'Available' }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+            <mat-cell *matCellDef="let car">
+                <mat-icon class="delete-icon" (click)="openDeleteConfirmation(car)">delete</mat-icon>
+            </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-</div>
-<div class="add-car-btn">
+
     <button mat-raised-button color="primary" (click)="addCar()">
         <mat-icon>add</mat-icon> Add Car
     </button>
+
 </div>

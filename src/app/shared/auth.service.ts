@@ -30,7 +30,6 @@ export class AuthService {
   register(userDetails: UserDetails) {
     this.fireauth.createUserWithEmailAndPassword(userDetails.email, userDetails.password).then(res => {
       // Access userDetails.firstname and userDetails.lastname here
-      const { firstname, lastname } = userDetails;
       const uid = res.user?.uid;
       this.firestore.collection('users').add({
         userDetails,

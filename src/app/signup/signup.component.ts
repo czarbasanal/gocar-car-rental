@@ -1,5 +1,5 @@
-import { Component, OnInit  } from '@angular/core';
-import { SignupCommunicationService } from '../signup-communication.service';
+import { Component, OnInit } from '@angular/core';
+import { SignupCommunicationService } from '../shared/signup-communication.service';
 import { Router } from '@angular/router';
 
 
@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit{
+export class SignupComponent implements OnInit {
   showDetails = true;
 
-  constructor(private router: Router, private signupCommunicationService: SignupCommunicationService) {}
+  constructor(private router: Router, private signupCommunicationService: SignupCommunicationService) { }
 
   ngOnInit() {
     this.signupCommunicationService.detailsButtonClick$.subscribe(() => {
@@ -35,5 +35,5 @@ export class SignupComponent implements OnInit{
       this.toggleDetails();
     }
   }
-  
+
 }
