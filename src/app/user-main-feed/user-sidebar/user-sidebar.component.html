@@ -1,37 +1,34 @@
 <!-- sidebar.component.html -->
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+<div class="d-flex flex-column flex-shrink-0 p-3 ps-5 ms-3 pt-5" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-        <span class="fs-4">Sidebar</span>
     </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-                Home
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link link-dark">
-                Dashboard
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link link-dark">
-                Orders
-            </a>
-        </li>
-        <!-- Add more items here -->
-    </ul>
-    <hr>
-    <div class="dropdown">
-        <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            <strong>User</strong>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
+
+    <div class="filter-section">
+        <div class="filter-title">TYPE</div>
+        <div class="form-check" *ngFor="let type of types">
+            <input class="form-check-input" type="checkbox" [value]="type.value" [id]="type.name">
+            <label class="form-check-label" [for]="type.name">
+                <span class="type-style">{{ type.name }}</span> <span class="count-style">({{ type.count }})</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-title">CAPACITY</div>
+        <div class="form-check" *ngFor="let capacity of capacities">
+            <input class="form-check-input" type="checkbox" [value]="capacity.value" [id]="capacity.name">
+            <label class="form-check-label" [for]="capacity.name">
+                <span class="capacity-style">{{ capacity.name }}</span> <span class="count-style">({{ capacity.count
+                    }})</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-title">PRICE</div>
+        <input type="range" class="form-range custom-range-slider" id="priceRange" [(ngModel)]="maxPrice"
+            (input)="onPriceChange($event)" min="0" max="10000" step="500">
+
+        <label for="priceRange" class="form-label">Max. Php {{ maxPrice | number:'1.2-2' }}</label>
     </div>
 </div>
