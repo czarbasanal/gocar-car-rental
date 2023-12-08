@@ -9,6 +9,7 @@ import { Car } from 'src/app/shared/car.model';
 })
 export class GridCardComponent implements OnInit {
   cars: Car[] = [];
+  displayedCars: Car[] = [];
   showSeeMoreButton: boolean = false;
   toggleButtonText: string = 'Show More Cars';
   isCollapsed: boolean = true;
@@ -24,11 +25,17 @@ export class GridCardComponent implements OnInit {
       .subscribe(carData => {
         this.cars = carData;
         this.showSeeMoreButton = carData.length > 6;
+        this.updateDisplayedCars();
       });
   }
 
   toggleCollapse(): void {
     this.isCollapsed = !this.isCollapsed;
     this.toggleButtonText = this.isCollapsed ? 'Show More Cars' : 'Show Less Cars';
+    this.updateDisplayedCars();
+  }
+
+  updateDisplayedCars(): void {
+    this.displayedCars = this.isCollapsed ? this.cars.slice(0, 6) : this.cars;
   }
 }

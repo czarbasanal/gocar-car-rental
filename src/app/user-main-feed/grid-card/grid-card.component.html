@@ -1,7 +1,6 @@
 <div class="container mt-4">
     <div class="row">
-        <!-- Dynamic Car Cards -->
-        <div class="col-md-4 mb-3" *ngFor="let car of cars">
+        <div class="col-md-4 mb-3" *ngFor="let car of displayedCars">
             <div class="card">
                 <img [src]="car.imgPath" class="card-img-top" alt="{{ car.model }}">
                 <div class="card-img-overlay">
@@ -35,7 +34,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 d-flex align-items-center justify-content-start">
-                            <p class="price-label">&#8369;{{ car.rentPrice }}/day</p>
+                            <p class="price-label">&#8369;{{ car.rentPrice.toFixed(2) }}/day</p>
                         </div>
                         <div class="col-md-6 d-flex align-items-center justify-content-end">
                             <button class="btn btn-primary btn-md" type="button">Rent Now</button>
