@@ -68,4 +68,7 @@ export class ReceiptComponent implements OnInit {
     alert('Thank you for choosing gocar!');
     this.router.navigate(['main-feed']);
   }
+  goBack() {
+    this.router.navigate(['car-rental']);
+  }
 }
