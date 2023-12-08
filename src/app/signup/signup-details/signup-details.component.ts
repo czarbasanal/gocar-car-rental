@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SignupCommunicationService } from '../signup-communication.service';
-import { UserDetails } from '../shared/user-details.model';
+import { SignupCommunicationService } from '../../signup-communication.service';
+import { UserDetails } from '../../shared/user-details.model';
 
 @Component({
   selector: 'app-signup-details',

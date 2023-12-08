@@ -1,0 +1,180 @@
+<app-user-navbar></app-user-navbar>
+<div class="booking-details">
+  <div class="container mt-2">
+    <div class="wrapper">
+      <div class="row">
+        <!-- First Half Content -->
+        <div class="col" id="car-details">
+          <div class="card" *ngIf="carDetails">
+            <img
+              src="assets/car-catalogue/suv-toyota-fortuner.png"
+              class="card-img-top"
+              alt="Card Image"
+            />
+            <div class="card-img-overlay">
+              <div class="card-title">
+                <div class="row">
+                  <div class="col-md-6">
+                    <p class="car-brand">{{ carDetails.brand }}</p>
+                    <p class="car-model">{{ carDetails.model }}</p>
+                  </div>
+                  <div
+                    class="col-md-6 d-flex align-items-center justify-content-end"
+                  >
+                    <img
+                      src="assets/favorite-car.png"
+                      class="favorite-car-icon"
+                      alt="Favorite"
+                    />
+                  </div>
+                </div>
+                <p class="car-type">{{ carDetails.carType }}</p>
+              </div>
+            </div>
+            <div class="card-body d-flex flex-column align-items-center justify-content-between">
+              <div class="row mb-4">
+                  <div class="col-md-4 d-flex align-items-stretch justify-content-center">
+                      <img src="assets/fuel-type.png" alt="Fuel Type" class="specification">
+                      <p class="card-text">{{ carDetails.fuelType }}</p>
+                  </div>
+                  <div class="col-md-4 d-flex align-items-stretch justify-content-center">
+                      <img src="assets/trans-type.png" alt="Transmission Type" class="specification">
+                      <p class="card-text">{{ carDetails.transType }}</p>
+                  </div>
+                  <div class="col-md-4 d-flex align-items-stretch justify-content-center">
+                      <img src="assets/max-persons.png" alt="Max Persons" class="specification">
+                      <p class="card-text">{{ carDetails.maxSeats }} Pax</p>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6 d-flex align-items-center justify-content-start">
+                    <p class="price-label">&#8369;{{ carDetails.rentPrice | number: '1.2-2' }}/<span style="font-size: 14px; color: #90A3BF;">day</span></p>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Second Half Content -->
+        <div class="col" id="rent-details">
+          <div class="row">
+            <!-- Item 1 Content -->
+            <div class="row">
+              <div id="booking">
+                <p class="title">Booking Details</p>
+                <label>PickUp</label>
+                <div class="row justify-content-between">
+                  <div class="col-md-6" id="details1">
+                    <input class="book1" type="date" id="datepicker" placeholder="Pickup Date" [(ngModel)]="pickupDate" (change)="onInputChange()"/>
+                  </div>
+                  <div class="col-md-6" id="details2">
+                    <select id="book2" class="form-select" [(ngModel)]="pickupTime" (change)="onInputChange()">
+                      <option value="" disabled selected hidden>Select Time</option>
+                      <option value="1">09:00 AM</option>
+                      <option value="2">10:00 AM</option>
+                      <option value="3">11:00 AM</option>
+                      <option value="4">12:00 PM</option>
+                      <option value="5">01:00 PM</option>
+                      <option value="6">02:00 PM</option>
+                      <option value="7">03:00 PM</option>
+                      <option value="8">04:00 PM</option>
+                      <option value="9">05:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+                <label class="return">Return</label>
+                <div class="row justify-content-between">
+                  <div class="col-md-6" id="details1">
+                    <input class="book1" type="date" id="datepicker" placeholder="Return Date"  [(ngModel)]="returnDate" (change)="onInputChange()"/>
+                  </div>
+                  <div class="col-md-6" id="details2">
+                    <select id="book2" class="form-select" [(ngModel)]="returnTime" (change)="onInputChange()">
+                      <option value="" disabled selected hidden>Select Time</option>
+                      <option value="1">09:00 AM</option>
+                      <option value="2">10:00 AM</option>
+                      <option value="3">11:00 AM</option>
+                      <option value="4">12:00 PM</option>
+                      <option value="5">01:00 PM</option>
+                      <option value="6">02:00 PM</option>
+                      <option value="7">03:00 PM</option>
+                      <option value="8">04:00 PM</option>
+                      <option value="9">05:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Item 2 Content -->
+            <div class="row mt-4">
+              <div id="extra">
+                <p class="title">Select Extras</p>
+                <div class="row">
+                  <div class="col-8">
+                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.gpsNavigation" (change)="onInputChange()"/>
+                    <label class="form-check-label" for="flexCheckDefault">GPS navigation</label>
+                  </div>
+                  <div class="col-4 text-end">&#8369;{{ extraPrices.gpsNavigation }}/day</div>
+                </div>
+                <div class="row">
+                  <div class="col-8">
+                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.additionalDriver" (change)="onInputChange()"/>
+                    <label class="form-check-label" for="flexCheckDefault">Additional driver</label>
+                  </div>
+                  <div class="col-4 text-end">&#8369;{{ extraPrices.additionalDriver }}/day</div>
+                </div>
+                <div class="row">
+                  <div class="col-8">
+                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.childSeat" (change)="onInputChange()"/>
+                    <label class="form-check-label" for="flexCheckDefault">Child seat</label>
+                  </div>
+                  <div class="col-4 text-end">&#8369;{{ extraPrices.childSeat }}/day</div>
+                </div>
+                <div class="row">
+                  <div class="col-8">
+                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.roofBicycleRack" (change)="onInputChange()"/>
+                    <label class="form-check-label" for="flexCheckDefault">Roof bicycle rack</label>
+                  </div>
+                  <div class="col-4 text-end">&#8369;{{ extraPrices.roofBicycleRack }}/day</div>
+                </div>
+              </div>
+            </div>
+            <!-- Item 3 Content -->
+            <div class="row mt-4">
+              <div id="final">
+                <p class="title">Final Calculations</p>
+                <div class="row justify-content-between">
+                  <div class="col-4">
+                    <div>Rent</div>
+                  </div>
+                  <div class="col-4">
+                    <div class="text-end">&#8369;{{ rentalCost | number: '1.2-2' }}</div>
+                  </div>
+                </div>
+                <div class="row justify-content-between">
+                  <div class="col-4">
+                    <div>Extras</div>
+                  </div>
+                  <div class="col-4 justify-content-end">
+                    <div class="text-end">&#8369;{{ extraPayment | number: '1.2-2' }}</div>
+                  </div>
+                </div>
+                <div class="row justify-content-between">
+                  <div class="col-4">
+                    <div id="total">Total</div>
+                  </div>
+                  <div class="col-4">
+                    <div class="text-end" id="total">&#8369;{{ totalExpense | number: '1.2-2' }}</div>
+                  </div>
+                </div>
+                <div class="row justify-content-end">
+                  <div class="col-4 offset-8 text-end">
+                    <button type="button" class="btn btn-primary" (click)="goToLanding()">Rent Now</button>
+                  </div>
+                </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

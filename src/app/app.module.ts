@@ -8,8 +8,8 @@ import { GridCardComponent } from './user-main-feed/grid-card/grid-card.componen
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { SignupDetailsComponent } from './signup-details/signup-details.component';
-import { SignupDetails2Component } from './signup-details-2/signup-details-2.component';
+import { SignupDetailsComponent } from './signup/signup-details/signup-details.component';
+import { SignupDetails2Component } from './signup/signup-details-2/signup-details-2.component';
 import { SignupCommunicationService } from './signup-communication.service';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -30,6 +30,8 @@ import { getRemoteConfig, provideRemoteConfig } from '@angular/fire/remote-confi
 import { UserSidebarComponent } from './user-main-feed/user-sidebar/user-sidebar.component';
 import { UserNavbarComponent } from './user-main-feed/user-navbar/user-navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { CarRentalComponent } from './user-main-feed/car-rental/car-rental.component';
+import { ReceiptComponent } from './receipt/receipt.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { FooterComponent } from './footer/footer.component';
     UserSidebarComponent,
     UserNavbarComponent,
     FooterComponent,
+    CarRentalComponent,
+    ReceiptComponent,
   ],
   imports: [
     BrowserModule,
