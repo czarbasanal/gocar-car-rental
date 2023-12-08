@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SignupCommunicationService } from '../../signup-communication.service';
+import { SignupCommunicationService } from 'src/app/shared/signup-communication.service';
 import { UserDetails } from '../../shared/user-details.model';
 
 @Component({

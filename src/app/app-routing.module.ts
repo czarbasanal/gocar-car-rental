@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'grid-card', component: GridCardComponent },
   { path: 'main-feed', component: UserMainFeedComponent },
   { path: 'car-rental', component: CarRentalComponent },
-  { path: 'receipt', component: ReceiptComponent }
+  { path: 'receipt', component: ReceiptComponent },
   { path: 'analytics', component: AnalyticsComponent },
   { path: 'inventory', component: InventoryComponent },
   { path: 'transactions', component: TransactionsComponent },

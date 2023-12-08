@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/auth.service';
 import { UserDetails } from '../../shared/user-details.model';
-import { SignupCommunicationService } from '../../signup-communication.service';
+import { SignupCommunicationService } from 'src/app/shared/signup-communication.service';
 
 @Component({
   selector: 'app-signup-details-2',
