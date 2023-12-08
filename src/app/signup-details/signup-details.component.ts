@@ -19,15 +19,16 @@ export class SignupDetailsComponent {
 
   uploadedFileName: string = '';
 
-  constructor(private signupCommunicationService: SignupCommunicationService) {}
+  constructor(private signupCommunicationService: SignupCommunicationService) { }
 
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (file) {
+      console.log(file);
       const imageName = file.name;
       const imagePath = `assets/photos/${imageName}`;
-    this.userDetails.imagePath = imagePath;
-    this.uploadedFileName = imageName;
+      this.userDetails.imagePath = imagePath;
+      this.uploadedFileName = imageName;
     }
   }
 

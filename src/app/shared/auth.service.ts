@@ -11,10 +11,9 @@ import { UserDetails } from './user-details.model';
 export class AuthService {
 
   constructor(
-    private fireauth: AngularFireAuth, 
+    private fireauth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private router: Router) 
-    { }
+    private router: Router) { }
 
   // login method
   login(email: string, password: string) {
@@ -31,13 +30,12 @@ export class AuthService {
   register(userDetails: UserDetails) {
     this.fireauth.createUserWithEmailAndPassword(userDetails.email, userDetails.password).then(res => {
       // Access userDetails.firstname and userDetails.lastname here
-      const { firstname, lastname } = userDetails;
       const uid = res.user?.uid;
       this.firestore.collection('users').add({
         userDetails,
         uid
       });
-  
+
       alert('Registration Successful');
       // this.sendEmailForVarification(res.user);
       this.router.navigate(['login']);
@@ -87,5 +85,6 @@ export class AuthService {
       alert(err.message);
     })
   }
+
 
 }
