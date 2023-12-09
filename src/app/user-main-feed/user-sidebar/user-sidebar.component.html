@@ -6,7 +6,8 @@
     <div class="filter-section">
         <div class="filter-title">TYPE</div>
         <div class="form-check" *ngFor="let type of types">
-            <input class="form-check-input" type="checkbox" [value]="type.value" [id]="type.name">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="type.isChecked" (change)="onCheckboxChange()"
+                [id]="type.name">
             <label class="form-check-label" [for]="type.name">
                 <span class="type-style">{{ type.name }}</span> <span class="count-style">({{ type.count }})</span>
             </label>
@@ -16,7 +17,8 @@
     <div class="filter-section">
         <div class="filter-title">CAPACITY</div>
         <div class="form-check" *ngFor="let capacity of capacities">
-            <input class="form-check-input" type="checkbox" [value]="capacity.value" [id]="capacity.name">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="capacity.isChecked"
+                (change)="onCheckboxChange()" [id]="capacity.name">
             <label class="form-check-label" [for]="capacity.name">
                 <span class="capacity-style">{{ capacity.name }}</span> <span class="count-style">({{ capacity.count
                     }})</span>

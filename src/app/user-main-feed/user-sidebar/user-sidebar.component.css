@@ -23,6 +23,11 @@
     gap: 8px;
 }
 
+.form-check :hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .form-check-input {
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;

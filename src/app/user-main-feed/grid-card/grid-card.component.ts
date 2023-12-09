@@ -13,6 +13,12 @@ export class GridCardComponent implements OnInit {
   displayedCars: Car[] = [];
   showSeeMoreButton: boolean = false;
   toggleButtonText: string = 'Show More Cars';
+  maxPrice: number = Infinity;
+
+  filterCriteria = {
+    types: new Set<string>(),
+    capacities: new Set<number>(),
+  };
 
   constructor(private router: Router, private db: AngularFirestore) { }
   isCollapsed: boolean = true;
@@ -36,9 +42,32 @@ export class GridCardComponent implements OnInit {
     this.updateDisplayedCars();
   }
 
-  updateDisplayedCars(): void {
-    this.displayedCars = this.isCollapsed ? this.cars.slice(0, 6) : this.cars;
+  setFilterCriteria(types: Set<string>, capacities: Set<number>): void {
+    this.filterCriteria.types = types;
+    this.filterCriteria.capacities = capacities;
+    this.updateDisplayedCars();
   }
+  setMaxPrice(price: number): void {
+    this.maxPrice = price;
+    this.updateDisplayedCars();
+  }
+  updateDisplayedCars(): void {
+    let filteredCars = this.cars;
+
+    if (this.filterCriteria.types.size > 0) {
+      filteredCars = filteredCars.filter(car => this.filterCriteria.types.has(car.carType));
+    }
+
+    if (this.filterCriteria.capacities.size > 0) {
+      filteredCars = filteredCars.filter(car => this.filterCriteria.capacities.has(car.maxSeats));
+    }
+
+    filteredCars = filteredCars.filter(car => car.rentPrice <= this.maxPrice);
+
+    this.displayedCars = this.isCollapsed ? filteredCars.slice(0, 6) : filteredCars;
+  }
+
+
 
   goToCarRental() {
     this.router.navigate(['/car-rental']);
