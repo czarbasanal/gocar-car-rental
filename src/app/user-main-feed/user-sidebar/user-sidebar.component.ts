@@ -1,6 +1,6 @@
 import { Component, Output, OnInit, EventEmitter } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
+import { Car } from 'src/app/shared/car.model';
 @Component({
   selector: 'app-user-sidebar',
   templateUrl: './user-sidebar.component.html',
@@ -26,35 +26,26 @@ export class UserSidebarComponent implements OnInit {
   ];
   maxPrice: number = 3000.00;
   constructor(private db: AngularFirestore) { }
-
+  cars: Car[] = [];
   ngOnInit() {
     this.fetchCarData();
   }
 
   fetchCarData() {
-    this.db.collection<any>('car-inventory').valueChanges()
+    this.db.collection<Car>('car-inventory').valueChanges()
       .subscribe(cars => {
-        this.calculateCounts(cars);
+        this.cars = cars;
+        this.calculateCounts();
       });
   }
 
-  calculateCounts(cars: any[]) {
-    this.types.forEach(type => type.count = 0);
-    this.capacities.forEach(capacity => capacity.count = 0);
+  calculateCounts() {
+    this.types.forEach(type => {
+      type.count = this.cars.filter(car => car.carType === type.value && !car.isRented).length;
+    });
 
-    cars.forEach(car => {
-      this.types.forEach(type => {
-        if (car.carType.toLowerCase() === type.value.toLowerCase()) {
-          type.count++;
-        }
-      });
-
-      this.capacities.forEach(capacity => {
-        const seatCount = parseInt(capacity.name.split(' ')[0]);
-        if (car.maxSeats === seatCount) {
-          capacity.count++;
-        }
-      });
+    this.capacities.forEach(capacity => {
+      capacity.count = this.cars.filter(car => car.maxSeats === capacity.value && !car.isRented).length;
     });
   }
 
@@ -71,7 +62,7 @@ export class UserSidebarComponent implements OnInit {
   onPriceChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.maxPrice = Number(input.value);
-    this.maxPriceChanged.emit(this.maxPrice); // Emit the current max price
+    this.maxPriceChanged.emit(this.maxPrice);
   }
 
 }

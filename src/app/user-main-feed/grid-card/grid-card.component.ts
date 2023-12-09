@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Car } from 'src/app/shared/car.model';
@@ -8,13 +8,19 @@ import { Car } from 'src/app/shared/car.model';
   templateUrl: './grid-card.component.html',
   styleUrls: ['./grid-card.component.css']
 })
-export class GridCardComponent implements OnInit {
+export class GridCardComponent implements OnInit, OnChanges {
+  @Input() searchTerm: string = '';
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['searchTerm']) {
+      this.updateDisplayedCars();
+    }
+  }
   cars: Car[] = [];
   displayedCars: Car[] = [];
   showSeeMoreButton: boolean = false;
   toggleButtonText: string = 'Show More Cars';
   maxPrice: number = Infinity;
-
   filterCriteria = {
     types: new Set<string>(),
     capacities: new Set<number>(),
@@ -30,7 +36,7 @@ export class GridCardComponent implements OnInit {
   fetchCars() {
     this.db.collection<Car>('car-inventory').valueChanges({ idField: 'id' })
       .subscribe(carData => {
-        this.cars = carData;
+        this.cars = carData.filter(car => !car.isRented);
         this.showSeeMoreButton = carData.length > 6;
         this.updateDisplayedCars();
       });
@@ -54,6 +60,10 @@ export class GridCardComponent implements OnInit {
   updateDisplayedCars(): void {
     let filteredCars = this.cars;
 
+    if (this.searchTerm) {
+      filteredCars = filteredCars.filter(car => this.matchesSearchTerm(car, this.searchTerm));
+    }
+
     if (this.filterCriteria.types.size > 0) {
       filteredCars = filteredCars.filter(car => this.filterCriteria.types.has(car.carType));
     }
@@ -66,7 +76,12 @@ export class GridCardComponent implements OnInit {
 
     this.displayedCars = this.isCollapsed ? filteredCars.slice(0, 6) : filteredCars;
   }
-
+  private matchesSearchTerm(car: Car, term: string): boolean {
+    term = term.toLowerCase();
+    return Object.values(car).some(value =>
+      typeof value === 'string' && value.toLowerCase().includes(term)
+    );
+  }
 
 
   goToCarRental() {

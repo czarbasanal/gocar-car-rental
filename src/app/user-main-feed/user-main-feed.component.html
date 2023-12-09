@@ -1,4 +1,4 @@
-<app-user-navbar></app-user-navbar>
+<app-user-navbar (searchTermChanged)="onSearchTermChanged($event)"></app-user-navbar>
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -6,8 +6,8 @@
                 (maxPriceChanged)="gridCardComponent.setMaxPrice($event)">
             </app-user-sidebar>
         </div>
-        <div class="col-md-9 bg-light">
-            <app-grid-card #gridCardComponent></app-grid-card>
+        <div class="col-md-9 bg-light pt-5 mt-5">
+            <app-grid-card #gridCardComponent [searchTerm]="searchTerm"></app-grid-card>
         </div>
     </div>
 </div>
