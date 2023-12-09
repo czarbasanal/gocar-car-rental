@@ -24,3 +24,11 @@ button {
 .delete-icon:hover {
     color: #d32f2f;
 }
+
+.text-green {
+    color: green;
+}
+
+.text-red {
+    color: red;
+}

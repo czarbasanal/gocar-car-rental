@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef, Renderer2 } from '@angular/core';
+import { Component, HostListener, ElementRef, Renderer2, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-user-navbar',
@@ -28,7 +28,16 @@ export class UserNavbarComponent {
     { name: 'Notif 2', image: 'notif.png' },
     { name: 'Notif 3', image: 'notif.png' }
   ];
+  @Output() searchTermChanged = new EventEmitter<string>();
+  searchTerm: string = '';
 
+  onSearchTermChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement | null;
+    if (inputElement) {
+      this.searchTerm = inputElement.value;
+      this.searchTermChanged.emit(this.searchTerm);
+    }
+  }
   openProfileDropdown(): void {
     this.isProfileDropdownOpen = true;
   }
@@ -58,5 +67,9 @@ export class UserNavbarComponent {
 
   closeNotifDropdown(): void {
     this.isNotifDropdownOpen = false;
+  }
+  clearSearch(): void {
+    this.searchTerm = '';
+    this.searchTermChanged.emit(this.searchTerm);
   }
 }

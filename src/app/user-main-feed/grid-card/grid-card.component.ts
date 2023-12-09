@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Car } from 'src/app/shared/car.model';
@@ -10,7 +10,14 @@ import { UserService } from 'src/app/shared/firestore.service';
   templateUrl: './grid-card.component.html',
   styleUrls: ['./grid-card.component.css']
 })
-export class GridCardComponent implements OnInit {
+export class GridCardComponent implements OnInit, OnChanges {
+  @Input() searchTerm: string = '';
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['searchTerm']) {
+      this.updateDisplayedCars();
+    }
+  }
   user: any;
   cars: Car[] = [];
   displayedCars: Car[] = [];
@@ -19,7 +26,12 @@ export class GridCardComponent implements OnInit {
   carIds: string[] = [];
   currentCarID: string = '';
   currentUserID: string = '';
-  
+  maxPrice: number = Infinity;
+  filterCriteria = {
+    types: new Set<string>(),
+    capacities: new Set<number>(),
+  };
+
 
   constructor(private router: Router, private db: AngularFirestore, private route: ActivatedRoute, private userService: UserService) { }
   isCollapsed: boolean = true;
@@ -39,20 +51,25 @@ export class GridCardComponent implements OnInit {
   }
 
   fetchCars() {
-  this.db.collection<Car>('car-inventory').snapshotChanges()
-    .subscribe(carSnapshot => {
-      this.cars = carSnapshot.map(carChange => {
-        const carData = carChange.payload.doc.data() as Car;
-        const carId = carChange.payload.doc.id;
-        this.carIds.push(carId);
-        //console.log("Car ID: ",carId);
-        return { id: carId, ...carData } as Car;
+    this.db.collection<Car>('car-inventory').snapshotChanges()
+      .subscribe(carSnapshot => {
+        const allCars = carSnapshot.map(carChange => {
+          const carData = carChange.payload.doc.data() as Car;
+          const carId = carChange.payload.doc.id;
+          this.carIds.push(carId);
+          return { id: carId, ...carData } as Car;
+        });
+  
+        // If you want to filter out rented cars and only display available ones
+        this.cars = allCars.filter(car => !car.isRented);
+  
+        // Show "See More" button based on the total number of cars, not just unrented
+        this.showSeeMoreButton = allCars.length > 6;
+  
+        this.updateDisplayedCars();
       });
-
-      this.showSeeMoreButton = this.cars.length > 6;
-      this.updateDisplayedCars();
-    });
   }
+  
 
 
   toggleCollapse(): void {
@@ -61,9 +78,50 @@ export class GridCardComponent implements OnInit {
     this.updateDisplayedCars();
   }
 
-  updateDisplayedCars(): void {
-    this.displayedCars = this.isCollapsed ? this.cars.slice(0, 6) : this.cars;
+  setFilterCriteria(types: Set<string>, capacities: Set<number>): void {
+    this.filterCriteria.types = types;
+    this.filterCriteria.capacities = capacities;
+    this.updateDisplayedCars();
   }
+  setMaxPrice(price: number): void {
+    this.maxPrice = price;
+    this.updateDisplayedCars();
+  }
+  updateDisplayedCars(): void {
+    let filteredCars = this.cars;
+
+    if (this.searchTerm) {
+      filteredCars = filteredCars.filter(car => this.matchesSearchTerm(car, this.searchTerm));
+    }
+
+    if (this.filterCriteria.types.size > 0) {
+      filteredCars = filteredCars.filter(car => this.filterCriteria.types.has(car.carType));
+    }
+
+    if (this.filterCriteria.capacities.size > 0) {
+      filteredCars = filteredCars.filter(car => this.filterCriteria.capacities.has(car.maxSeats));
+    }
+
+    filteredCars = filteredCars.filter(car => car.rentPrice <= this.maxPrice);
+
+    this.displayedCars = this.isCollapsed ? filteredCars.slice(0, 6) : filteredCars;
+
+    this.showSeeMoreButton = filteredCars.length > 6;
+  }
+  private matchesSearchTerm(car: Car, term: string): boolean {
+    term = term.toLowerCase();
+
+    return Object.entries(car).some(([key, value]) => {
+      if (typeof value === 'string') {
+        return value.toLowerCase().includes(term);
+      } else if (typeof value === 'number') {
+        const numTerm = Number(term);
+        return isNaN(numTerm) ? false : value === numTerm;
+      }
+      return false;
+    });
+  }
+
 
   goToCarRental(index: number) {
     const carId = this.carIds[index];
