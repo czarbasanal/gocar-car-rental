@@ -56,8 +56,8 @@ export class CarRentalComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.currentUserId = params['userId'];
       this.currentCarId = params['carId'];
-      console.log('User ID:', this.currentUserId);
-      console.log('Car ID:', this.currentCarId);
+      //console.log('User ID:', this.currentUserId);
+      //console.log('Car ID:', this.currentCarId);
     });
     this.getCarDetails();
   }
@@ -84,7 +84,7 @@ export class CarRentalComponent implements OnInit {
   calculateRentalCost() {
     this.rentalCost = this.daysDifference * this.carDetails?.rentPrice || 0;
   }
-  
+
   calculateTotalExtraPayment() {
     this.extraPayment = 0;
 
