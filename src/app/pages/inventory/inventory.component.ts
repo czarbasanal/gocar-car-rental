@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FireStorageService } from 'src/app/shared/fire-storage.service';
-import { Observable, map } from 'rxjs';
-import { AdminAddCarComponent } from 'src/app/admin-dashboard/admin-add-car/admin-add-car.component';
 import { ConfirmationDialogComponent } from 'src/app/admin-dashboard/confirmation-dialog/confirmation-dialog.component';
+import { AdminAddCarComponent } from 'src/app/admin-dashboard/admin-add-car/admin-add-car.component';
 import { Car } from 'src/app/shared/car.model';
-
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.css']
 })
-export class InventoryComponent implements OnInit {
-  cars!: Observable<any[]>;
+export class InventoryComponent implements OnInit, AfterViewInit {
+  dataSource = new MatTableDataSource<Car>([]);
   displayedColumns: string[] = ['imgPath', 'brand', 'model', 'carType', 'rentPrice', 'maxSeats', 'fuelType', 'transType', 'isRented', 'action'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private dialog: MatDialog, private db: AngularFirestore, private fireStorageService: FireStorageService, private snackBar: MatSnackBar) { }
 
@@ -24,36 +27,27 @@ export class InventoryComponent implements OnInit {
     this.fetchCars();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   fetchCars() {
-    this.cars = this.db.collection('car-inventory').snapshotChanges().pipe(
+    this.db.collection<Car>('car-inventory').snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Car;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
-    );
+    ).subscribe(carData => {
+      this.dataSource = new MatTableDataSource<Car>(carData);
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   addCar() {
     this.dialog.open(AdminAddCarComponent, {
       width: '1036px',
-
     });
-  }
-
-  async deleteCar(car: any) {
-    if (!car) return;
-    try {
-      await this.db.collection('car-inventory').doc(car.id).delete();
-
-      if (car.imgPath) {
-        await this.fireStorageService.delete(car.imgPath);
-      }
-      this.snackBar.open('Car deleted successfully', 'Close', { duration: 2000 });
-    } catch (error) {
-      console.error('Error deleting car:', error);
-      this.snackBar.open('Error deleting car', 'Close', { duration: 2000 });
-    }
   }
 
   openDeleteConfirmation(car: any) {
@@ -66,5 +60,21 @@ export class InventoryComponent implements OnInit {
         this.deleteCar(car);
       }
     });
+  }
+
+  async deleteCar(car: any) {
+    if (!car) return;
+
+    try {
+      await this.db.collection('car-inventory').doc(car.id).delete();
+
+      if (car.imgPath) {
+        await this.fireStorageService.delete(car.imgPath);
+      }
+      this.snackBar.open('Car deleted successfully', 'Close', { duration: 2000 });
+    } catch (error) {
+      console.error('Error deleting car:', error);
+      this.snackBar.open('Error deleting car', 'Close', { duration: 2000 });
+    }
   }
 }
