@@ -1,5 +1,11 @@
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.16);
+    background-color: #ffff;
 }
 
 .search-bar {
@@ -18,9 +24,21 @@
     outline: none;
 }
 
+.clear-btn {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+
+}
+
 .search-input:focus {
-    border-color: #86b7fe;
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    /* border-color: #86b7fe; */
+    /* box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25); */
+    box-shadow: 0 0 0 0.1rem rgba(32, 129, 249, 0.1);
 }
 
 .search-icon {
@@ -54,8 +72,8 @@
 }
 
 .navbar-nav .nav-item .nav-link svg {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
 }
 
 .dropdown-menu {

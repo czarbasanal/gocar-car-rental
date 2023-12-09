@@ -23,6 +23,11 @@
     gap: 8px;
 }
 
+.form-check :hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .form-check-input {
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
@@ -61,7 +66,7 @@
     text-align: justify;
     font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 550;
     line-height: 150%;
     letter-spacing: -0.4px;
     margin-right: 5px;
