@@ -61,8 +61,21 @@ ol {
     position: relative;
 }
 
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
 .threeCars {
     height: 650px;
+    animation-name: slideInFromRight;
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
 }
 
 .CarCompanyLogos {
@@ -130,8 +143,7 @@ ol {
 }
 
 .HowToRent {
-    margin-top: 150px;
-    margin-bottom: 82px;
+    margin-top: 100px
 }
 
 .HowToRent :first-child {
@@ -158,9 +170,44 @@ ol {
     text-align: center;
 }
 
-.Easy {
-    position: relative
+@-webkit-keyframes swirl-in-fwd {
+    0% {
+        -webkit-transform: rotate(-540deg) scale(0);
+        transform: rotate(-540deg) scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: rotate(0) scale(1);
+        transform: rotate(0) scale(1);
+        opacity: 1;
+    }
 }
+
+@keyframes swirl-in-fwd {
+    0% {
+        -webkit-transform: rotate(-540deg) scale(0);
+        transform: rotate(-540deg) scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: rotate(0) scale(1);
+        transform: rotate(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.Easy {
+    position: relative;
+    opacity: 0;
+    /* Initially invisible */
+    -webkit-animation: swirl-in-fwd 1s ease-out 2s both;
+    /* For Safari and older Chrome browsers */
+    animation: swirl-in-fwd 1s ease-out 2s both;
+    /* Modern browsers */
+}
+
 
 .Easy img {
     position: absolute;
