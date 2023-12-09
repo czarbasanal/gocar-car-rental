@@ -7,7 +7,7 @@
         <div class="col" id="car-details">
           <div class="card" *ngIf="carDetails">
             <img
-              src="assets/car-catalogue/suv-toyota-fortuner.png"
+              [src]="carDetails.imgPath"
               class="card-img-top"
               alt="Card Image"
             />

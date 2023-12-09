@@ -37,7 +37,7 @@
                             <div class="col-sm-3">
                                 <div class="text-muted">
                                     <h5 class="font-size-16 mb-3">Vehicle ID:</h5>
-                                    <p class="mb-1">{{ currentTransactionDetails.endDate }}</p>
+                                    <p class="mb-1">{{ currentTransactionDetails.transactionCarId }}</p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -88,7 +88,7 @@
                                         </tr>
                                         <tr>
                                             <th scope="row" colspan="3" class="border-0 text-end">Total</th>
-                                            <td class="text-end"><h4 class="m-0 fw-semibold">&#8369; {{ currentTransactionDetails.rent | number: '1.2-2' }}</h4></td>
+                                            <td class="text-end"><h4 class="m-0 fw-semibold">&#8369; {{ currentTransactionDetails.total | number: '1.2-2' }}</h4></td>
                                         </tr>
                                     </tbody>
                                 </table>

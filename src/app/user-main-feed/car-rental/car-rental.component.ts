@@ -1,7 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ExtraDetail, TransactionDetails } from 'src/app/shared/transaction.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute  } from '@angular/router';
 
 @Component({
   selector: 'app-car-rental',
@@ -19,8 +19,9 @@ export class CarRentalComponent implements OnInit {
   extraPayment: number = 0;
   totalExpense: number = 0;
   daysDifference: number = 0;
-  currentCarId: string = ''; //ilisanan pa ni
-  currentUserId: string = ''; //ilisanan pa ni
+  currentCarId: string = '';
+  currentUserId: string = '';
+  currentTransactionId: string = '';
 
   selectedExtras: any = {
     gpsNavigation: false,
@@ -49,11 +50,15 @@ export class CarRentalComponent implements OnInit {
     total: 0,
   };
 
-  constructor(private firestore: AngularFirestore, private router: Router) {}
+  constructor(private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.currentCarId = 'nkcd5S3lJVMfJPx5VQLA'; //ilisanan pa ni
-    this.currentUserId = '9zOAMpevRPcqWJLi84C6DH54hap2'; //ilisanan pa ni
+    this.route.params.subscribe(params => {
+      this.currentUserId = params['userId'];
+      this.currentCarId = params['carId'];
+      console.log('User ID:', this.currentUserId);
+      console.log('Car ID:', this.currentCarId);
+    });
     this.getCarDetails();
   }
   getCarDetails() {
@@ -63,7 +68,6 @@ export class CarRentalComponent implements OnInit {
       .valueChanges()
       .subscribe((data: any) => {
         this.carDetails = data;
-        console.log(this.carDetails);
       }
     );
   }
@@ -76,9 +80,11 @@ export class CarRentalComponent implements OnInit {
     const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
     return daysDifference;
   }
+  
   calculateRentalCost() {
     this.rentalCost = this.daysDifference * this.carDetails?.rentPrice || 0;
   }
+  
   calculateTotalExtraPayment() {
     this.extraPayment = 0;
 
@@ -179,20 +185,20 @@ export class CarRentalComponent implements OnInit {
     this.transactionDetails.startTime = this.getTime(this.pickupTime);
     this.transactionDetails.endDate = this.returnDate;
     this.transactionDetails.endTime = this.getTime(this.returnTime);
-    this.transactionDetails.rent = this.rentalCost || 0;
+    this.transactionDetails.rent = this.rentalCost;
     this.transactionDetails.extras = this.getSelectedExtrasDetails();
     this.transactionDetails.total = this.totalExpense;
     this.transactionDetails.duration = this.daysDifference;
-    
 
-    this.firestore.collection('transactions').doc().set(
+    this.currentTransactionId = this.firestore.createId();
+    this.firestore.collection('transactions').doc(this.currentTransactionId).set(
       this.transactionDetails
     );
   }
 
   goToReceipt() {
     this.modelUpdate();
-    this.router.navigate(['receipt']);
+    this.router.navigate(['receipt', this.currentTransactionId]);
   }
 
 }

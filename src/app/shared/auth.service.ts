@@ -18,13 +18,20 @@ export class AuthService {
   // login method
   login(email: string, password: string) {
     this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
-      localStorage.setItem('token', 'true');
-      this.router.navigate(['main-feed']);
+      if (res.user) {
+        const uid = res.user.uid;
+        localStorage.setItem('token', 'true');
+        this.router.navigate(['main-feed', uid]);
+      } else {
+        // Handle the case where res.user is null
+        console.error('User is null after successful login');
+      }
     }, err => {
       alert(err.message);
       this.router.navigate(['login']);
-    })
+    });
   }
+  
 
   // register method
   register(userDetails: UserDetails) {
