@@ -6,14 +6,29 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="invoice-title mt-2">
-                            <h4 class="float-end font-size-15">Transaction ID: {{ currentTransactionId }}</h4>
-                            <div class="mb-4">
-                               <h2 class="mb-1 text-muted">gocar.usjr.edu.ph</h2>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <h2 class="mb-1 text-muted">gocar.usjr.edu.ph</h2>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="float-end">
+                                        <svg (click)="goBackToMainFeed()" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                        </svg>
+                                    </div>
+                                 </div>
                             </div>
-                            <div class="text-muted">
-                                <p class="mb-1"> 7VQ6+XQR usjr, cicct, Cebu City, 6000 Cebu</p>
-                                <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i> gocar@usjr.edu.ph</p>
-                                <p><i class="uil uil-phone me-1"></i> 0966 995 3511</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="text-muted">
+                                        <p class="mb-1"> 7VQ6+XQR usjr, cicct, Cebu City, 6000 Cebu</p>
+                                        <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i> gocar@usjr.edu.ph</p>
+                                        <p><i class="uil uil-phone me-1"></i> 0966 995 3511</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 d-flex align-items-center justify-content-end">
+                                    <h4 class="float-end font-size-15">Transaction ID: {{ currentTransactionId }}</h4>
+                                </div>
                             </div>
                         </div>
     
@@ -37,7 +52,7 @@
                             <div class="col-sm-3">
                                 <div class="text-muted">
                                     <h5 class="font-size-16 mb-3">Vehicle ID:</h5>
-                                    <p class="mb-1">{{ currentTransactionDetails.endDate }}</p>
+                                    <p class="mb-1">{{ currentTransactionDetails.transactionCarId }}</p>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -73,7 +88,7 @@
                                                 </div>
                                             </td>
                                             <td>&#8369; {{ currentCarDetails.rentPrice | number: '1.2-2' }}</td>
-                                            <td>{{ currentTransactionDetails.duration }}</td>
+                                            <td>{{ currentTransactionDetails.days }} day/s {{ currentTransactionDetails.hrs }} hrs</td>
                                             <td class="text-end">&#8369; {{ currentTransactionDetails.rent | number: '1.2-2' }}</td>
                                         </tr>
                                         <tr *ngFor="let extra of currentTransactionDetails.extras; let i = index">
@@ -83,29 +98,15 @@
                                               </div>
                                             </td>
                                             <td>&#8369; {{ extra.basePrice | number: '1.2-2' }}</td>
-                                            <td>{{ currentTransactionDetails.duration }}</td>
+                                            <td>{{ currentTransactionDetails.days }} days {{ currentTransactionDetails.hrs }} hrs</td>
                                             <td class="text-end">&#8369; {{ extra.cost | number: '1.2-2' }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row" colspan="3" class="border-0 text-end">Total</th>
-                                            <td class="text-end"><h4 class="m-0 fw-semibold">&#8369; {{ currentTransactionDetails.rent | number: '1.2-2' }}</h4></td>
+                                            <td class="text-end"><h4 class="m-0 fw-semibold">&#8369; {{ currentTransactionDetails.total | number: '1.2-2' }}</h4></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="row mt-4 justify-content-end">
-                                <div class="col-md-2">
-                                    <select class="form-select">
-                                        <option value="" disabled selected hidden>Select Payment</option>
-                                        <option value="1">GCash</option>
-                                        <option value="2">Paymaya</option>
-                                      </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="float-end">
-                                        <a class="btn btn-primary w-md" (click)="goBackToMainFeed()">Confirm Payment</a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../shared/firestore.service';
 
 @Component({
   selector: 'app-user-main-feed',
@@ -7,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserMainFeedComponent implements OnInit {
   searchTerm: string = '';
+  user: any;
+
+  constructor(private route: ActivatedRoute, private userService: UserService) { }
+
   onSearchTermChanged(newTerm: string): void {
     this.searchTerm = newTerm;
-
   }
-  ngOnInit(): void {
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const uid = params['userId'];
+      this.userService.getUserDetails(uid).subscribe(user => {
+        this.user = user;
+      });
+    });
   }
 }
