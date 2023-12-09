@@ -7,7 +7,8 @@ export interface TransactionDetails {
     endTime: string;
     rent: number;
     extras: ExtraDetail[];
-    duration:number,
+    days: number,
+    hrs: number,
     total: number;
   }
   

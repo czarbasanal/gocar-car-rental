@@ -26,7 +26,7 @@ export class GridCardComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const uid = params['uid'];
+      const uid = params['userId'];
       this.currentUserID = uid;
       //console.log("User: ",this.currentUserID)
       this.userService.getUserDetails(uid).subscribe(user => {
@@ -52,7 +52,7 @@ export class GridCardComponent implements OnInit {
       this.showSeeMoreButton = this.cars.length > 6;
       this.updateDisplayedCars();
     });
-}
+  }
 
 
   toggleCollapse(): void {

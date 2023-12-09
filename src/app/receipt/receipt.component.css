@@ -17,3 +17,8 @@
     outline: none;
     box-shadow: none;
 }
+
+.float-end:hover {
+    cursor: pointer;
+    color: red;
+}

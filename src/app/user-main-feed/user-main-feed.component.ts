@@ -14,7 +14,7 @@ export class UserMainFeedComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const uid = params['uid'];
+      const uid = params['userId'];
       this.userService.getUserDetails(uid).subscribe(user => {
         this.user = user;
       });

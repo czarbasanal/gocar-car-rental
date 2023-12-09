@@ -15,10 +15,17 @@ export class CarRentalComponent implements OnInit {
   returnDate: string = '';
   pickupTime: string = '';
   returnTime: string = '';
+
+  formattedPickupTime: any;
+  formattedReturnTime: any;
+  pickupDateTime: any;
+  returnDateTime: any;
+
   rentalCost: number = 0;
   extraPayment: number = 0;
   totalExpense: number = 0;
   daysDifference: number = 0;
+  hrsDifference: number = 0;
   currentCarId: string = '';
   currentUserId: string = '';
   currentTransactionId: string = '';
@@ -46,7 +53,8 @@ export class CarRentalComponent implements OnInit {
     endTime: '',
     rent: 0,
     extras: [],
-    duration: 0,
+    days: 0,
+    hrs: 0,
     total: 0,
   };
 
@@ -72,44 +80,70 @@ export class CarRentalComponent implements OnInit {
     );
   }
   calculateDays() {
-    const formattedPickupTime = this.pickupTime.toString();
-    const formattedReturnTime = this.returnTime.toString();
-    const pickupDateTime = new Date(this.pickupDate + 'T' + formattedPickupTime + ':00');
-    const returnDateTime = new Date(this.returnDate + 'T' + formattedReturnTime + ':00');
-    const timeDifference = returnDateTime.getTime() - pickupDateTime.getTime();
-    const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
+    const timeDifference = this.returnDateTime.getTime() - this.pickupDateTime.getTime();
+    const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
     return daysDifference;
+  }
+  calculateHrs() {
+    const timeDifference = this.returnDateTime.getTime() - this.pickupDateTime.getTime();
+    const remainingMilliseconds = timeDifference % (1000 * 3600 * 24);
+    const hrsDifference = Math.floor(remainingMilliseconds / (1000 * 3600));
+    return hrsDifference;
   }
   
   calculateRentalCost() {
-    this.rentalCost = this.daysDifference * this.carDetails?.rentPrice || 0;
+    this.rentalCost = (this.daysDifference * this.carDetails?.rentPrice || 0)
+                    + (this.hrsDifference  * (this.carDetails?.rentPrice / 24 || 0));
   }
 
   calculateTotalExtraPayment() {
     this.extraPayment = 0;
 
     if (this.selectedExtras.gpsNavigation) {
-      this.extraPayment += this.extraPrices.gpsNavigation * this.daysDifference;
+      this.extraPayment += (this.extraPrices.gpsNavigation * this.daysDifference)
+                          +((this.extraPrices.gpsNavigation / 24) * this.hrsDifference)
     }
     if (this.selectedExtras.additionalDriver) {
-      this.extraPayment += this.extraPrices.additionalDriver * this.daysDifference;
+      this.extraPayment += (this.extraPrices.additionalDriver * this.daysDifference)
+                          +((this.extraPrices.additionalDriver / 24) * this.hrsDifference)
     }
     if (this.selectedExtras.childSeat) {
-      this.extraPayment += this.extraPrices.childSeat * this.daysDifference;
+      this.extraPayment += (this.extraPrices.childSeat * this.daysDifference)
+                          +((this.extraPrices.childSeat / 24) * this.hrsDifference)
     }
     if (this.selectedExtras.roofBicycleRack) {
-      this.extraPayment += this.extraPrices.roofBicycleRack * this.daysDifference;
+      this.extraPayment += (this.extraPrices.roofBicycleRack * this.daysDifference)
+                          +((this.extraPrices.roofBicycleRack / 24) * this.hrsDifference)
     }
   }
   totalRentExpense() {
     this.totalExpense = this.rentalCost + this.extraPayment;
   }
 
+  areInputsFilled(): boolean {
+    return !!this.pickupDate && !!this.pickupTime && !!this.returnDate && !!this.returnTime;
+  }
+
   onInputChange() {
-    this.daysDifference = this.calculateDays();
-    this.calculateRentalCost();
-    this.calculateTotalExtraPayment();
-    this.totalRentExpense()
+    if(this.areInputsFilled()){
+      this.formattedPickupTime = this.pickupTime.toString();
+      this.formattedReturnTime = this.returnTime.toString();
+      this.pickupDateTime = new Date(this.pickupDate + 'T' + this.formattedPickupTime + ':00:00');
+      this.returnDateTime = new Date(this.returnDate + 'T' + this.formattedReturnTime + ':00:00');
+      
+      if (this.calculateDays() == 0){
+        this.daysDifference = 1;
+        this.hrsDifference = 0;
+      }
+      else{
+        this.daysDifference = this.calculateDays();
+        this.hrsDifference = this.calculateHrs();
+      }
+
+      this.calculateRentalCost();
+      this.calculateTotalExtraPayment();
+      this.totalRentExpense()
+    }
   }
 
   getSelectedExtrasDetails() {
@@ -147,31 +181,31 @@ export class CarRentalComponent implements OnInit {
   }
   getTime(time: string){
     switch(time) {
-      case "09:00":
+      case "09":
         time = "09:00 AM"
         break;
-      case "10:00":
+      case "10":
         time = "10:00 AM"
         break;
-      case "11:00":
+      case "11":
         time = "11:00 AM"
         break;
-      case "12:00":
+      case "12":
         time = "12:00 PM"
         break;
-      case "13:00":
+      case "13":
         time = "01:00 PM"
         break;
-      case "14:00":
+      case "14":
         time = "02:00 PM"
         break;
-      case "15:00":
+      case "15":
         time = "03:00 PM"
         break;
-      case "16:00":
+      case "16":
         time = "04:00 PM"
         break;
-      case "17:00":
+      case "17":
         time = "05:00 PM"
         break;
     }
@@ -188,7 +222,8 @@ export class CarRentalComponent implements OnInit {
     this.transactionDetails.rent = this.rentalCost;
     this.transactionDetails.extras = this.getSelectedExtrasDetails();
     this.transactionDetails.total = this.totalExpense;
-    this.transactionDetails.duration = this.daysDifference;
+    this.transactionDetails.days = this.daysDifference;
+    this.transactionDetails.hrs = this.hrsDifference;
 
     this.currentTransactionId = this.firestore.createId();
     this.firestore.collection('transactions').doc(this.currentTransactionId).set(
@@ -196,9 +231,46 @@ export class CarRentalComponent implements OnInit {
     );
   }
 
-  goToReceipt() {
-    this.modelUpdate();
-    this.router.navigate(['receipt', this.currentTransactionId]);
+  valid(){
+    const currentDate = new Date();
+    currentDate.setHours(new Date().getHours(), new Date().getMinutes(), new Date().getSeconds(), 0);
+    const minPickupDate = new Date(currentDate);
+    minPickupDate.setDate(currentDate.getDate());
+
+    if (this.pickupDateTime <= minPickupDate) {
+      alert('Invalid Pick up Date. Please choose another date');
+      return false;
+    }
+    else if (this.pickupDateTime > this.returnDateTime || this.pickupDateTime == this.returnDateTime) {
+      alert('Invalid Return Date. Please choose another date');
+      return false;
+    }
+    else if (this.pickupDate == '') {
+      alert('Please enter Pick up Date');
+      return false;
+    }
+    else if (this.getTime(this.pickupTime) == '') {
+      alert('Please enter Return Date');
+      return false;
+    }
+    else if (this.returnDate == '') {
+      alert('Please enter Pick up Time');
+      return false;
+    }
+    else if (this.getTime(this.returnTime) == '') {
+      alert('Please enter Return Time');
+      return false;
+    }
+    else{
+      return true;
+    }
+    
   }
 
+  goToReceipt() {
+    if (this.valid()){
+      this.modelUpdate();
+      this.router.navigate(['receipt', this.currentTransactionId]);
+    }
+  }
 }

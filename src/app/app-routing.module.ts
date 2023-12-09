@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'grid-card', component: GridCardComponent },
   //{ path: 'main-feed', component: UserMainFeedComponent },
-  { path: 'main-feed/:uid', component: UserMainFeedComponent },
+  { path: 'main-feed/:userId', component: UserMainFeedComponent },
   //{ path: 'car-rental', component: CarRentalComponent },
   { path: 'car-rental/:userId/:carId', component: CarRentalComponent },
   //{ path: 'receipt', component: ReceiptComponent },
