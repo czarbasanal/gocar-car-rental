@@ -29,12 +29,13 @@ export class UserNavbarComponent {
     { name: 'Notif 3', image: 'notif.png' }
   ];
   @Output() searchTermChanged = new EventEmitter<string>();
+  searchTerm: string = '';
 
   onSearchTermChange(event: Event) {
     const inputElement = event.target as HTMLInputElement | null;
     if (inputElement) {
-      const newTerm = inputElement.value;
-      this.searchTermChanged.emit(newTerm);
+      this.searchTerm = inputElement.value;
+      this.searchTermChanged.emit(this.searchTerm);
     }
   }
   openProfileDropdown(): void {
@@ -66,5 +67,9 @@ export class UserNavbarComponent {
 
   closeNotifDropdown(): void {
     this.isNotifDropdownOpen = false;
+  }
+  clearSearch(): void {
+    this.searchTerm = '';
+    this.searchTermChanged.emit(this.searchTerm);
   }
 }

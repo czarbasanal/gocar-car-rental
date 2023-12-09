@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserMainFeedComponent implements OnInit {
   searchTerm: string = '';
-  onSearchTermChanged(newTerm: string) {
+  onSearchTermChanged(newTerm: string): void {
     this.searchTerm = newTerm;
+
   }
   ngOnInit(): void {
   }

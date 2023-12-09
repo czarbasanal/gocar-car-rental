@@ -24,6 +24,17 @@
     outline: none;
 }
 
+.clear-btn {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+
+}
+
 .search-input:focus {
     /* border-color: #86b7fe; */
     /* box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25); */

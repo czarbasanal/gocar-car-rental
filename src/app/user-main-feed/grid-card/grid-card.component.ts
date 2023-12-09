@@ -75,12 +75,21 @@ export class GridCardComponent implements OnInit, OnChanges {
     filteredCars = filteredCars.filter(car => car.rentPrice <= this.maxPrice);
 
     this.displayedCars = this.isCollapsed ? filteredCars.slice(0, 6) : filteredCars;
+
+    this.showSeeMoreButton = filteredCars.length > 6;
   }
   private matchesSearchTerm(car: Car, term: string): boolean {
     term = term.toLowerCase();
-    return Object.values(car).some(value =>
-      typeof value === 'string' && value.toLowerCase().includes(term)
-    );
+
+    return Object.entries(car).some(([key, value]) => {
+      if (typeof value === 'string') {
+        return value.toLowerCase().includes(term);
+      } else if (typeof value === 'number') {
+        const numTerm = Number(term);
+        return isNaN(numTerm) ? false : value === numTerm;
+      }
+      return false;
+    });
   }
 
 

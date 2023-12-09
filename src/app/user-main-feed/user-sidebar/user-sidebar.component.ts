@@ -24,7 +24,7 @@ export class UserSidebarComponent implements OnInit {
     { name: '8 Person', count: 0, value: 8, isChecked: false },
     { name: '18 Person', count: 0, value: 18, isChecked: false },
   ];
-  maxPrice: number = 3000.00;
+  maxPrice: number = 0.00;
   constructor(private db: AngularFirestore) { }
   cars: Car[] = [];
   ngOnInit() {
