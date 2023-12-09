@@ -62,15 +62,16 @@ ol {
 }
 
 .threeCars {
-    height: 600px;
+    height: 650px;
 }
 
 .CarCompanyLogos {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 71px;
+
 }
 
 .CarCompanyLogos div {
@@ -119,8 +120,8 @@ ol {
 
 .RightContainer {
     position: absolute;
-    top: 0;
-    left: 290px;
+    top: -50px;
+    left: 270px;
     z-index: 1;
 }
 
