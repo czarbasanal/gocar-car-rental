@@ -9,8 +9,8 @@ export class FireStorageService {
 
   constructor(private storage: AngularFireStorage) { }
 
-  async upload(file: File): Promise<string> {
-    const filePath = `car-catalogue/${file.name}`;
+  async upload(storageCollection: string, file: File): Promise<string> {
+    const filePath = `${storageCollection}/${file.name}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
