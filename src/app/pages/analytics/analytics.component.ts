@@ -26,6 +26,7 @@ export class AnalyticsComponent implements OnInit {
       backgroundColor: 'rgba(32,129,249,1)',
     }
   ];
+  loading = true;
 
   constructor(private dataService: DataServiceService) { }
 
@@ -34,6 +35,7 @@ export class AnalyticsComponent implements OnInit {
   }
 
   loadData() {
+    this.loading = true;
     this.dataService.getUsersCount().subscribe(userCount => {
       this.dataService.getTransactionsCount().subscribe(transactionCount => {
         this.dataService.getCarsCount().subscribe(carCount => {
@@ -47,6 +49,7 @@ export class AnalyticsComponent implements OnInit {
               }
             ]
           };
+          this.loading = false;
         });
       });
     });

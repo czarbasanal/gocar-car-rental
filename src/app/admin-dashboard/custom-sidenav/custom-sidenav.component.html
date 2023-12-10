@@ -13,7 +13,7 @@
             }}</mat-icon>
         <span matListItemTitle *ngIf="!sideNavCollapsed()">{{ item.label }}</span>
     </a>
-    <a mat-list-item class="logout">
+    <a mat-list-item class="logout" (click)="logout()">
         <mat-icon matListItemIcon>exit_to_app</mat-icon>
         <span matListItemTitle *ngIf="!sideNavCollapsed()">Logout</span>
     </a>
