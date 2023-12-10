@@ -9,12 +9,9 @@ import { SignupCommunicationService, UserDetailsWithFile } from 'src/app/shared/
   styleUrls: ['./signup-details-2.component.css']
 })
 export class SignupDetails2Component implements OnInit, OnDestroy {
-
   confirmPassword: string = '';
   userDetailsWithFile!: UserDetailsWithFile;
-  isLoading: boolean = false;
   private detailsButtonClickSubscription!: Subscription;
-  private loadingSubscription!: Subscription;
 
   constructor(private auth: AuthService, private signupCommunicationService: SignupCommunicationService) { }
 
@@ -24,15 +21,10 @@ export class SignupDetails2Component implements OnInit, OnDestroy {
         this.userDetailsWithFile = userDetailsWithFile;
       }
     );
-
-    this.loadingSubscription = this.auth.isLoading$.subscribe(loading => {
-      this.isLoading = loading;
-    });
   }
 
   ngOnDestroy(): void {
     this.detailsButtonClickSubscription.unsubscribe();
-    this.loadingSubscription.unsubscribe();
   }
 
   register() {

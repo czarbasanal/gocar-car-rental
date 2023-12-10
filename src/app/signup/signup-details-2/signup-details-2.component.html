@@ -14,10 +14,7 @@
             <input type="password" class="form-input" placeholder="Confirm Password" name="confirmPassword"
                 [(ngModel)]="confirmPassword">
         </div>
-        <button type="submit" class="form-button" [disabled]="isLoading">Sign up</button>
-        <div *ngIf="isLoading" class="spinner-container">
-            <mat-spinner></mat-spinner>
-        </div>
+        <button type="submit" class="form-button">Sign up</button>
     </form>
     <hr class="divider">
     <div class="bottom-text">
