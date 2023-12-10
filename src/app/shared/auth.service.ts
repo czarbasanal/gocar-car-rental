@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider } from 'firebase/auth'
+import { GoogleAuthProvider, sendPasswordResetEmail, GithubAuthProvider, FacebookAuthProvider } from 'firebase/auth'
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { UserDetails } from './user-details.model';
@@ -35,16 +35,19 @@ export class AuthService {
 
   // register method
   register(userDetails: UserDetails) {
+
     this.fireauth.createUserWithEmailAndPassword(userDetails.email, userDetails.password).then(res => {
-      // Access userDetails.firstname and userDetails.lastname here
       const uid = res.user?.uid;
+      
       this.firestore.collection('users').doc(uid).set({
         userDetails,
       });
 
       alert('Registration Successful');
       this.router.navigate(['login']);
-    }, err => {
+    },
+    
+    err => {
       alert(err.message);
       this.router.navigate(['signup']);
     });
@@ -61,10 +64,11 @@ export class AuthService {
   }
 
   // forgot password
-  forgotPassword(email: string) {
-    this.fireauth.sendPasswordResetEmail(email).then(() => {
-      this.router.navigate(['/verify-email']);
-    }, err => {
+  async forgotPassword(email: string) {
+    await this.fireauth.sendPasswordResetEmail(email).then(() => {
+      console.log("nakadawat ko ani nga email: ", email)
+      //this.router.navigate(['/verify-email']); --------------ilisan ni nako
+    }, err => {           
       alert('Something went wrong');
     })
   }

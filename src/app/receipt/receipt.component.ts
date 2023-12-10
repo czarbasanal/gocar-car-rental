@@ -16,14 +16,12 @@ export class ReceiptComponent implements OnInit {
   constructor(private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.currentTransactionId = 'mEwPqBzR8m1qzjl1kUSY'; //ilisanan pa ni
-
     this.route.params.subscribe(params => {
       this.currentTransactionId = params['transactionId'];
-      //console.log('Transaction ID:', this.currentTransactionId);
     });
 
     this.getTransactionDetails();
+    console.log(this.currentTransactionDetails)
   }
 
   getTransactionDetails() {
@@ -33,9 +31,6 @@ export class ReceiptComponent implements OnInit {
       .valueChanges()
       .subscribe((data: any) => {
         this.currentTransactionDetails = data;
-        //console.log('Transaction: ',this.currentTransactionDetails);
-        //console.log('CarId: ',this.currentTransactionDetails.transactionCarId);
-        //console.log('UserId: ',this.currentTransactionDetails.transactionUserId);
         if (this.currentTransactionDetails.transactionCarId && this.currentTransactionDetails.transactionUserId) {
           this.getCarDetails();
           this.getUserDetails();
@@ -52,7 +47,6 @@ export class ReceiptComponent implements OnInit {
       .valueChanges()
       .subscribe((data: any) => {
         this.currentCarDetails = data;
-        //console.log('Car: ',this.currentCarDetails);
       }
     );
     }
@@ -65,7 +59,6 @@ export class ReceiptComponent implements OnInit {
       .valueChanges()
       .subscribe((data: any) => {
         this.currentUserDetails = data;
-        //console.log('User: ',this.currentUserDetails);
       }
     );
     }
