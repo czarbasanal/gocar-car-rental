@@ -26,14 +26,15 @@ export class UserNavbarComponent implements OnInit {
   // ];
 
   notifications = [
-    { name: '1', image: 'notif.png' },
-    { name: 'Notif 2', image: 'notif.png' },
-    { name: 'Notif 3', image: 'notif.png' }
+    { name: 'Exclusive Deals', image: 'assets/speaker.png' },
+    { name: 'Promo Alert!', image: 'assets/speaker.png' },
+    { name: 'Rental Reminder', image: 'assets/speaker.png' }
   ];
   @Output() searchTermChanged = new EventEmitter<string>();
   searchTerm: string = '';
   user: any;
   carIds: string[] = [];
+  rentedCars: any[] = [];
   userFavorites: any[] = [];
   currentUserID: string = '';
   constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) { }
@@ -45,11 +46,13 @@ export class UserNavbarComponent implements OnInit {
 
       this.userService.getUserDetails(uid).subscribe(user => {
         this.user = user;
-
+        this.rentedCars = user.myRentedCars || [];
+        console.log(this.rentedCars)
+        console.log(user.myRentedCars)
         this.userService.getUserFavorites(uid).subscribe(favorites => {
           this.userFavorites = favorites;
           console.log(this.userFavorites)
-          // Populate the carIds array based on userFavorites
+
 
           console.log(this.userFavorites.map(fav => fav.id));
 

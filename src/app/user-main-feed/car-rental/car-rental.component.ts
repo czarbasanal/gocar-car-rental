@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ExtraDetail, TransactionDetails } from 'src/app/shared/transaction.model';
-import { MyRentedCarsItem } from 'src/app/shared/user-details.model';
+import { MyRentedCarsItem, UserDetails } from 'src/app/shared/user-details.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Car } from 'src/app/shared/car.model';
 import { UserService } from 'src/app/shared/firestore.service';
@@ -17,7 +17,9 @@ export class CarRentalComponent implements OnInit {
   rentLink: MyRentedCarsItem = {
     transactionId: '',
     userId: '',
-    route: null,
+    carName: '',
+    carImage: '',
+    route: '',
   }
 
   pickupDate: string = '';
@@ -282,19 +284,39 @@ export class CarRentalComponent implements OnInit {
   goToReceipt() {
     if (this.valid()) {
       this.modelUpdate();
+
+      // Update the car's rented status
       this.firestore.collection('car-inventory').doc(this.currentCarId).update({
         isRented: true
       });
 
-      this.rentLink.transactionId = this.currentTransactionId,
-        this.rentLink.userId = this.currentUserId,
+      // Create a new rented car item
+      const newRentedCarItem: MyRentedCarsItem = {
+        transactionId: this.currentTransactionId,
+        userId: this.currentUserId,
+        carName: this.carDetails.model, // Assuming 'model' is the name of the car in carDetails
+        carImage: this.carDetails.imgPath, // Assuming 'imgPath' holds the image URL
+        route: '/car-rental/' + this.currentCarId
+      };
 
-        this.firestore.collection('users').doc(this.currentUserId).update({
-          myRentedCars: this.rentLink
-        });
-      this.router.navigate(['receipt', this.currentTransactionId]);
+      // Fetch current user's rented cars, update the array, and then update the user's document
+      this.firestore.collection('users').doc(this.currentUserId).get().subscribe(doc => {
+        if (doc.exists) {
+          const userData = doc.data() as UserDetails;
+          const updatedRentedCars = userData.myRentedCars || [];
+          updatedRentedCars.push(newRentedCarItem);
+
+          this.firestore.collection('users').doc(this.currentUserId).update({
+            myRentedCars: updatedRentedCars
+          });
+
+          // Navigate to the receipt page
+          this.router.navigate(['receipt', this.currentTransactionId]);
+        }
+      });
     }
   }
+
   isFavorited(car: Car): boolean {
     const uniqueIdentifier = car.brand + car.model;
     return this.user.favorites.some(
