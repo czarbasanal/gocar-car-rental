@@ -1,13 +1,14 @@
 <app-user-navbar></app-user-navbar>
 <div class="booking-details">
-  <div class="container mt-3">
+  
+  <div class="container">
     <div class="wrapper">
       <div class="row">
         <!-- First Half Content -->
         <div class="col" id="car-details">
           <div class="card" *ngIf="carDetails">
             <img
-              src="assets/car-catalogue/suv-toyota-fortuner.png"
+              [src]="carDetails.imgPath"
               class="card-img-top"
               alt="Card Image"
             />
@@ -61,7 +62,7 @@
             <div class="row">
               <div id="booking">
                 <p class="title">Booking Details</p>
-                <label>PickUp</label>
+                <label>Pick Up</label>
                 <div class="row justify-content-between">
                   <div class="col-md-6" id="details1">
                     <input class="book1" type="date" id="datepicker" placeholder="Pickup Date" [(ngModel)]="pickupDate" (change)="onInputChange()"/>
@@ -69,15 +70,15 @@
                   <div class="col-md-6" id="details2">
                     <select id="book2" class="form-select" [(ngModel)]="pickupTime" (change)="onInputChange()">
                       <option value="" disabled selected hidden>Select Time</option>
-                      <option value="09:00">09:00 AM</option>
-                      <option value="10:00">10:00 AM</option>
-                      <option value="11:00">11:00 AM</option>
-                      <option value="12:00">12:00 PM</option>
-                      <option value="13:00">01:00 PM</option>
-                      <option value="14:00">02:00 PM</option>
-                      <option value="15:00">03:00 PM</option>
-                      <option value="16:00">04:00 PM</option>
-                      <option value="17:00">05:00 PM</option>
+                      <option value="09">09:00 AM</option>
+                      <option value="10">10:00 AM</option>
+                      <option value="11">11:00 AM</option>
+                      <option value="12">12:00 PM</option>
+                      <option value="13">01:00 PM</option>
+                      <option value="14">02:00 PM</option>
+                      <option value="15">03:00 PM</option>
+                      <option value="16">04:00 PM</option>
+                      <option value="17">05:00 PM</option>
                     </select>
                   </div>
                 </div>
@@ -89,15 +90,15 @@
                   <div class="col-md-6" id="details2">
                     <select id="book2" class="form-select" [(ngModel)]="returnTime" (change)="onInputChange()">
                       <option value="" disabled selected hidden>Select Time</option>
-                      <option value="09:00">09:00 AM</option>
-                      <option value="10:00">10:00 AM</option>
-                      <option value="11:00">11:00 AM</option>
-                      <option value="12:00">12:00 PM</option>
-                      <option value="13:00">01:00 PM</option>
-                      <option value="14:00">02:00 PM</option>
-                      <option value="15:00">03:00 PM</option>
-                      <option value="16:00">04:00 PM</option>
-                      <option value="17:00">05:00 PM</option>
+                      <option value="09">09:00 AM</option>
+                      <option value="10">10:00 AM</option>
+                      <option value="11">11:00 AM</option>
+                      <option value="12">12:00 PM</option>
+                      <option value="13">01:00 PM</option>
+                      <option value="14">02:00 PM</option>
+                      <option value="15">03:00 PM</option>
+                      <option value="16">04:00 PM</option>
+                      <option value="17">05:00 PM</option>
                     </select>
                   </div>
                 </div>
@@ -109,28 +110,28 @@
                 <p class="title">Select Extras</p>
                 <div class="row">
                   <div class="col-8">
-                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.gpsNavigation" (change)="onInputChange()"/>
+                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.gpsNavigation" (change)="onInputChange()" [disabled]="!areInputsFilled()"/>
                     <label class="form-check-label" for="flexCheckDefault">GPS navigation</label>
                   </div>
                   <div class="col-4 text-end">&#8369;{{ extraPrices.gpsNavigation }}/day</div>
                 </div>
                 <div class="row">
                   <div class="col-8">
-                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.additionalDriver" (change)="onInputChange()"/>
+                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.additionalDriver" (change)="onInputChange()" [disabled]="!areInputsFilled()"/>
                     <label class="form-check-label" for="flexCheckDefault">Additional driver</label>
                   </div>
                   <div class="col-4 text-end">&#8369;{{ extraPrices.additionalDriver }}/day</div>
                 </div>
                 <div class="row">
                   <div class="col-8">
-                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.childSeat" (change)="onInputChange()"/>
+                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.childSeat" (change)="onInputChange()" [disabled]="!areInputsFilled()"/>
                     <label class="form-check-label" for="flexCheckDefault">Child seat</label>
                   </div>
                   <div class="col-4 text-end">&#8369;{{ extraPrices.childSeat }}/day</div>
                 </div>
                 <div class="row">
                   <div class="col-8">
-                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.roofBicycleRack" (change)="onInputChange()"/>
+                    <input class="form-check-input no-focus-outline" type="checkbox" [(ngModel)]="selectedExtras.roofBicycleRack" (change)="onInputChange()" [disabled]="!areInputsFilled()"/>
                     <label class="form-check-label" for="flexCheckDefault">Roof bicycle rack</label>
                   </div>
                   <div class="col-4 text-end">&#8369;{{ extraPrices.roofBicycleRack }}/day</div>

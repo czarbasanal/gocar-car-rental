@@ -1,6 +1,6 @@
 import { Component, OnInit  } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-receipt',
@@ -13,10 +13,16 @@ export class ReceiptComponent implements OnInit {
   currentUserDetails: any;
   currentTransactionId: string = '';
 
-  constructor(private firestore: AngularFirestore, private router: Router) {}
+  constructor(private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.currentTransactionId = 'mEwPqBzR8m1qzjl1kUSY'; //ilisanan pa ni
+
+    this.route.params.subscribe(params => {
+      this.currentTransactionId = params['transactionId'];
+      //console.log('Transaction ID:', this.currentTransactionId);
+    });
+
     this.getTransactionDetails();
   }
 
@@ -27,9 +33,9 @@ export class ReceiptComponent implements OnInit {
       .valueChanges()
       .subscribe((data: any) => {
         this.currentTransactionDetails = data;
-        console.log('Transaction: ',this.currentTransactionDetails);
-        console.log('CarId: ',this.currentTransactionDetails.transactionCarId);
-        console.log('UserId: ',this.currentTransactionDetails.transactionUserId);
+        //console.log('Transaction: ',this.currentTransactionDetails);
+        //console.log('CarId: ',this.currentTransactionDetails.transactionCarId);
+        //console.log('UserId: ',this.currentTransactionDetails.transactionUserId);
         if (this.currentTransactionDetails.transactionCarId && this.currentTransactionDetails.transactionUserId) {
           this.getCarDetails();
           this.getUserDetails();
@@ -46,7 +52,7 @@ export class ReceiptComponent implements OnInit {
       .valueChanges()
       .subscribe((data: any) => {
         this.currentCarDetails = data;
-        console.log('Car: ',this.currentCarDetails);
+        //console.log('Car: ',this.currentCarDetails);
       }
     );
     }
@@ -59,14 +65,17 @@ export class ReceiptComponent implements OnInit {
       .valueChanges()
       .subscribe((data: any) => {
         this.currentUserDetails = data;
-        console.log('User: ',this.currentUserDetails);
+        //console.log('User: ',this.currentUserDetails);
       }
     );
     }
   }
   goBackToMainFeed() {
     alert('Thank you for choosing gocar!');
-    this.router.navigate(['main-feed']);
+    this.firestore.collection('car-inventory').doc(this.currentTransactionDetails.transactionCarId).update({
+      isRented: true
+    });
+    this.router.navigate(['main-feed', this.currentTransactionDetails.transactionUserId]);
   }
   goBack() {
     this.router.navigate(['car-rental']);

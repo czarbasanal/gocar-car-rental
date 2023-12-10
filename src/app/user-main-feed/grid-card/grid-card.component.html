@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <div class="row">
-        <div class="col-md-4 mb-3" *ngFor="let car of displayedCars">
+        <div class="col-md-4 mb-3" *ngFor="let car of displayedCars; let i = index">
             <div class="card">
                 <img [src]="car.imgPath" class="card-img-top" alt="{{ car.model }}">
                 <div class="card-img-overlay">
@@ -37,7 +37,7 @@
                             <p class="price-label">&#8369;{{ car.rentPrice.toFixed(2) }}/day</p>
                         </div>
                         <div class="col-md-6 d-flex align-items-center justify-content-end">
-                            <button class="btn btn-primary btn-md" type="button" (click)="goToCarRental()">Rent
+                            <button class="btn btn-primary btn-md" type="button" (click)="goToCarRental(i)">Rent
                                 Now</button>
                         </div>
                     </div>
