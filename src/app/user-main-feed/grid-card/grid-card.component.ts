@@ -12,7 +12,7 @@ import { UserService } from 'src/app/shared/firestore.service';
 })
 export class GridCardComponent implements OnInit, OnChanges {
   @Input() searchTerm: string = '';
-
+  isLoading = true;
   ngOnChanges(changes: SimpleChanges) {
     if (changes['searchTerm']) {
       this.updateDisplayedCars();
@@ -52,6 +52,7 @@ export class GridCardComponent implements OnInit, OnChanges {
   }
 
   fetchCars() {
+    this.isLoading = true;
     const modelFilter = (car: Car) => !car.isRented;
 
     this.db.collection<Car>('car-inventory').snapshotChanges()
@@ -64,11 +65,13 @@ export class GridCardComponent implements OnInit, OnChanges {
 
         this.carIds = filteredCars.map(car => car.id);
         this.cars = filteredCars;
-  
+
         this.showSeeMoreButton = this.cars.length > 6;
         this.updateDisplayedCars();
+        this.isLoading = false;
       }
-    );
+      );
+
   }
 
   fetchFilteredCarIds(displayedCars: Car[]): void {
@@ -80,13 +83,41 @@ export class GridCardComponent implements OnInit, OnChanges {
           const carData = carChange.payload.doc.data() as Car;
           return { id: carChange.payload.doc.id, ...carData };
         })
-        .filter(modelFilter);
-  
+          .filter(modelFilter);
+
         this.carIds = filteredCars.map(car => car.id);
       }
+      );
+  }
+  toggleFavorite(fav: Car): void {
+    const uniqueIdentifier = fav.brand + fav.model;
+    const index = this.user.favorites.findIndex(
+      (favorite: Car) => (favorite.brand + favorite.model) === uniqueIdentifier
+    );
+
+    if (index === -1) {
+
+      this.user.favorites.push(fav);
+    } else {
+
+      this.user.favorites.splice(index, 1);
+    }
+
+
+    this.userService.updateUserFavorites(this.currentUserID, this.user.favorites).subscribe(() => {
+
+    }, error => {
+
+    });
+  }
+
+  isFavorited(car: Car): boolean {
+    const uniqueIdentifier = car.brand + car.model;
+    return this.user.favorites.some(
+      (favorite: Car) => (favorite.brand + favorite.model) === uniqueIdentifier
     );
   }
-  
+
 
   toggleCollapse(): void {
     this.isCollapsed = !this.isCollapsed;
@@ -122,7 +153,7 @@ export class GridCardComponent implements OnInit, OnChanges {
     filteredCars = filteredCars.filter(car => car.rentPrice <= this.maxPrice);
 
     this.displayedCars = this.isCollapsed ? filteredCars.slice(0, 6) : filteredCars;
-    
+
     this.showSeeMoreButton = filteredCars.length > 6;
 
     this.fetchFilteredCarIds(this.displayedCars);

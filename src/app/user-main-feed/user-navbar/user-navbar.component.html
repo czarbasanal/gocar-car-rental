@@ -84,18 +84,22 @@
                                 d="M16.44 3.10001C14.63 3.10001 13.01 3.98001 12 5.33001C10.99 3.98001 9.37 3.10001 7.56 3.10001C4.49 3.10001 2 5.60001 2 8.69001C2 9.88001 2.19 10.98 2.52 12C4.1 17 8.97 19.99 11.38 20.81C11.72 20.93 12.28 20.93 12.62 20.81C15.03 19.99 19.9 17 21.48 12C21.81 10.98 22 9.88001 22 8.69001C22 5.60001 19.51 3.10001 16.44 3.10001Z"
                                 fill="#596780" />
                         </svg>
-
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" [class.show]="isFavDropdownOpen"
                     aria-labelledby="favDropdown" (mouseenter)="openFavDropdown()" (mouseleave)="closeFavDropdown()">
-                    <li *ngFor="let fav of favorites">
-                        <a class="dropdown-item" href="#">
-                            <img [src]="fav.image" [alt]="fav.name" width="30" height="30">
-                            {{ fav.name }}
-                        </a>
+                    <li *ngFor="let fav of userFavorites">
+                        <button class="dropdown-item" (click)="goToCarRental(fav)">
+                            <img [src]="fav.imgPath" [alt]="fav.model" width="30" height="30">
+                            {{ fav.model }}
+                        </button>
+                    </li>
+                    <li *ngIf="userFavorites.length === 0" class="dropdown-item">
+                        No favorite cars yet.
                     </li>
                 </ul>
+
+
             </li>
             <!-- NOTIFICATION -->
             <li class="nav-item dropdown">
@@ -129,7 +133,9 @@
                     (mouseenter)="openProfileDropdown()" (mouseleave)="closeProfileDropdown()" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="icon-circle">
-                        <img src="assets/avatar.png" alt="" width="45" height="45">
+                        <img *ngIf="user?.profileImg" [src]="user.profileImg" alt="Profile" width="45" height="45">
+                        <!-- Default Avatar if unable to obatain user avatar -->
+                        <img *ngIf="!user?.profileImg" src="assets/avatar.png" alt="Default" width="45" height="45">
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" [class.show]="isProfileDropdownOpen"

@@ -21,7 +21,7 @@ export class UserDetails {
     public licenseImg: string = '',
     public profileImg: string = '',
     public notifications: Array<NotificationItem> = [],
-    public favorites: Array<Car> = [],
+    public favorites: Array<{ car: Car, carId: string }> = [],
     public myRentedCars: Array<MyRentedCarsItem> = []
   ) { }
 }
