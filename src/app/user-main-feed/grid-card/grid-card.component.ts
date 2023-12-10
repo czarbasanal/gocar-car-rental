@@ -18,15 +18,19 @@ export class GridCardComponent implements OnInit, OnChanges {
       this.updateDisplayedCars();
     }
   }
+
   user: any;
+
   cars: Car[] = [];
   displayedCars: Car[] = [];
+
   showSeeMoreButton: boolean = false;
   toggleButtonText: string = 'Show More Cars';
   carIds: string[] = [];
   currentCarID: string = '';
   currentUserID: string = '';
   maxPrice: number = Infinity;
+
   filterCriteria = {
     types: new Set<string>(),
     capacities: new Set<number>(),
@@ -40,14 +44,11 @@ export class GridCardComponent implements OnInit, OnChanges {
     this.route.params.subscribe(params => {
       const uid = params['userId'];
       this.currentUserID = uid;
-      //console.log("User: ",this.currentUserID)
       this.userService.getUserDetails(uid).subscribe(user => {
         this.user = user;
-        //console.log("Grid Card: ",user)
       });
     });
     this.fetchCars();
-    //console.log("ALL Car ID: ",this.carIds);
   }
 
   fetchCars() {
@@ -56,6 +57,7 @@ export class GridCardComponent implements OnInit, OnChanges {
 
     this.db.collection<Car>('car-inventory').snapshotChanges()
       .subscribe(carSnapshot => {
+
         const filteredCars = carSnapshot.map(carChange => {
           const carData = carChange.payload.doc.data() as Car;
           return { id: carChange.payload.doc.id, ...carData };
@@ -171,7 +173,6 @@ export class GridCardComponent implements OnInit, OnChanges {
       return false;
     });
   }
-
 
   goToCarRental(index: number) {
     const carId = this.carIds[index];

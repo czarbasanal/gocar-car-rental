@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider } from 'firebase/auth'
+import { GoogleAuthProvider, sendPasswordResetEmail, GithubAuthProvider, FacebookAuthProvider } from 'firebase/auth'
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FireStorageService } from 'src/app/shared/fire-storage.service';
 import { Router } from '@angular/router';
@@ -26,19 +26,25 @@ export class AuthService {
 
   // login method
   login(email: string, password: string) {
-    this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
-      if (res.user) {
-        const userId = res.user.uid;
-        localStorage.setItem('token', 'true');
-        this.router.navigate(['main-feed', userId]);
-      } else {
-        // Handle the case where res.user is null
-        console.error('User is null after successful login');
-      }
-    }, err => {
-      alert(err.message);
-      this.router.navigate(['login']);
-    });
+
+    if (email == 'admin@gmail.com' && password == 'admin') {
+      this.router.navigate(['admin-dashboard']);
+    }
+    else {
+      this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
+        if (res.user) {
+          const userId = res.user.uid;
+          localStorage.setItem('token', 'true');
+          this.router.navigate(['main-feed', userId]);
+        } else {
+          // Handle the case where res.user is null
+          console.error('User is null after successful login');
+        }
+      }, err => {
+        alert(err.message);
+        this.router.navigate(['login']);
+      });
+    }
   }
 
 
@@ -90,10 +96,11 @@ export class AuthService {
   }
 
   // forgot password
-  forgotPassword(email: string) {
-    this.fireauth.sendPasswordResetEmail(email).then(() => {
-      this.router.navigate(['/verify-email']);
-    }, err => {
+  async forgotPassword(email: string) {
+    await this.fireauth.sendPasswordResetEmail(email).then(() => {
+      console.log("nakadawat ko ani nga email: ", email)
+      //this.router.navigate(['/verify-email']); --------------ilisan ni nako
+    }, err => {           
       alert('Something went wrong');
     })
   }

@@ -9,7 +9,7 @@ export type NotificationItem = {
 export type MyRentedCarsItem = {
   transactionId: string;
   userId: string;
-
+  route: null;
 }
 
 export class UserDetails {

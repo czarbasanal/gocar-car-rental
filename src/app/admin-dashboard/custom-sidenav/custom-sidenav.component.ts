@@ -1,4 +1,5 @@
 import { Component, Input, computed, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
 export type MenuItem = {
   icon: string;
@@ -16,6 +17,8 @@ export class CustomSidenavComponent {
   @Input() set collapsed(val: boolean) {
     this.sideNavCollapsed.set(val);
   }
+
+  constructor(private router: Router) { }
 
   menuItems = signal<MenuItem[]>([
     {
@@ -41,5 +44,9 @@ export class CustomSidenavComponent {
   ]);
 
   profilePicSize = computed(() => this.sideNavCollapsed() ? '40' : '100');
+
+  logout() {
+    this.router.navigate(['landing-page']);
+  }
 
 }
