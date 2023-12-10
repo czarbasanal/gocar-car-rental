@@ -67,3 +67,11 @@ p.price-label {
 .favorite-car-icon:not(.favorited):hover {
     transform: translateY(-5px);
 }
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    /* Adjust as needed */
+}

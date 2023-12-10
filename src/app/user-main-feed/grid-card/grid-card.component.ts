@@ -12,7 +12,7 @@ import { UserService } from 'src/app/shared/firestore.service';
 })
 export class GridCardComponent implements OnInit, OnChanges {
   @Input() searchTerm: string = '';
-
+  isLoading = true;
   ngOnChanges(changes: SimpleChanges) {
     if (changes['searchTerm']) {
       this.updateDisplayedCars();
@@ -51,11 +51,11 @@ export class GridCardComponent implements OnInit, OnChanges {
   }
 
   fetchCars() {
+    this.isLoading = true;
     const modelFilter = (car: Car) => !car.isRented;
 
     this.db.collection<Car>('car-inventory').snapshotChanges()
       .subscribe(carSnapshot => {
-
         const filteredCars = carSnapshot.map(carChange => {
           const carData = carChange.payload.doc.data() as Car;
           return { id: carChange.payload.doc.id, ...carData };
@@ -66,8 +66,10 @@ export class GridCardComponent implements OnInit, OnChanges {
 
         this.showSeeMoreButton = this.cars.length > 6;
         this.updateDisplayedCars();
+        this.isLoading = false;
       }
       );
+
   }
 
   fetchFilteredCarIds(displayedCars: Car[]): void {
