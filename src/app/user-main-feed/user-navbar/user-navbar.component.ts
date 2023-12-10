@@ -13,11 +13,11 @@ export class UserNavbarComponent implements OnInit {
   isFavDropdownOpen = false;
   isNotifDropdownOpen = false;
 
-  cars = [
-    { name: 'Car 1', image: 'car1.png' },
-    { name: 'Car 2', image: 'car2.png' },
-    { name: 'Car 3', image: 'car3.png' }
-  ];
+  // cars = [
+  //   { name: 'Car 1', image: 'car1.png' },
+  //   { name: 'Car 2', image: 'car2.png' },
+  //   { name: 'Car 3', image: 'car3.png' }
+  // ];
 
   // favorites = [
   //   { name: 'Fav 1', image: 'fav1.png' },

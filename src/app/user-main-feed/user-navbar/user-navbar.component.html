@@ -66,12 +66,15 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" [class.show]="isCarDropdownOpen"
                     aria-labelledby="carDropdown" (mouseenter)="openCarDropdown()" (mouseleave)="closeCarDropdown()">
-                    <li *ngFor="let car of cars">
-                        <a class="dropdown-item" href="#">
-                            <img [src]="car.image" [alt]="car.name" width="30" height="30">
+                    <!-- <li *ngFor="let car of cars">
+                        <button class="dropdown-item" href="#">
+                            <img [src]="car.imagePath" [alt]="car.model" width="30" height="30">
                             {{ car.name }}
-                        </a>
+                        </button>
                     </li>
+                    <li *ngIf="myRentedCars.length === 0" class="dropdown-item">
+                        No Rented cars yet.
+                    </li> -->
                 </ul>
             </li>
             <!-- HEART -->
