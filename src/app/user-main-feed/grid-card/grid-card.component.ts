@@ -71,7 +71,7 @@ export class GridCardComponent implements OnInit, OnChanges {
     );
   }
 
-  fetchCarIds(displayedCars: Car[]): void {
+  fetchFilteredCarIds(displayedCars: Car[]): void {
     const modelFilter = (car: Car) => displayedCars.some(displayedCar => displayedCar.model === car.model);
 
     this.db.collection<Car>('car-inventory').snapshotChanges()
@@ -125,7 +125,7 @@ export class GridCardComponent implements OnInit, OnChanges {
     
     this.showSeeMoreButton = filteredCars.length > 6;
 
-    this.fetchCarIds(this.displayedCars);
+    this.fetchFilteredCarIds(this.displayedCars);
 
   }
 

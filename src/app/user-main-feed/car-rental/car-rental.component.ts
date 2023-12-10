@@ -1,6 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ExtraDetail, TransactionDetails } from 'src/app/shared/transaction.model';
+import { MyRentedCarsItem } from 'src/app/shared/user-details.model';
 import { Router, ActivatedRoute  } from '@angular/router';
 
 @Component({
@@ -10,6 +11,12 @@ import { Router, ActivatedRoute  } from '@angular/router';
 })
 export class CarRentalComponent implements OnInit {
   carDetails: any;
+
+  rentLink: MyRentedCarsItem = {
+    transactionId: '',
+    userId: '',
+    route: null,
+  }
 
   pickupDate: string = '';
   returnDate: string = '';
@@ -64,6 +71,8 @@ export class CarRentalComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.currentUserId = params['userId'];
       this.currentCarId = params['carId'];
+      console.log("currentUserId", this.currentUserId)
+      console.log("currentCarId", this.currentCarId)
     });
     this.getCarDetails();
   }
@@ -268,6 +277,16 @@ export class CarRentalComponent implements OnInit {
   goToReceipt() {
     if (this.valid()){
       this.modelUpdate();
+      this.firestore.collection('car-inventory').doc(this.currentCarId).update({
+        isRented: true
+      });
+
+      this.rentLink.transactionId = this.currentTransactionId,
+      this.rentLink.userId = this.currentUserId,
+
+      this.firestore.collection('users').doc(this.currentUserId).update({
+        myRentedCars: this.rentLink
+      });
       this.router.navigate(['receipt', this.currentTransactionId]);
     }
   }

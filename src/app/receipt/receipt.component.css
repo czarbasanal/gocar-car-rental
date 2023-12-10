@@ -21,7 +21,7 @@
     box-shadow: none;
 }
 
-.float-end:hover {
+#close:hover {
     cursor: pointer;
     color: red;
 }

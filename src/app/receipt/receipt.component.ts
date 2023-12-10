@@ -1,6 +1,8 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router, ActivatedRoute } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-receipt',
@@ -8,6 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./receipt.component.css']
 })
 export class ReceiptComponent implements OnInit {
+  isHovered = false;
+
   currentTransactionDetails: any;
   currentCarDetails: any;
   currentUserDetails: any;
@@ -15,61 +19,52 @@ export class ReceiptComponent implements OnInit {
 
   constructor(private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.currentTransactionId = params['transactionId'];
-    });
-
-    this.getTransactionDetails();
-    console.log(this.currentTransactionDetails)
-  }
-
-  getTransactionDetails() {
-    this.firestore
-      .collection('transactions')
-      .doc(this.currentTransactionId)
-      .valueChanges()
-      .subscribe((data: any) => {
-        this.currentTransactionDetails = data;
-        if (this.currentTransactionDetails.transactionCarId && this.currentTransactionDetails.transactionUserId) {
-          this.getCarDetails();
-          this.getUserDetails();
+  async ngOnInit() {
+    try {
+      const params = await firstValueFrom(this.route.params.pipe(take(1)));
+      if (params) {
+        this.currentTransactionId = params['transactionId'];
+  
+        const transaction = await this.retrieveDocument('transactions', this.currentTransactionId);
+        this.currentTransactionDetails = transaction;
+  
+        if (this.currentTransactionDetails) {
+          const car = await this.retrieveDocument('car-inventory', this.currentTransactionDetails.transactionCarId);
+          this.currentCarDetails = car;
+  
+          const user = await this.retrieveDocument('users', this.currentTransactionDetails.transactionUserId);
+          this.currentUserDetails = user;
         }
+  
+        console.log("Nasud transaction?: ", this.currentTransactionDetails);
+        console.log("Nasud car?: ", this.currentCarDetails);
+        console.log("Nasud user?: ", this.currentUserDetails);
+      } else {
+        console.error("Route parameters are undefined");
       }
-    );
+    } catch (error) {
+      console.error("Error in ngOnInit: ", error);
+    }
+  }
+  
+
+  async retrieveDocument(collectionId: string, documentId: string): Promise<any> {
+    const documentObservable = this.firestore
+      .collection(collectionId)
+      .doc(documentId)
+      .valueChanges()
+      .pipe(take(1))
+    return firstValueFrom(documentObservable);
+  }
+  
+  goBackToMainFeed() {
+    if (this.currentTransactionDetails && this.currentTransactionDetails.transactionUserId) {
+      this.router.navigate(['main-feed', this.currentTransactionDetails.transactionUserId]);
+    } else {
+      console.error("Transaction user ID is undefined");
+    }
   }
 
-  getCarDetails() {
-    if (this.currentTransactionDetails.transactionCarId) {
-      this.firestore
-      .collection('car-inventory')
-      .doc(this.currentTransactionDetails.transactionCarId)
-      .valueChanges()
-      .subscribe((data: any) => {
-        this.currentCarDetails = data;
-      }
-    );
-    }
-  }
-  getUserDetails() {
-    if (this.currentTransactionDetails.transactionUserId) {
-      this.firestore
-      .collection('users')
-      .doc(this.currentTransactionDetails.transactionUserId)
-      .valueChanges()
-      .subscribe((data: any) => {
-        this.currentUserDetails = data;
-      }
-    );
-    }
-  }
-  goBackToMainFeed() {
-    alert('Thank you for choosing gocar!');
-    this.firestore.collection('car-inventory').doc(this.currentTransactionDetails.transactionCarId).update({
-      isRented: true
-    });
-    this.router.navigate(['main-feed', this.currentTransactionDetails.transactionUserId]);
-  }
   goBack() {
     this.router.navigate(['car-rental']);
   }

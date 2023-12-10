@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { GoogleAuthProvider, sendPasswordResetEmail, GithubAuthProvider, FacebookAuthProvider } from 'firebase/auth'
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Router } from '@angular/router';
 import { UserDetails } from './user-details.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,11 @@ export class AuthService {
   constructor(
     private fireauth: AngularFireAuth,
     private firestore: AngularFirestore,
+    private storage: AngularFireStorage,
     private router: Router) { }
+
+  private isLoadingSubject = new BehaviorSubject<boolean>(false);
+  isLoading$ = this.isLoadingSubject.asObservable();
 
   // login method
   login(email: string, password: string) {
@@ -34,24 +40,32 @@ export class AuthService {
   
 
   // register method
-  register(userDetails: UserDetails) {
+  async register(userDetails: UserDetails, file: File) {
+    try {
+      this.isLoadingSubject.next(true);
+      const userCredential = await this.fireauth.createUserWithEmailAndPassword(userDetails.email, userDetails.password);
+      const profileImageUrl = await this.storage.upload('user-licenses', file);
 
-    this.fireauth.createUserWithEmailAndPassword(userDetails.email, userDetails.password).then(res => {
-      const uid = res.user?.uid;
-      
-      this.firestore.collection('users').doc(uid).set({
-        userDetails,
-      });
+      const uid = userCredential.user?.uid;
+      if (uid) {
+        const updatedUserDetails = {
+          ...userDetails,
+          profileImg: profileImageUrl
+        };
 
-      alert('Registration Successful');
-      this.router.navigate(['login']);
-    },
-    
-    err => {
+        await this.firestore.collection('users').doc(uid).set(updatedUserDetails);
+
+        this.isLoadingSubject.next(false);
+        alert('Registration Successful');
+        this.router.navigate(['login']);
+      }
+    } catch (err: any) {
       alert(err.message);
+      this.isLoadingSubject.next(false);
       this.router.navigate(['signup']);
-    });
+    }
   }
+
 
   // sign out
   logout() {
