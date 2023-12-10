@@ -51,9 +51,19 @@ p.price-label {
 
 .favorite-car-icon {
     transition: transform 0.3s ease-in-out;
+    stroke: #91a4c0;
 }
 
 .favorite-car-icon:hover {
     cursor: pointer;
+    transform: translateY(-5px);
+}
+
+.favorite-car-icon.favorited {
+    stroke: red;
+    fill: red;
+}
+
+.favorite-car-icon:not(.favorited):hover {
     transform: translateY(-5px);
 }

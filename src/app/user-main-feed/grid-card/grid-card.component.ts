@@ -85,7 +85,34 @@ export class GridCardComponent implements OnInit, OnChanges {
       }
       );
   }
+  toggleFavorite(fav: Car): void {
+    const uniqueIdentifier = fav.brand + fav.model;
+    const index = this.user.favorites.findIndex(
+      (favorite: Car) => (favorite.brand + favorite.model) === uniqueIdentifier
+    );
 
+    if (index === -1) {
+
+      this.user.favorites.push(fav);
+    } else {
+
+      this.user.favorites.splice(index, 1);
+    }
+
+
+    this.userService.updateUserFavorites(this.currentUserID, this.user.favorites).subscribe(() => {
+
+    }, error => {
+
+    });
+  }
+
+  isFavorited(car: Car): boolean {
+    const uniqueIdentifier = car.brand + car.model;
+    return this.user.favorites.some(
+      (favorite: Car) => (favorite.brand + favorite.model) === uniqueIdentifier
+    );
+  }
 
 
   toggleCollapse(): void {

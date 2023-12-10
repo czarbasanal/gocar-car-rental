@@ -11,8 +11,25 @@
                                 <p class="car-model">{{ car.model }}</p>
                             </div>
                             <div class="col-md-4 d-flex align-items-center justify-content-end">
-                                <img src="assets/favorite-car.png" class="favorite-car-icon" alt="Favorite">
+                                <!-- Non-favorited Heart (Grey), shown only if the car is not favorited -->
+                                <svg *ngIf="!isFavorited(car)" class="favorite-car-icon" (click)="toggleFavorite(car)"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M16.44 3.10001C14.63 3.10001 13.01 3.98001 12 5.33001C10.99 3.98001 9.37 3.10001 7.56 3.10001C4.49 3.10001 2 5.60001 2 8.69001C2 9.88001 2.19 10.98 2.52 12C4.1 17 8.97 19.99 11.38 20.81C11.72 20.93 12.28 20.93 12.62 20.81C15.03 19.99 19.9 17 21.48 12C21.81 10.98 22 9.88001 22 8.69001C22 5.60001 19.51 3.10001 16.44 3.10001Z"
+                                        fill="none" stroke="#91a4c0" stroke-width="1.5" />
+                                </svg>
+
+                                <!-- Favorited Heart (Red), shown only if the car is favorited -->
+                                <svg *ngIf="isFavorited(car)" class="favorite-car-icon" (click)="toggleFavorite(car)"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="#ed3f3f">
+                                    <path
+                                        d="M16.44 3.10001C14.63 3.10001 13.01 3.98001 12 5.33001C10.99 3.98001 9.37 3.10001 7.56 3.10001C4.49 3.10001 2 5.60001 2 8.69001C2 9.88001 2.19 10.98 2.52 12C4.1 17 8.97 19.99 11.38 20.81C11.72 20.93 12.28 20.93 12.62 20.81C15.03 19.99 19.9 17 21.48 12C21.81 10.98 22 9.88001 22 8.69001C22 5.60001 19.51 3.10001 16.44 3.10001Z"
+                                        fill="#ed3f3f" stroke="#ed3f3f" stroke-width="1.5" />
+                                </svg>
                             </div>
+
                         </div>
                         <p class="car-type">{{ car.carType }}</p>
                     </div>
