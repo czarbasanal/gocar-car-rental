@@ -96,3 +96,148 @@
     width: 45px;
     height: 45px;
 }
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+}
+
+.dropdown-title {
+    padding: 10px 15px;
+    font-weight: bold;
+    color: #333;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.dropdown-item img.car-image {
+    flex-shrink: 0;
+    margin-right: 10px;
+    width: 100px;
+    height: 100px;
+
+    object-fit: cover;
+
+}
+
+a.dropdown-tile {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    text-decoration: none;
+
+}
+
+.car-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.car-name {
+    font-weight: bold;
+    color: #333;
+
+}
+
+.transaction-id {
+    font-size: 0.8em;
+    color: #666;
+
+}
+
+button.dropdown-item img {
+    width: 70px;
+    height: 70px;
+    margin-right: 0;
+}
+
+button.dropdown-item {
+    font-weight: bold;
+    color: #333;
+    padding: 10px;
+}
+
+button.dropdown-item svg {
+    margin-left: 5px;
+}
+
+a.dropdown-item {
+    margin-right: 8px;
+}
+
+a.dropdown-item img {
+    margin-right: 8px;
+}
+
+.dropdown-title {
+    padding: 10px 15px;
+    font-weight: bold;
+    color: #333;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+/* .dropdown-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    padding: 0;
+} */
+
+.fav-image {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.fav-model {
+    flex-grow: 1;
+    margin-left: 10px;
+    /* Adjust as needed */
+}
+
+.fav-heart {
+    flex-shrink: 0;
+}
+
+li.dropdown-item-container {
+    padding: 0;
+}

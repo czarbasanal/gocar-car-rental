@@ -306,8 +306,8 @@ ol {
     margin: 50px;
     position: relative;
     opacity: 0;
-    -webkit-animation: scale-in-center .4s ease-out 2s 1 forwards, heartbeat 1.5s ease-in 3.4s infinite;
-    animation: scale-in-center .4s ease-out 2s 1 forwards, heartbeat 1.5s ease-in 3.4s infinite;
+    -webkit-animation: scale-in-center .4s ease-out 1 forwards, heartbeat 1.5s ease-in 3.4s infinite;
+    animation: scale-in-center .4s ease-out 1 forwards, heartbeat 1.5s ease-in 3.4s infinite;
 }
 
 .icon-container img.lower {
