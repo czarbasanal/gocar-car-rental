@@ -12,8 +12,6 @@ export class SignupDetailsComponent {
   constructor(private signupCommunicationService: SignupCommunicationService) { }
 
   uploadedFileName: string = '';
-  isLoading: boolean = false;
-  isFileAttached: boolean = false;
   selectedFile!: File;
 
   userDetails: UserDetails = {
@@ -37,25 +35,24 @@ export class SignupDetailsComponent {
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (file) {
-      this.isFileAttached = true;
       this.selectedFile = file;
       this.uploadedFileName = file.name;
     }
   }
 
   onFormSubmit(event: Event) {
-    if (this.userDetails.lastname == '') {
+    if (this.userDetailsWithFile.userDetails.lastname == '') {
       alert('Please enter your Lastname');
       return;
     }
-    if (this.userDetails.firstname == '') {
+    if (this.userDetailsWithFile.userDetails.firstname == '') {
       alert('Please enter your Firstname');
       return;
     }
-    if (this.userDetails.licenseImg == '') {
-      alert("Please upload your Driver's License");
-      return;
-    }
+    // if (this.userDetailsWithFile.file) {
+    //   alert("Please upload your Driver's License");
+    //   return;
+    // }
     event.preventDefault();
     this.signupCommunicationService.notifyDetailsButtonClick(this.userDetailsWithFile);
   }
