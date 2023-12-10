@@ -36,11 +36,13 @@ export class SignupDetailsComponent {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
+      this.userDetailsWithFile.file = this.selectedFile;
       this.uploadedFileName = file.name;
     }
   }
 
   onFormSubmit(event: Event) {
+
     if (this.userDetailsWithFile.userDetails.lastname == '') {
       alert('Please enter your Lastname');
       return;
