@@ -11,6 +11,7 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { UsersComponent } from './pages/users/users.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing-page', pathMatch: 'full' },
@@ -24,10 +25,17 @@ const routes: Routes = [
   { path: 'car-rental/:userId/:carId', component: CarRentalComponent },
   //{ path: 'receipt', component: ReceiptComponent },
   { path: 'receipt/:transactionId', component: ReceiptComponent },
-  { path: 'analytics', component: AnalyticsComponent },
-  { path: 'inventory', component: InventoryComponent },
-  { path: 'transactions', component: TransactionsComponent },
-  { path: 'users', component: UsersComponent },
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    children: [
+      { path: '', redirectTo: 'analytics', pathMatch: 'full' },
+      { path: 'analytics', component: AnalyticsComponent },
+      { path: 'inventory', component: InventoryComponent },
+      { path: 'transactions', component: TransactionsComponent },
+      { path: 'users', component: UsersComponent },
+    ]
+  }
 ];
 
 @NgModule({

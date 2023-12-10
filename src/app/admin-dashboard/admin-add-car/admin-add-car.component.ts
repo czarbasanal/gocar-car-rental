@@ -5,9 +5,6 @@ import { FireStorageService } from 'src/app/shared/fire-storage.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Car } from 'src/app/shared/car.model';
 import { NgForm } from '@angular/forms';
-import { firstValueFrom } from 'rxjs';
-
-
 
 
 @Component({
