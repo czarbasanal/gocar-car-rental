@@ -11,9 +11,12 @@
                                     <h2 class="mb-1 text-muted">gocar.usjr.edu.ph</h2>
                                  </div>
                                  <div class="col-md-6">
-                                    <div class="float-end">
-                                        <svg (click)="goBackToMainFeed()" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                    <div class="float-end" id="close" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
+                                        <svg *ngIf="!isHovered" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                        </svg>
+                                        <svg *ngIf="isHovered" (click)="goBackToMainFeed()" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
                                         </svg>
                                     </div>
                                  </div>
@@ -38,8 +41,8 @@
                             <div class="col-sm-3">
                                 <div class="text-muted">
                                     <h5 class="font-size-16 mb-3">Customer:</h5>
-                                    <h5 class="font-size-15 mb-2">{{ currentUserDetails.userDetails.firstname }} {{ currentUserDetails.userDetails.lastname }}</h5>
-                                    <p class="mb-1">{{ currentUserDetails.userDetails.email }}</p>
+                                    <h5 class="font-size-15 mb-2">{{ currentUserDetails.firstname }} {{ currentUserDetails.lastname }}</h5>
+                                    <p class="mb-1">{{ currentUserDetails.email }}</p>
                                 </div>
                             </div>
                             <div class="col-sm-3">

@@ -18,15 +18,19 @@ export class GridCardComponent implements OnInit, OnChanges {
       this.updateDisplayedCars();
     }
   }
+
   user: any;
+
   cars: Car[] = [];
   displayedCars: Car[] = [];
+
   showSeeMoreButton: boolean = false;
   toggleButtonText: string = 'Show More Cars';
   carIds: string[] = [];
   currentCarID: string = '';
   currentUserID: string = '';
   maxPrice: number = Infinity;
+
   filterCriteria = {
     types: new Set<string>(),
     capacities: new Set<number>(),
@@ -40,37 +44,49 @@ export class GridCardComponent implements OnInit, OnChanges {
     this.route.params.subscribe(params => {
       const uid = params['userId'];
       this.currentUserID = uid;
-      //console.log("User: ",this.currentUserID)
       this.userService.getUserDetails(uid).subscribe(user => {
         this.user = user;
-        //console.log("Grid Card: ",user)
       });
     });
     this.fetchCars();
-    //console.log("ALL Car ID: ",this.carIds);
   }
 
   fetchCars() {
+    const modelFilter = (car: Car) => !car.isRented;
+
     this.db.collection<Car>('car-inventory').snapshotChanges()
       .subscribe(carSnapshot => {
-        const allCars = carSnapshot.map(carChange => {
+
+        const filteredCars = carSnapshot.map(carChange => {
           const carData = carChange.payload.doc.data() as Car;
-          const carId = carChange.payload.doc.id;
-          this.carIds.push(carId);
-          return { id: carId, ...carData } as Car;
-        });
+          return { id: carChange.payload.doc.id, ...carData };
+        }).filter(modelFilter);
+
+        this.carIds = filteredCars.map(car => car.id);
+        this.cars = filteredCars;
   
-        // If you want to filter out rented cars and only display available ones
-        this.cars = allCars.filter(car => !car.isRented);
-  
-        // Show "See More" button based on the total number of cars, not just unrented
-        this.showSeeMoreButton = allCars.length > 6;
-  
+        this.showSeeMoreButton = this.cars.length > 6;
         this.updateDisplayedCars();
-      });
+      }
+    );
+  }
+
+  fetchFilteredCarIds(displayedCars: Car[]): void {
+    const modelFilter = (car: Car) => displayedCars.some(displayedCar => displayedCar.model === car.model);
+
+    this.db.collection<Car>('car-inventory').snapshotChanges()
+      .subscribe(carSnapshot => {
+        const filteredCars = carSnapshot.map(carChange => {
+          const carData = carChange.payload.doc.data() as Car;
+          return { id: carChange.payload.doc.id, ...carData };
+        })
+        .filter(modelFilter);
+  
+        this.carIds = filteredCars.map(car => car.id);
+      }
+    );
   }
   
-
 
   toggleCollapse(): void {
     this.isCollapsed = !this.isCollapsed;
@@ -87,6 +103,7 @@ export class GridCardComponent implements OnInit, OnChanges {
     this.maxPrice = price;
     this.updateDisplayedCars();
   }
+
   updateDisplayedCars(): void {
     let filteredCars = this.cars;
 
@@ -105,9 +122,13 @@ export class GridCardComponent implements OnInit, OnChanges {
     filteredCars = filteredCars.filter(car => car.rentPrice <= this.maxPrice);
 
     this.displayedCars = this.isCollapsed ? filteredCars.slice(0, 6) : filteredCars;
-
+    
     this.showSeeMoreButton = filteredCars.length > 6;
+
+    this.fetchFilteredCarIds(this.displayedCars);
+
   }
+
   private matchesSearchTerm(car: Car, term: string): boolean {
     term = term.toLowerCase();
 
@@ -121,7 +142,6 @@ export class GridCardComponent implements OnInit, OnChanges {
       return false;
     });
   }
-
 
   goToCarRental(index: number) {
     const carId = this.carIds[index];
