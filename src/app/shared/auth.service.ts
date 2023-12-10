@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider } from 'firebase/auth'
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { FireStorageService } from 'src/app/shared/fire-storage.service';
 import { Router } from '@angular/router';
 import { UserDetails } from './user-details.model';
 import { BehaviorSubject } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,13 @@ export class AuthService {
   constructor(
     private fireauth: AngularFireAuth,
     private firestore: AngularFirestore,
+    private fireStorageService: FireStorageService,
     private storage: AngularFireStorage,
     private router: Router) { }
 
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoadingSubject.asObservable();
+  storageCollection: string = 'user-licenses';
 
   // login method
   login(email: string, password: string) {
@@ -37,20 +40,28 @@ export class AuthService {
       this.router.navigate(['login']);
     });
   }
-  
 
-  // register method
+
+
   async register(userDetails: UserDetails, file: File) {
     try {
       this.isLoadingSubject.next(true);
       const userCredential = await this.fireauth.createUserWithEmailAndPassword(userDetails.email, userDetails.password);
-      const profileImageUrl = await this.storage.upload('user-licenses', file);
+
+
+      const task = await this.fireStorageService.uploadFile(this.storageCollection, file);
+
+      const snapshot = await task;
+      const fileRef = this.storage.ref(snapshot.ref.fullPath);
+
+
+      const licenseImageUrl = await this.fireStorageService.generateFileURL(fileRef);
 
       const uid = userCredential.user?.uid;
       if (uid) {
         const updatedUserDetails = {
           ...userDetails,
-          profileImg: profileImageUrl
+          licenseImg: licenseImageUrl
         };
 
         await this.firestore.collection('users').doc(uid).set(updatedUserDetails);
@@ -65,6 +76,7 @@ export class AuthService {
       this.router.navigate(['signup']);
     }
   }
+
 
 
   // sign out

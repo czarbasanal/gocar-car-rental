@@ -2,8 +2,11 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FireStorageService } from 'src/app/shared/fire-storage.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Car } from 'src/app/shared/car.model';
 import { NgForm } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
+
 
 
 
@@ -26,7 +29,7 @@ export class AdminAddCarComponent {
     isRented: false,
   };
 
-  constructor(private db: AngularFirestore, private fireStorageService: FireStorageService, private snackBar: MatSnackBar) { }
+  constructor(private db: AngularFirestore, private storage: AngularFireStorage, private fireStorageService: FireStorageService, private snackBar: MatSnackBar) { }
   @ViewChild('fileInput')
   fileInputVariable!: ElementRef;
 
@@ -40,6 +43,7 @@ export class AdminAddCarComponent {
     if (file) {
       this.isFileAttached = true;
       this.selectedFile = file;
+      console.log(this.selectedFile)
     }
   }
 
@@ -48,7 +52,12 @@ export class AdminAddCarComponent {
       this.isLoading = true;
 
       try {
-        const url = await this.fireStorageService.upload(this.storageCollection, this.selectedFile);
+        const task = await this.fireStorageService.uploadFile(this.storageCollection, this.selectedFile);
+
+        const snapshot = await task;
+        const fileRef = this.storage.ref(snapshot.ref.fullPath);
+
+        const url = await this.fireStorageService.generateFileURL(fileRef);
         formData.imgPath = url;
 
         await this.db.collection('car-inventory').add(formData);
@@ -78,6 +87,7 @@ export class AdminAddCarComponent {
       }
     }
   }
+
 
   private resetFileInput() {
     this.fileInputVariable.nativeElement.value = '';

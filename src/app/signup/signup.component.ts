@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../shared/auth.service';
 import { SignupCommunicationService } from '../shared/signup-communication.service';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-signup',
@@ -10,13 +10,22 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   showDetails = true;
-
-  constructor(private router: Router, private signupCommunicationService: SignupCommunicationService) { }
+  isLoading = false;
+  constructor(
+    private router: Router,
+    private signupCommunicationService: SignupCommunicationService,
+    private authService: AuthService  // Inject AuthService
+  ) { }
 
   ngOnInit() {
     this.signupCommunicationService.detailsButtonClick$.subscribe(() => {
       this.toggleDetails();
     });
+
+    this.authService.isLoading$.subscribe(loading => {
+      this.isLoading = loading;
+    });
+
     this.resetComponentState();
   }
 
@@ -35,5 +44,4 @@ export class SignupComponent implements OnInit {
       this.toggleDetails();
     }
   }
-
 }

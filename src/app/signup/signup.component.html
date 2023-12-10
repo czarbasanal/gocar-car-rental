@@ -10,6 +10,10 @@
         <app-signup-details class="SignUpDetails" *ngIf="showDetails"></app-signup-details>
         <app-signup-details-2 class="SignUpDetails" *ngIf="!showDetails"></app-signup-details-2>
 
+        <div *ngIf="isLoading" class="spinner-overlay">
+            <mat-spinner></mat-spinner>
+        </div>
+
         <div class="side-panel">
             <img class="triangle" src="assets/gocar-branding/triangle2.png" alt="triangle">
             <div class="side-text">Your journey starts here.</div>
