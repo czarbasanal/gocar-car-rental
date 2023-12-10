@@ -33,6 +33,7 @@ export class AdminAddCarComponent {
   isLoading: boolean = false;
   isFileAttached: boolean = false;
   selectedFile: File | null = null;
+  storageCollection: string = 'car-catalogue';
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -47,7 +48,7 @@ export class AdminAddCarComponent {
       this.isLoading = true;
 
       try {
-        const url = await this.fireStorageService.upload(this.selectedFile);
+        const url = await this.fireStorageService.upload(this.storageCollection, this.selectedFile);
         formData.imgPath = url;
 
         await this.db.collection('car-inventory').add(formData);

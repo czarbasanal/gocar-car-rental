@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SignupCommunicationService } from 'src/app/shared/signup-communication.service';
+import { SignupCommunicationService, UserDetailsWithFile } from 'src/app/shared/signup-communication.service';
 import { UserDetails } from '../../shared/user-details.model';
 
 @Component({
@@ -9,42 +9,51 @@ import { UserDetails } from '../../shared/user-details.model';
 })
 
 export class SignupDetailsComponent {
+  constructor(private signupCommunicationService: SignupCommunicationService) { }
+
+  uploadedFileName: string = '';
+  selectedFile!: File;
+
   userDetails: UserDetails = {
     email: '',
     firstname: '',
     lastname: '',
     password: '',
-    imagePath: ''
+    licenseImg: '',
+    profileImg: '',
+    notifications: [],
+    favorites: [],
+    myRentedCars: [],
   };
 
-  uploadedFileName: string = '';
+  userDetailsWithFile: UserDetailsWithFile = {
+    userDetails: this.userDetails,
+    file: this.selectedFile,
+  }
 
-  constructor(private signupCommunicationService: SignupCommunicationService) { }
 
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (file) {
-      const imageName = file.name;
-      const imagePath = `assets/photos/${imageName}`;
-      this.userDetails.imagePath = imagePath;
-      this.uploadedFileName = imageName;
+      this.selectedFile = file;
+      this.uploadedFileName = file.name;
     }
   }
 
   onFormSubmit(event: Event) {
-    if (this.userDetails.lastname == '') {
+    if (this.userDetailsWithFile.userDetails.lastname == '') {
       alert('Please enter your Lastname');
       return;
     }
-    if (this.userDetails.firstname == '') {
+    if (this.userDetailsWithFile.userDetails.firstname == '') {
       alert('Please enter your Firstname');
       return;
     }
-    if (this.userDetails.imagePath == '') {
-      alert("Please upload your Driver's License");
-      return;
-    }
+    // if (this.userDetailsWithFile.file) {
+    //   alert("Please upload your Driver's License");
+    //   return;
+    // }
     event.preventDefault();
-    this.signupCommunicationService.notifyDetailsButtonClick(this.userDetails);
+    this.signupCommunicationService.notifyDetailsButtonClick(this.userDetailsWithFile);
   }
 }
