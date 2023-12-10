@@ -37,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgChartsModule } from 'ng2-charts';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { UsersComponent } from './pages/users/users.component';
@@ -88,6 +89,7 @@ import { ConfirmationDialogComponent } from './admin-dashboard/confirmation-dial
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    NgChartsModule
   ],
   providers: [SignupCommunicationService, ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent]
