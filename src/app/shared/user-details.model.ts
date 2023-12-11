@@ -9,6 +9,8 @@ export type NotificationItem = {
 export type MyRentedCarsItem = {
   transactionId: string;
   userId: string;
+  carName: string;      // Added field for the car's name
+  carImage: string;     // Added field for the car's image
   route: string;
 }
 
@@ -21,7 +23,7 @@ export class UserDetails {
     public licenseImg: string = '',
     public profileImg: string = '',
     public notifications: Array<NotificationItem> = [],
-    public favorites: Array<Car> = [],
+    public favorites: Array<{ car: Car, carId: string }> = [],
     public myRentedCars: Array<MyRentedCarsItem> = []
   ) { }
 }

@@ -1,7 +1,10 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ExtraDetail, TransactionDetails } from 'src/app/shared/transaction.model';
-import { Router, ActivatedRoute  } from '@angular/router';
+import { MyRentedCarsItem, UserDetails } from 'src/app/shared/user-details.model';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Car } from 'src/app/shared/car.model';
+import { UserService } from 'src/app/shared/firestore.service';
 
 @Component({
   selector: 'app-car-rental',
@@ -10,6 +13,14 @@ import { Router, ActivatedRoute  } from '@angular/router';
 })
 export class CarRentalComponent implements OnInit {
   carDetails: any;
+
+  rentLink: MyRentedCarsItem = {
+    transactionId: '',
+    userId: '',
+    carName: '',
+    carImage: '',
+    route: '',
+  }
 
   pickupDate: string = '';
   returnDate: string = '';
@@ -57,15 +68,18 @@ export class CarRentalComponent implements OnInit {
     hrs: 0,
     total: 0,
   };
-
-  constructor(private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {}
-
+  user: any;
+  constructor(private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute, private userService: UserService) { }
+  cars: Car[] = [];
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.currentUserId = params['userId'];
       this.currentCarId = params['carId'];
-      //console.log('User ID:', this.currentUserId);
-      //console.log('Car ID:', this.currentCarId);
+      console.log("currentUserId", this.currentUserId)
+      console.log("currentCarId", this.currentCarId)
+      this.userService.getUserDetails(this.currentUserId).subscribe(user => {
+        this.user = user;
+      });
     });
     this.getCarDetails();
   }
@@ -77,7 +91,7 @@ export class CarRentalComponent implements OnInit {
       .subscribe((data: any) => {
         this.carDetails = data;
       }
-    );
+      );
   }
   calculateDays() {
     const timeDifference = this.returnDateTime.getTime() - this.pickupDateTime.getTime();
@@ -90,10 +104,10 @@ export class CarRentalComponent implements OnInit {
     const hrsDifference = Math.floor(remainingMilliseconds / (1000 * 3600));
     return hrsDifference;
   }
-  
+
   calculateRentalCost() {
     this.rentalCost = (this.daysDifference * this.carDetails?.rentPrice || 0)
-                    + (this.hrsDifference  * (this.carDetails?.rentPrice / 24 || 0));
+      + (this.hrsDifference * (this.carDetails?.rentPrice / 24 || 0));
   }
 
   calculateTotalExtraPayment() {
@@ -101,19 +115,19 @@ export class CarRentalComponent implements OnInit {
 
     if (this.selectedExtras.gpsNavigation) {
       this.extraPayment += (this.extraPrices.gpsNavigation * this.daysDifference)
-                          +((this.extraPrices.gpsNavigation / 24) * this.hrsDifference)
+        + ((this.extraPrices.gpsNavigation / 24) * this.hrsDifference)
     }
     if (this.selectedExtras.additionalDriver) {
       this.extraPayment += (this.extraPrices.additionalDriver * this.daysDifference)
-                          +((this.extraPrices.additionalDriver / 24) * this.hrsDifference)
+        + ((this.extraPrices.additionalDriver / 24) * this.hrsDifference)
     }
     if (this.selectedExtras.childSeat) {
       this.extraPayment += (this.extraPrices.childSeat * this.daysDifference)
-                          +((this.extraPrices.childSeat / 24) * this.hrsDifference)
+        + ((this.extraPrices.childSeat / 24) * this.hrsDifference)
     }
     if (this.selectedExtras.roofBicycleRack) {
       this.extraPayment += (this.extraPrices.roofBicycleRack * this.daysDifference)
-                          +((this.extraPrices.roofBicycleRack / 24) * this.hrsDifference)
+        + ((this.extraPrices.roofBicycleRack / 24) * this.hrsDifference)
     }
   }
   totalRentExpense() {
@@ -125,17 +139,17 @@ export class CarRentalComponent implements OnInit {
   }
 
   onInputChange() {
-    if(this.areInputsFilled()){
+    if (this.areInputsFilled()) {
       this.formattedPickupTime = this.pickupTime.toString();
       this.formattedReturnTime = this.returnTime.toString();
       this.pickupDateTime = new Date(this.pickupDate + 'T' + this.formattedPickupTime + ':00:00');
       this.returnDateTime = new Date(this.returnDate + 'T' + this.formattedReturnTime + ':00:00');
-      
-      if (this.calculateDays() == 0){
+
+      if (this.calculateDays() == 0) {
         this.daysDifference = 1;
         this.hrsDifference = 0;
       }
-      else{
+      else {
         this.daysDifference = this.calculateDays();
         this.hrsDifference = this.calculateHrs();
       }
@@ -148,9 +162,9 @@ export class CarRentalComponent implements OnInit {
 
   getSelectedExtrasDetails() {
     const details: ExtraDetail[] = [];
-    
+
     if (this.selectedExtras.gpsNavigation) {
-      details.push({    
+      details.push({
         name: 'GPS Navigation',
         basePrice: this.extraPrices.gpsNavigation,
         cost: this.extraPrices.gpsNavigation * this.daysDifference,
@@ -179,8 +193,8 @@ export class CarRentalComponent implements OnInit {
     }
     return details;
   }
-  getTime(time: string){
-    switch(time) {
+  getTime(time: string) {
+    switch (time) {
       case "09":
         time = "09:00 AM"
         break;
@@ -231,7 +245,7 @@ export class CarRentalComponent implements OnInit {
     );
   }
 
-  valid(){
+  valid() {
     const currentDate = new Date();
     currentDate.setHours(new Date().getHours(), new Date().getMinutes(), new Date().getSeconds(), 0);
     const minPickupDate = new Date(currentDate);
@@ -261,16 +275,72 @@ export class CarRentalComponent implements OnInit {
       alert('Please enter Return Time');
       return false;
     }
-    else{
+    else {
       return true;
     }
-    
+
   }
 
   goToReceipt() {
-    if (this.valid()){
+    if (this.valid()) {
       this.modelUpdate();
-      this.router.navigate(['receipt', this.currentTransactionId]);
+
+      // Update the car's rented status
+      this.firestore.collection('car-inventory').doc(this.currentCarId).update({
+        isRented: true
+      });
+
+      // Create a new rented car item
+      const newRentedCarItem: MyRentedCarsItem = {
+        transactionId: this.currentTransactionId,
+        userId: this.currentUserId,
+        carName: this.carDetails.model, // Assuming 'model' is the name of the car in carDetails
+        carImage: this.carDetails.imgPath, // Assuming 'imgPath' holds the image URL
+        route: '/car-rental/' + this.currentCarId
+      };
+
+      // Fetch current user's rented cars, update the array, and then update the user's document
+      this.firestore.collection('users').doc(this.currentUserId).get().subscribe(doc => {
+        if (doc.exists) {
+          const userData = doc.data() as UserDetails;
+          const updatedRentedCars = userData.myRentedCars || [];
+          updatedRentedCars.push(newRentedCarItem);
+
+          this.firestore.collection('users').doc(this.currentUserId).update({
+            myRentedCars: updatedRentedCars
+          });
+
+          // Navigate to the receipt page
+          this.router.navigate(['receipt', this.currentTransactionId]);
+        }
+      });
     }
+  }
+
+  isFavorited(car: Car): boolean {
+    const uniqueIdentifier = car.brand + car.model;
+    return this.user.favorites.some(
+      (favorite: Car) => (favorite.brand + favorite.model) === uniqueIdentifier
+    );
+  }
+  toggleFavorite(fav: Car): void {
+    const uniqueIdentifier = fav.brand + fav.model;
+    const index = this.user.favorites.findIndex(
+      (favorite: Car) => (favorite.brand + favorite.model) === uniqueIdentifier
+    );
+
+    if (index === -1) {
+
+      this.user.favorites.push(fav);
+    } else {
+
+      this.user.favorites.splice(index, 1);
+    }
+
+    this.userService.updateUserFavorites(this.currentUserId, this.user.favorites).subscribe(() => {
+
+    }, error => {
+
+    });
   }
 }

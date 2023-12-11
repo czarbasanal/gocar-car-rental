@@ -37,6 +37,16 @@ export class LoginComponent implements OnInit {
 
   }
 
+  //myEmail: string = 'anthonygwapopacamarra@gmail.com';
+  //myEmail: string = 'czarbasanal@gmail.com';
+  //myEmail: string = 'mexldelvertuba@gmail.com';
+  //myEmail: string = 'aithaneulysse.gimenez.21@usjr.edu.ph';
+  myEmail: string = '';
+
+  forgotPassword() {
+    this.auth.forgotPassword(this.myEmail);
+  }
+
   signInWithGoogle() {
     this.auth.googleSignIn();
   }
