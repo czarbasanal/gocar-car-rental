@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class TransactionsComponent implements OnInit {
   transactions!: Observable<TransactionDetails[]>;
   transactionIds: Map<TransactionDetails, string> = new Map();
+  carNames: Map<string, string> = new Map();
   expandedElement: TransactionDetails | null = null;
   displayedColumns: string[] = ['transactionUserId', 'transactionCarId', 'startDate', 'endDate', 'rent', 'total', 'action'];
 
@@ -25,6 +26,16 @@ export class TransactionsComponent implements OnInit {
         return { ...data, id };
       }))
     );
+
+    this.fetchCarNames();
+  }
+
+  fetchCarNames() {
+    this.firestore.collection<any>('car-inventory').valueChanges({ idField: 'id' }).subscribe(cars => {
+      cars.forEach(car => {
+        this.carNames.set(car.id, car.model);
+      });
+    });
   }
 
   deleteTransaction(transaction: TransactionDetails) {

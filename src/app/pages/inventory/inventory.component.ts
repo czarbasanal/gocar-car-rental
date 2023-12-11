@@ -43,6 +43,7 @@ export class InventoryComponent implements OnInit, AfterViewInit {
     ).subscribe(carData => {
       this.dataSource = new MatTableDataSource<Car>(carData);
       this.dataSource.paginator = this.paginator;
+      carData.forEach(car => this.carIds.set(car, car.id));
     });
   }
 
@@ -85,13 +86,20 @@ export class InventoryComponent implements OnInit, AfterViewInit {
     if (carId) {
       this.db.collection('car-inventory').doc(carId).update({ isRented: false })
         .then(() => {
-          car.isRented = false;
-          this.snackBar.open('Car returned successfully', 'Close', { duration: 2000 });
+          const index = this.dataSource.data.findIndex(item => item === car);
+          if (index !== -1) {
+            this.dataSource.data[index].isRented = false;
+            this.dataSource._updateChangeSubscription();
+            this.snackBar.open('Car returned successfully', 'Close', { duration: 2000 });
+          }
         })
         .catch(error => {
           console.error('Error returning car:', error);
           this.snackBar.open('Error returning car', 'Close', { duration: 2000 });
         });
+    } else {
+      this.snackBar.open('Error: Car ID not found', 'Close', { duration: 2000 });
     }
   }
+
 }

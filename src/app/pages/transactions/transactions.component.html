@@ -11,8 +11,10 @@
 
         <!-- Transaction Car ID Column -->
         <ng-container matColumnDef="transactionCarId">
-            <th mat-header-cell *matHeaderCellDef> Car ID </th>
-            <td mat-cell *matCellDef="let transaction"> {{transaction.transactionCarId}} </td>
+            <th mat-header-cell *matHeaderCellDef> Car Name </th>
+            <td mat-cell *matCellDef="let transaction">
+                {{ carNames.get(transaction.transactionCarId) }}
+            </td>
         </ng-container>
 
         <!-- Start Date Column -->
