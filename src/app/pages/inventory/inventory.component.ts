@@ -17,7 +17,8 @@ import { map } from 'rxjs';
 })
 export class InventoryComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Car>([]);
-  displayedColumns: string[] = ['imgPath', 'brand', 'model', 'carType', 'rentPrice', 'maxSeats', 'fuelType', 'transType', 'isRented', 'action'];
+  carIds: Map<Car, string> = new Map();
+  displayedColumns: string[] = ['imgPath', 'brand', 'model', 'carType', 'rentPrice', 'maxSeats', 'fuelType', 'transType', 'isRented', 'return', 'action'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -36,17 +37,19 @@ export class InventoryComponent implements OnInit, AfterViewInit {
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Car;
         const id = a.payload.doc.id;
+        this.carIds.set(data, id);
         return { id, ...data };
       }))
     ).subscribe(carData => {
       this.dataSource = new MatTableDataSource<Car>(carData);
       this.dataSource.paginator = this.paginator;
+      carData.forEach(car => this.carIds.set(car, car.id));
     });
   }
 
   addCar() {
     this.dialog.open(AdminAddCarComponent, {
-      width: '1036px',
+      width: '1050px', height: '420px',
     });
   }
 
@@ -77,4 +80,26 @@ export class InventoryComponent implements OnInit, AfterViewInit {
       this.snackBar.open('Error deleting car', 'Close', { duration: 2000 });
     }
   }
+
+  returnCar(car: Car) {
+    const carId = this.carIds.get(car);
+    if (carId) {
+      this.db.collection('car-inventory').doc(carId).update({ isRented: false })
+        .then(() => {
+          const index = this.dataSource.data.findIndex(item => item === car);
+          if (index !== -1) {
+            this.dataSource.data[index].isRented = false;
+            this.dataSource._updateChangeSubscription();
+            this.snackBar.open('Car returned successfully', 'Close', { duration: 2000 });
+          }
+        })
+        .catch(error => {
+          console.error('Error returning car:', error);
+          this.snackBar.open('Error returning car', 'Close', { duration: 2000 });
+        });
+    } else {
+      this.snackBar.open('Error: Car ID not found', 'Close', { duration: 2000 });
+    }
+  }
+
 }

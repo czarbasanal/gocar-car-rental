@@ -1,0 +1,40 @@
+<div class="container d-flex align-items-center justify-content-center">
+    <div class="fixed-size-container">
+        <mat-card>
+            <mat-card-title>My Profile</mat-card-title>
+
+            <mat-card-content fxLayout="row" fxLayoutGap="20px">
+                <div fxFlex="50%">
+                    <form #userProfileForm="ngForm">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" placeholder="Email" name="email" ngModel required email>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>First Name</mat-label>
+                            <input matInput placeholder="First Name" name="firstname" ngModel required>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput placeholder="Last Name" name="lastname" ngModel required>
+                        </mat-form-field>
+                    </form>
+                </div>
+
+                <div fxFlex="50%" class="image-container" fxLayout="column" fxLayoutAlign="center center">
+                    <img [src]="userImage" *ngIf="userImage; else iconPlaceholder" class="profile-image">
+                    <ng-template #iconPlaceholder>
+                        <mat-icon class="profile-placeholder">account_circle</mat-icon>
+                    </ng-template>
+                    <input type="file" (change)="onFileSelected($event)" hidden #fileInput>
+                    <button mat-stroked-button (click)="fileInput.click()">Select Image</button>
+                </div>
+            </mat-card-content>
+            <mat-card-actions align="start">
+                <button mat-button color="primary" type="submit" [disabled]="!userProfileForm.form.valid">Save</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { UserDetails } from './user-details.model';
 import { from } from 'rxjs';
 import { Car } from './car.model';
-import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +14,12 @@ export class UserService {
 
   getUserDetails(uid: string): Observable<any> {
     return this.firestore.collection('users').doc(uid).valueChanges();
+  }
+
+  getUserImgPath(userId: string): Observable<string | null> {
+    return this.firestore.doc(`users/${userId}`).valueChanges().pipe(
+      map((user: any) => user ? user.imgPath : null)
+    );
   }
 
   getUserFavorites(userId: string): Observable<{ car: Car, carId: string }[]> {
@@ -36,6 +41,6 @@ export class UserService {
     const updatePromise = this.firestore.collection('users').doc(userId).update({
       favorites: favorites
     });
-    return from(updatePromise); // Convert the promise to an observable
+    return from(updatePromise);
   }
 }

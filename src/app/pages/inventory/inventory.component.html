@@ -51,6 +51,15 @@
             </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="return">
+            <mat-header-cell *matHeaderCellDef> Return </mat-header-cell>
+            <mat-cell *matCellDef="let car" class="return-button-cell">
+                <button mat-stroked-button (click)="returnCar(car)" [disabled]="!car.isRented" class="return-button">
+                    Return
+                </button>
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
             <mat-cell *matCellDef="let car">

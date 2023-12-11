@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/compat/storage';
 import { firstValueFrom } from 'rxjs';
 
@@ -31,4 +32,6 @@ export class FireStorageService {
     const fileRef = this.storage.refFromURL(fileUrl);
     await firstValueFrom(fileRef.delete());
   }
+
+
 }
