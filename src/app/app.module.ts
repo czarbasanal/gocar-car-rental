@@ -37,12 +37,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgChartsModule } from 'ng2-charts';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { UsersComponent } from './pages/users/users.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { ConfirmationDialogComponent } from './admin-dashboard/confirmation-dialog/confirmation-dialog.component';
+import { EditProfileComponent } from './user-main-feed/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -69,6 +72,7 @@ import { ConfirmationDialogComponent } from './admin-dashboard/confirmation-dial
     TransactionsComponent,
     AdminAddCarComponent,
     ConfirmationDialogComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,9 @@ import { ConfirmationDialogComponent } from './admin-dashboard/confirmation-dial
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    NgChartsModule
+    NgChartsModule,
+    MatCardModule,
+    FlexLayoutModule
   ],
   providers: [SignupCommunicationService, ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent]
