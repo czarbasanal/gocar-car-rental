@@ -49,7 +49,7 @@ export class InventoryComponent implements OnInit, AfterViewInit {
 
   addCar() {
     this.dialog.open(AdminAddCarComponent, {
-      width: '1036px',
+      width: '1050px', height: '420px',
     });
   }
 

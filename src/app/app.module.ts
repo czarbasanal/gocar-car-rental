@@ -47,6 +47,8 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
 import { ConfirmationDialogComponent } from './admin-dashboard/confirmation-dialog/confirmation-dialog.component';
 import { EditProfileComponent } from './user-main-feed/edit-profile/edit-profile.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { TransacDialogComponent } from './dialogs/transac-dialog/transac-dialog.component';
+import { UsersDialogComponent } from './dialogs/users-dialog/users-dialog.component';
 
 
 @NgModule({
@@ -75,6 +77,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ConfirmationDialogComponent,
     EditProfileComponent,
     ForgotPasswordComponent,
+    TransacDialogComponent,
+    UsersDialogComponent,
   ],
   imports: [
     BrowserModule,

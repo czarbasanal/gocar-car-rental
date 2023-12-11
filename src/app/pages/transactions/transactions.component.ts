@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, map } from 'rxjs';
 import { TransactionDetails } from 'src/app/shared/transaction.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TransacDialogComponent } from 'src/app/dialogs/transac-dialog/transac-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-transactions',
@@ -16,7 +18,7 @@ export class TransactionsComponent implements OnInit {
   expandedElement: TransactionDetails | null = null;
   displayedColumns: string[] = ['transactionUserId', 'transactionCarId', 'startDate', 'endDate', 'rent', 'total', 'action'];
 
-  constructor(private firestore: AngularFirestore, private snackBar: MatSnackBar) { }
+  constructor(private firestore: AngularFirestore, private snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.transactions = this.firestore.collection<TransactionDetails>('transactions').snapshotChanges().pipe(
@@ -39,18 +41,27 @@ export class TransactionsComponent implements OnInit {
   }
 
   deleteTransaction(transaction: TransactionDetails) {
-    if (transaction.id) {
-      this.firestore.doc(`transactions/${transaction.id}`).delete()
-        .then(() => {
-          this.snackBar.open('Transaction deleted successfully', 'Close', { duration: 3000 });
-        })
-        .catch(error => {
-          console.error('Error deleting transaction:', error);
-          this.snackBar.open('Error deleting transaction', 'Close', { duration: 3000 });
-        });
-    } else {
-      this.snackBar.open('Error: Transaction ID not found', 'Close', { duration: 3000 });
-    }
+    const dialogRef = this.dialog.open(TransacDialogComponent, {
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // User confirmed deletion
+        if (transaction.id) {
+          this.firestore.doc(`transactions/${transaction.id}`).delete()
+            .then(() => {
+              this.snackBar.open('Transaction deleted successfully', 'Close', { duration: 3000 });
+            })
+            .catch(error => {
+              console.error('Error deleting transaction:', error);
+              this.snackBar.open('Error deleting transaction', 'Close', { duration: 3000 });
+            });
+        } else {
+          this.snackBar.open('Error: Transaction ID not found', 'Close', { duration: 3000 });
+        }
+      }
+    });
   }
 }
 

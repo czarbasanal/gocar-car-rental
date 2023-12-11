@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, map } from 'rxjs';
 import { UserDetails } from 'src/app/shared/user-details.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UsersDialogComponent } from 'src/app/dialogs/users-dialog/users-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users',
@@ -15,7 +17,7 @@ export class UsersComponent implements OnInit {
   expandedElement: UserDetails | null = null;
   userDisplayedColumns: string[] = ['email', 'firstname', 'lastname', 'myRentedCars', 'action'];
 
-  constructor(private firestore: AngularFirestore, private snackBar: MatSnackBar) { }
+  constructor(private firestore: AngularFirestore, private snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.fetchUsers();
@@ -29,6 +31,18 @@ export class UsersComponent implements OnInit {
         return { ...data, id };
       }))
     );
+  }
+
+  openDeleteConfirmation(user: any) {
+    const dialogRef = this.dialog.open(UsersDialogComponent, {
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteUser(user);
+      }
+    });
   }
 
   deleteUser(user: any) {
@@ -46,3 +60,4 @@ export class UsersComponent implements OnInit {
     }
   }
 }
+
