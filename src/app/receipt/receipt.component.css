@@ -25,3 +25,10 @@
     cursor: pointer;
     color: red;
 }
+
+.loading-overlay {
+    display: flex;
+    justify-content: center;
+    margin-top: 45vh;
+    scale: 1.5;
+}

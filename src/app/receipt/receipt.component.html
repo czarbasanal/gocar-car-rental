@@ -1,120 +1,211 @@
 <app-user-navbar></app-user-navbar>
-<div class="receipt">
-<div class="container">
-    <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="invoice-title mt-2">
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <h2 class="mb-1 text-muted">gocar.usjr.edu.ph</h2>
-                                 </div>
-                                 <div class="col-md-6">
-                                    <div class="float-end" id="close" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
-                                        <svg *ngIf="!isHovered" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                        </svg>
-                                        <svg *ngIf="isHovered" (click)="goBackToMainFeed()" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
-                                        </svg>
-                                    </div>
-                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="text-muted">
-                                        <p class="mb-1"> 7VQ6+XQR usjr, cicct, Cebu City, 6000 Cebu</p>
-                                        <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i> gocar@usjr.edu.ph</p>
-                                        <p><i class="uil uil-phone me-1"></i> 0966 995 3511</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 d-flex align-items-center justify-content-end">
-                                    <h4 class="float-end font-size-15">Transaction ID: {{ currentTransactionId }}</h4>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <hr class="my-4">
-    
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="text-muted">
-                                    <h5 class="font-size-16 mb-3">Customer:</h5>
-                                    <h5 class="font-size-15 mb-2">{{ currentUserDetails.firstname }} {{ currentUserDetails.lastname }}</h5>
-                                    <p class="mb-1">{{ currentUserDetails.email }}</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="text-muted">
-                                    <h5 class="font-size-16 mb-3">Date:</h5>
-                                    <p class="mb-1">Pickup: {{ currentTransactionDetails.startDate }} at {{ currentTransactionDetails.startTime }}</p>
-                                    <p class="mb-1">Return: {{ currentTransactionDetails.endDate }} at {{ currentTransactionDetails.endTime }}</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="text-muted">
-                                    <h5 class="font-size-16 mb-3">Vehicle ID:</h5>
-                                    <p class="mb-1">{{ currentTransactionDetails.transactionCarId }}</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="text-muted text-sm-end">
-                                    <div>
-                                        <h5 class="font-size-15 mb-1">Transaction ID:</h5>
-                                        <p>{{ currentTransactionId }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="py-2 mt-4">
-                            <h5 class="font-size-15">Order Summary</h5>
-    
-                            <div class="table-responsive">
-                                <table class="table align-middle table-nowrap table-centered mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Car Details</th>
-                                            <th>Price</th>
-                                            <th>Rent Duration</th>
-                                            <th class="text-end" style="width: 200px;">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div>
-                                                    <p class="text-muted mb-0">{{ currentCarDetails.fuelType }}</p>
-                                                    <h5 class="text-truncate font-size-14 mb-1">{{ currentCarDetails.model }}</h5>
-                                                    <p class="text-muted mb-0">{{ currentCarDetails.carType }}</p>
-                                                </div>
-                                            </td>
-                                            <td>&#8369; {{ currentCarDetails.rentPrice | number: '1.2-2' }}</td>
-                                            <td>{{ currentTransactionDetails.days }} day/s {{ currentTransactionDetails.hrs }} hrs</td>
-                                            <td class="text-end">&#8369; {{ currentTransactionDetails.rent | number: '1.2-2' }}</td>
-                                        </tr>
-                                        <tr *ngFor="let extra of currentTransactionDetails.extras; let i = index">
-                                            <td>
-                                              <div>
-                                                <p class="text-muted mb-0">{{ extra.name }}</p>
-                                              </div>
-                                            </td>
-                                            <td>&#8369; {{ extra.basePrice | number: '1.2-2' }}</td>
-                                            <td>{{ currentTransactionDetails.days }} days {{ currentTransactionDetails.hrs }} hrs</td>
-                                            <td class="text-end">&#8369; {{ extra.cost | number: '1.2-2' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" colspan="3" class="border-0 text-end">Total</th>
-                                            <td class="text-end"><h4 class="m-0 fw-semibold">&#8369; {{ currentTransactionDetails.total | number: '1.2-2' }}</h4></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div *ngIf="isLoading; else content" class="loading-overlay">
+  <mat-spinner></mat-spinner>
 </div>
+<ng-template #content>
+  <div class="receipt">
+    <div class="container">
+      <div id="content" class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="invoice-title mt-2">
+                <div class="row mb-4">
+                  <div class="col-md-6">
+                    <h2 class="mb-1 text-muted">gocar.car.rental</h2>
+                  </div>
+                  <div class="col-md-6">
+                    <div
+                      class="float-end"
+                      id="close"
+                      (mouseenter)="isHovered = true"
+                      (mouseleave)="isHovered = false"
+                    >
+                      <svg
+                        *ngIf="!isHovered"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        fill="currentColor"
+                        class="bi bi-x"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+                        />
+                      </svg>
+                      <svg
+                        *ngIf="isHovered"
+                        (click)="goBackToMainFeed()"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        fill="currentColor"
+                        class="bi bi-x-circle-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="text-muted">
+                      <p class="mb-1">
+                        7VQ6+XQR USJR, SCS, Cebu City, 6000 Cebu
+                      </p>
+                      <p class="mb-1">
+                        <i class="uil uil-envelope-alt me-1"></i>
+                        gocar@car.rental.com
+                      </p>
+                      <p><i class="uil uil-phone me-1"></i> 0966 995 3511</p>
+                    </div>
+                  </div>
+                  <div
+                    class="col-md-6 d-flex align-items-center justify-content-end"
+                  >
+                    <h4 class="float-end font-size-15">
+                      Transaction ID: {{ currentTransactionId }}
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              <hr class="my-4" />
+
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="text-muted">
+                    <h5 class="font-size-16 mb-3">Customer:</h5>
+                    <h5 class="font-size-15 mb-2">
+                      {{ currentUserDetails.firstname }}
+                      {{ currentUserDetails.lastname }}
+                    </h5>
+                    <p class="mb-1">{{ currentUserDetails.email }}</p>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="text-muted">
+                    <h5 class="font-size-16 mb-3">Date:</h5>
+                    <p class="mb-1">
+                      Pickup: {{ currentTransactionDetails.startDate }} at
+                      {{ currentTransactionDetails.startTime }}
+                    </p>
+                    <p class="mb-1">
+                      Return: {{ currentTransactionDetails.endDate }} at
+                      {{ currentTransactionDetails.endTime }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="text-muted">
+                    <h5 class="font-size-16 mb-3">Vehicle ID:</h5>
+                    <p class="mb-1">
+                      {{ currentTransactionDetails.transactionCarId }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="text-muted text-sm-end">
+                    <div>
+                      <h5 class="font-size-15 mb-1">Transaction ID:</h5>
+                      <p>{{ currentTransactionId }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="py-2 mt-4">
+                <h5 class="font-size-15">Order Summary</h5>
+
+                <div class="table-responsive">
+                  <table
+                    class="table align-middle table-nowrap table-centered mb-0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Car Details</th>
+                        <th>Price</th>
+                        <th>Rent Duration</th>
+                        <th class="text-end" style="width: 200px">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div>
+                            <p class="text-muted mb-0">
+                              {{ currentCarDetails.fuelType }}
+                            </p>
+                            <h5 class="text-truncate font-size-14 mb-1">
+                              {{ currentCarDetails.model }}
+                            </h5>
+                            <p class="text-muted mb-0">
+                              {{ currentCarDetails.carType }}
+                            </p>
+                          </div>
+                        </td>
+                        <td>
+                          &#8369;
+                          {{ currentCarDetails.rentPrice | number : "1.2-2" }}
+                        </td>
+                        <td>
+                          {{ currentTransactionDetails.days }} day/s
+                          {{ currentTransactionDetails.hrs }} hrs
+                        </td>
+                        <td class="text-end">
+                          &#8369;
+                          {{
+                            currentTransactionDetails.rent | number : "1.2-2"
+                          }}
+                        </td>
+                      </tr>
+                      <tr
+                        *ngFor="
+                          let extra of currentTransactionDetails.extras;
+                          let i = index
+                        "
+                      >
+                        <td>
+                          <div>
+                            <p class="text-muted mb-0">{{ extra.name }}</p>
+                          </div>
+                        </td>
+                        <td>
+                          &#8369; {{ extra.basePrice | number : "1.2-2" }}
+                        </td>
+                        <td>
+                          {{ currentTransactionDetails.days }} days
+                          {{ currentTransactionDetails.hrs }} hrs
+                        </td>
+                        <td class="text-end">
+                          &#8369; {{ extra.cost | number : "1.2-2" }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3" class="border-0 text-end">
+                          Total
+                        </th>
+                        <td class="text-end">
+                          <h4 class="m-0 fw-semibold">
+                            &#8369;
+                            {{
+                              currentTransactionDetails.total | number : "1.2-2"
+                            }}
+                          </h4>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

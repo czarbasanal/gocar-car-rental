@@ -70,7 +70,7 @@
                         My Rented Cars
                     </li>
                     <li *ngFor="let car of rentedCars" class="dropdown-item">
-                        <a class="dropdown-tile">
+                        <a class="dropdown-tile" (click)="gotoReceipt(car.transactionId)" id="myrentedcars">
                             <img [src]="car.carImage" [alt]="car.carName" class="car-image">
                             <div class="car-info">
                                 <div class="car-name">{{ car.carName }}</div>
