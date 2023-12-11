@@ -1,6 +1,7 @@
 <app-user-navbar></app-user-navbar>
 
 <div class="booking-details">
+
   <div class="container">
     <div class="wrapper">
       <div class="row">
@@ -20,7 +21,22 @@
                       <p class="car-model">{{ carDetails.model }}</p>
                     </div>
                     <div class="col-md-6 d-flex align-items-center justify-content-end">
-                      <img src="assets/favorite-car.png" class="favorite-car-icon" alt="Favorite" />
+                      <svg *ngIf="!isFavorited(carDetails)" class="favorite-car-icon"
+                        (click)="toggleFavorite(carDetails)" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M16.44 3.10001C14.63 3.10001 13.01 3.98001 12 5.33001C10.99 3.98001 9.37 3.10001 7.56 3.10001C4.49 3.10001 2 5.60001 2 8.69001C2 9.88001 2.19 10.98 2.52 12C4.1 17 8.97 19.99 11.38 20.81C11.72 20.93 12.28 20.93 12.62 20.81C15.03 19.99 19.9 17 21.48 12C21.81 10.98 22 9.88001 22 8.69001C22 5.60001 19.51 3.10001 16.44 3.10001Z"
+                          fill="none" stroke="#91a4c0" stroke-width="1.5" />
+                      </svg>
+
+                      <!-- Favorited Heart (Red), shown only if the car is favorited -->
+                      <svg *ngIf="isFavorited(carDetails)" class="favorite-car-icon"
+                        (click)="toggleFavorite(carDetails)" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="#ed3f3f">
+                        <path
+                          d="M16.44 3.10001C14.63 3.10001 13.01 3.98001 12 5.33001C10.99 3.98001 9.37 3.10001 7.56 3.10001C4.49 3.10001 2 5.60001 2 8.69001C2 9.88001 2.19 10.98 2.52 12C4.1 17 8.97 19.99 11.38 20.81C11.72 20.93 12.28 20.93 12.62 20.81C15.03 19.99 19.9 17 21.48 12C21.81 10.98 22 9.88001 22 8.69001C22 5.60001 19.51 3.10001 16.44 3.10001Z"
+                          fill="#ed3f3f" stroke="#ed3f3f" stroke-width="1.5" />
+                      </svg>
                     </div>
                   </div>
                   <p class="car-type">{{ carDetails.carType }}</p>
@@ -29,24 +45,22 @@
               <div class="card-body d-flex flex-column align-items-center justify-content-between">
                 <div class="row mb-4">
                   <div class="col-md-4 d-flex align-items-stretch justify-content-center">
-                    <img src="assets/fuel-type.png" alt="Fuel Type" class="specification" />
+                    <img src="assets/fuel-type.png" alt="Fuel Type" class="specification">
                     <p class="card-text">{{ carDetails.fuelType }}</p>
                   </div>
                   <div class="col-md-4 d-flex align-items-stretch justify-content-center">
-                    <img src="assets/trans-type.png" alt="Transmission Type" class="specification" />
+                    <img src="assets/trans-type.png" alt="Transmission Type" class="specification">
                     <p class="card-text">{{ carDetails.transType }}</p>
                   </div>
                   <div class="col-md-4 d-flex align-items-stretch justify-content-center">
-                    <img src="assets/max-persons.png" alt="Max Persons" class="specification" />
+                    <img src="assets/max-persons.png" alt="Max Persons" class="specification">
                     <p class="card-text">{{ carDetails.maxSeats }} Pax</p>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6 d-flex align-items-center justify-content-start">
-                    <p class="price-label">
-                      &#8369;{{ carDetails.rentPrice | number : "1.2-2" }}/<span
-                        style="font-size: 14px; color: #90a3bf">day</span>
-                    </p>
+                    <p class="price-label">&#8369;{{ carDetails.rentPrice | number: '1.2-2' }}/<span
+                        style="font-size: 14px; color: #90A3BF;">day</span></p>
                   </div>
                 </div>
               </div>
@@ -194,9 +208,7 @@
                 </div>
                 <div class="row justify-content-end">
                   <div class="col-4 offset-8 text-end">
-                    <button type="button" class="btn btn-primary" (click)="goToReceipt()">
-                      Rent Now
-                    </button>
+                    <button type="button" class="btn btn-primary" (click)="goToReceipt()">Confirm</button>
                   </div>
                 </div>
               </div>

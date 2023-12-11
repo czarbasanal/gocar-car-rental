@@ -75,7 +75,6 @@ export class AuthService {
 
         this.isLoadingSubject.next(false);
         this.sendEmailForVarification(userCredential.user)
-        this.snackBar.open('Verification email sent!', 'Close', { duration: 10000 });
         this.router.navigate(['login']);
       }
     } catch (err: any) {

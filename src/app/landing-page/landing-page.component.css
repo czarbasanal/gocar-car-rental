@@ -23,6 +23,10 @@ ol {
     background-color: #F6F7F9;
 }
 
+.LandingPageBottomest {
+    background-color: #F6F7F9;
+}
+
 .FindText {
     font-size: 48px;
     font-weight: 700;
@@ -170,7 +174,7 @@ ol {
     text-align: center;
 }
 
-@-webkit-keyframes swirl-in-fwd {
+/* @-webkit-keyframes swirl-in-fwd {
     0% {
         -webkit-transform: rotate(-540deg) scale(0);
         transform: rotate(-540deg) scale(0);
@@ -180,32 +184,68 @@ ol {
     100% {
         -webkit-transform: rotate(0) scale(1);
         transform: rotate(0) scale(1);
+        opacity: 1;
+    }
+} */
+
+@keyframes scale-in-center {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
         opacity: 1;
     }
 }
 
-@keyframes swirl-in-fwd {
-    0% {
-        -webkit-transform: rotate(-540deg) scale(0);
-        transform: rotate(-540deg) scale(0);
-        opacity: 0;
+@keyframes heartbeat {
+    from {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
     }
 
-    100% {
-        -webkit-transform: rotate(0) scale(1);
-        transform: rotate(0) scale(1);
-        opacity: 1;
+    10% {
+        -webkit-transform: scale(0.91);
+        transform: scale(0.91);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+
+    17% {
+        -webkit-transform: scale(0.98);
+        transform: scale(0.98);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+
+    33% {
+        -webkit-transform: scale(0.87);
+        transform: scale(0.87);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+
+    45% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
     }
 }
 
 .Easy {
     position: relative;
     opacity: 0;
-    /* Initially invisible */
-    -webkit-animation: swirl-in-fwd 1s ease-out 2s both;
-    /* For Safari and older Chrome browsers */
-    animation: swirl-in-fwd 1s ease-out 2s both;
-    /* Modern browsers */
+    -webkit-animation: scale-in-center .4s ease-out 2s 1 forwards, heartbeat 1.5s ease-in 3.4s infinite;
+    animation: scale-in-center .4s ease-out 2s 1 forwards, heartbeat 1.5s ease-in 3.4s infinite;
 }
 
 
@@ -213,7 +253,48 @@ ol {
     position: absolute;
 }
 
-.icon-container {
+@keyframes shake-bottom {
+
+    0%,
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transform-origin: 50% 100%;
+        transform-origin: 50% 100%;
+    }
+
+    10% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+    }
+
+    20%,
+    40%,
+    60% {
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg);
+    }
+
+    30%,
+    50%,
+    70% {
+        -webkit-transform: rotate(4deg);
+        transform: rotate(4deg);
+    }
+
+    80% {
+        -webkit-transform: rotate(-2deg);
+        transform: rotate(-2deg);
+    }
+
+    90% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+    }
+}
+
+.icon-container,
+.icon-container2 {
     width: 230px;
     height: 230px;
     background: white;
@@ -223,7 +304,21 @@ ol {
     justify-content: center;
     align-items: center;
     margin: 50px;
+    position: relative;
+    opacity: 0;
+    -webkit-animation: scale-in-center .4s ease-out 1 forwards, heartbeat 1.5s ease-in 3.4s infinite;
+    animation: scale-in-center .4s ease-out 1 forwards, heartbeat 1.5s ease-in 3.4s infinite;
 }
+
+.icon-container img.lower {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 16px;
+
+}
+
 
 .icon-container2 {
     width: 230px;
@@ -262,4 +357,32 @@ ol {
 
 .Steps {
     justify-content: space-between;
+}
+
+.Facamz {
+    color: #596780;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29.52px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#facamars {
+    color: #596780;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29.52px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Targeting the first image */
+.icon-container:nth-child(1) img {
+    object-position: center 30%;
+}
+
+/* Targeting the second image */
+.icon-container:nth-child(2) img {
+    object-position: center 30%;
 }
