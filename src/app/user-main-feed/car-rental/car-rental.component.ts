@@ -68,10 +68,13 @@ export class CarRentalComponent implements OnInit {
     hrs: 0,
     total: 0,
   };
+
+  isLoading: boolean = false;
   user: any;
   constructor(private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute, private userService: UserService) { }
   cars: Car[] = [];
   ngOnInit() {
+    this.isLoading = true;
     this.route.params.subscribe(params => {
       this.currentUserId = params['userId'];
       this.currentCarId = params['carId'];
@@ -82,6 +85,7 @@ export class CarRentalComponent implements OnInit {
       });
     });
     this.getCarDetails();
+    this.isLoading = false;
   }
   getCarDetails() {
     this.firestore

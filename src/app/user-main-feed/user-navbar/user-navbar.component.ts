@@ -113,4 +113,8 @@ export class UserNavbarComponent implements OnInit {
     }
   }
 
+  gotoReceipt(transactionId: string) {
+    this.router.navigate(['/receipt', transactionId]);
+  }
+
 }

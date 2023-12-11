@@ -9,8 +9,8 @@ export type NotificationItem = {
 export type MyRentedCarsItem = {
   transactionId: string;
   userId: string;
-  carName: string;      // Added field for the car's name
-  carImage: string;     // Added field for the car's image
+  carName: string;
+  carImage: string;
   route: string;
 }
 

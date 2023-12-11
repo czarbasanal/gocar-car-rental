@@ -17,10 +17,13 @@ export class ReceiptComponent implements OnInit {
   currentUserDetails: any;
   currentTransactionId: string = '';
 
+  isLoading: boolean = false;
+
   constructor(private firestore: AngularFirestore, private router: Router, private route: ActivatedRoute) {}
 
   async ngOnInit() {
     try {
+      this.isLoading = true;
       const params = await firstValueFrom(this.route.params.pipe(take(1)));
       if (params) {
         this.currentTransactionId = params['transactionId'];
@@ -35,16 +38,13 @@ export class ReceiptComponent implements OnInit {
           const user = await this.retrieveDocument('users', this.currentTransactionDetails.transactionUserId);
           this.currentUserDetails = user;
         }
-  
-        console.log("Nasud transaction?: ", this.currentTransactionDetails);
-        console.log("Nasud car?: ", this.currentCarDetails);
-        console.log("Nasud user?: ", this.currentUserDetails);
       } else {
         console.error("Route parameters are undefined");
       }
     } catch (error) {
       console.error("Error in ngOnInit: ", error);
     }
+    this.isLoading = false;
   }
   
 

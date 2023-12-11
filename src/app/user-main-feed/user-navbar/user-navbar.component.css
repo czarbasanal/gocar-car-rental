@@ -241,3 +241,7 @@ a.dropdown-item img {
 li.dropdown-item-container {
     padding: 0;
 }
+
+#myrentedcars:hover {
+    cursor: pointer;
+}

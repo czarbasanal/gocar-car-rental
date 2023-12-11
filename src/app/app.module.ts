@@ -46,6 +46,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { ConfirmationDialogComponent } from './admin-dashboard/confirmation-dialog/confirmation-dialog.component';
 import { EditProfileComponent } from './user-main-feed/edit-profile/edit-profile.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { EditProfileComponent } from './user-main-feed/edit-profile/edit-profile
     AdminAddCarComponent,
     ConfirmationDialogComponent,
     EditProfileComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
