@@ -1,4 +1,5 @@
 export interface TransactionDetails {
+  id?: string;
   transactionUserId: string;
   transactionCarId: string;
   startDate: string;

@@ -17,7 +17,8 @@ import { map } from 'rxjs';
 })
 export class InventoryComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Car>([]);
-  displayedColumns: string[] = ['imgPath', 'brand', 'model', 'carType', 'rentPrice', 'maxSeats', 'fuelType', 'transType', 'isRented', 'action'];
+  carIds: Map<Car, string> = new Map();
+  displayedColumns: string[] = ['imgPath', 'brand', 'model', 'carType', 'rentPrice', 'maxSeats', 'fuelType', 'transType', 'isRented', 'return', 'action'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -36,6 +37,7 @@ export class InventoryComponent implements OnInit, AfterViewInit {
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Car;
         const id = a.payload.doc.id;
+        this.carIds.set(data, id);
         return { id, ...data };
       }))
     ).subscribe(carData => {
@@ -75,6 +77,21 @@ export class InventoryComponent implements OnInit, AfterViewInit {
     } catch (error) {
       console.error('Error deleting car:', error);
       this.snackBar.open('Error deleting car', 'Close', { duration: 2000 });
+    }
+  }
+
+  returnCar(car: Car) {
+    const carId = this.carIds.get(car);
+    if (carId) {
+      this.db.collection('car-inventory').doc(carId).update({ isRented: false })
+        .then(() => {
+          car.isRented = false;
+          this.snackBar.open('Car returned successfully', 'Close', { duration: 2000 });
+        })
+        .catch(error => {
+          console.error('Error returning car:', error);
+          this.snackBar.open('Error returning car', 'Close', { duration: 2000 });
+        });
     }
   }
 }

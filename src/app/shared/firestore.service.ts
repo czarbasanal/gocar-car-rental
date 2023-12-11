@@ -41,6 +41,6 @@ export class UserService {
     const updatePromise = this.firestore.collection('users').doc(userId).update({
       favorites: favorites
     });
-    return from(updatePromise); // Convert the promise to an observable
+    return from(updatePromise);
   }
 }

@@ -1,0 +1,17 @@
+.element-row,
+.detail-row {
+    border-bottom-width: 0;
+}
+
+.element-row {
+    cursor: pointer;
+}
+
+.expanded-row {
+    border-bottom-width: 1px;
+}
+
+.detail {
+    padding: 20px;
+    background-color: #f5f5f5;
+}

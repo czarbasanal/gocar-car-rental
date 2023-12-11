@@ -1,2 +1,73 @@
 <h2>Transactions</h2>
 <hr>
+<div class="mat-table-container">
+    <table mat-table [dataSource]="transactions" multiTemplateDataRows>
+
+        <!-- Transaction User ID Column -->
+        <ng-container matColumnDef="transactionUserId">
+            <th mat-header-cell *matHeaderCellDef> User ID </th>
+            <td mat-cell *matCellDef="let transaction"> {{transaction.transactionUserId}} </td>
+        </ng-container>
+
+        <!-- Transaction Car ID Column -->
+        <ng-container matColumnDef="transactionCarId">
+            <th mat-header-cell *matHeaderCellDef> Car ID </th>
+            <td mat-cell *matCellDef="let transaction"> {{transaction.transactionCarId}} </td>
+        </ng-container>
+
+        <!-- Start Date Column -->
+        <ng-container matColumnDef="startDate">
+            <th mat-header-cell *matHeaderCellDef> Start Date </th>
+            <td mat-cell *matCellDef="let transaction"> {{transaction.startDate}} </td>
+        </ng-container>
+
+        <!-- End Date Column -->
+        <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef> End Date </th>
+            <td mat-cell *matCellDef="let transaction"> {{transaction.endDate}} </td>
+        </ng-container>
+
+        <!-- Rent Column -->
+        <ng-container matColumnDef="rent">
+            <th mat-header-cell *matHeaderCellDef> Rent </th>
+            <td mat-cell *matCellDef="let transaction"> {{transaction.rent}} </td>
+        </ng-container>
+
+        <!-- Total Cost Column -->
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef> Total Cost </th>
+            <td mat-cell *matCellDef="let transaction"> {{transaction.total}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let transaction">
+                <button mat-icon-button (click)="deleteTransaction(transaction)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <!-- Expanded Content Column (for extras) -->
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                <div class="detail" *ngIf="expandedElement === element">
+                    <!-- Display the extras details -->
+                    <div *ngFor="let extra of element.extras">
+                        {{ extra.name }}: {{ extra.cost }}
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+
+        <!-- Header and Data Rows -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="element-row"
+            [class.expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"
+            [class.expanded-row]="expandedElement === row">
+        </tr>
+    </table>
+</div>
