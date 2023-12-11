@@ -43,6 +43,7 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { UsersComponent } from './pages/users/users.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { ConfirmationDialogComponent } from './admin-dashboard/confirmation-dialog/confirmation-dialog.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { ConfirmationDialogComponent } from './admin-dashboard/confirmation-dial
     TransactionsComponent,
     AdminAddCarComponent,
     ConfirmationDialogComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

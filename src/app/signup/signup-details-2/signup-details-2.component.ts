@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { SignupCommunicationService, UserDetailsWithFile } from 'src/app/shared/signup-communication.service';
@@ -13,7 +14,7 @@ export class SignupDetails2Component implements OnInit, OnDestroy {
   userDetailsWithFile!: UserDetailsWithFile;
   private detailsButtonClickSubscription!: Subscription;
 
-  constructor(private auth: AuthService, private signupCommunicationService: SignupCommunicationService) { }
+  constructor(private auth: AuthService, private signupCommunicationService: SignupCommunicationService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.detailsButtonClickSubscription = this.signupCommunicationService.detailsButtonClick$.subscribe(
@@ -29,22 +30,22 @@ export class SignupDetails2Component implements OnInit, OnDestroy {
 
   register() {
     if (this.userDetailsWithFile.userDetails.email == '') {
-      alert('Please enter email');
+      this.snackBar.open('Please enter your email.', 'Close', { duration: 2000 });
       return;
     }
 
     if (this.userDetailsWithFile.userDetails.password == '') {
-      alert('Please enter password');
+      this.snackBar.open('Please enter your password.', 'Close', { duration: 2000 });
       return;
     }
 
     if (this.confirmPassword == '') {
-      alert('Please confirm your password');
+      this.snackBar.open('Please confirm your password.', 'Close', { duration: 2000 });
       return;
     }
 
     if (this.userDetailsWithFile.userDetails.password !== this.confirmPassword) {
-      alert("Password did not match.");
+      this.snackBar.open('Passwords do not match.', 'Close', { duration: 2000 });
       return;
     }
 

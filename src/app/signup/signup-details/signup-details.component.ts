@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SignupCommunicationService, UserDetailsWithFile } from 'src/app/shared/signup-communication.service';
 import { UserDetails } from '../../shared/user-details.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup-details',
@@ -9,7 +10,7 @@ import { UserDetails } from '../../shared/user-details.model';
 })
 
 export class SignupDetailsComponent {
-  constructor(private signupCommunicationService: SignupCommunicationService) { }
+  constructor(private signupCommunicationService: SignupCommunicationService, private snackBar: MatSnackBar) { }
 
   uploadedFileName: string = '';
   selectedFile!: File;
@@ -44,11 +45,11 @@ export class SignupDetailsComponent {
   onFormSubmit(event: Event) {
 
     if (this.userDetailsWithFile.userDetails.lastname == '') {
-      alert('Please enter your Lastname');
+      this.snackBar.open('Please enter your last name.', 'Close', { duration: 2000 });
       return;
     }
     if (this.userDetailsWithFile.userDetails.firstname == '') {
-      alert('Please enter your Firstname');
+      this.snackBar.open('Please enter your first name.', 'Close', { duration: 2000 });
       return;
     }
     // if (this.userDetailsWithFile.file) {

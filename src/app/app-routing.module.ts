@@ -12,12 +12,14 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { UsersComponent } from './pages/users/users.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing-page', pathMatch: 'full' },
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'grid-card', component: GridCardComponent },
   //{ path: 'main-feed', component: UserMainFeedComponent },
   { path: 'main-feed/:userId', component: UserMainFeedComponent },

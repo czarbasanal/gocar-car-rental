@@ -1,3 +1,10 @@
+.loading-overlay {
+  display: flex;
+  margin-top: 45vh;
+  justify-content: center;
+  scale: 1.5;
+}
+
 .container {
   margin-top: 100px;
   width: 55%;

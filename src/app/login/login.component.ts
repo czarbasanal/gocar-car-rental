@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -20,12 +21,12 @@ export class LoginComponent implements OnInit {
   login() {
 
     if (this.email == '') {
-      alert('Please enter email');
+      this.snackBar.open('Please enter your email.', 'Close', { duration: 2000 });
       return;
     }
 
     if (this.password == '') {
-      alert('Please enter password');
+      this.snackBar.open('Please enter your password.', 'Close', { duration: 2000 });
       return;
     }
 
@@ -37,15 +38,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  //myEmail: string = 'anthonygwapopacamarra@gmail.com';
-  //myEmail: string = 'czarbasanal@gmail.com';
-  //myEmail: string = 'mexldelvertuba@gmail.com';
-  //myEmail: string = 'aithaneulysse.gimenez.21@usjr.edu.ph';
-  myEmail: string = '';
-
-  forgotPassword() {
-    this.auth.forgotPassword(this.myEmail);
-  }
+  
 
   signInWithGoogle() {
     this.auth.googleSignIn();

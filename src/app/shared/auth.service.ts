@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { UserDetails } from './user-details.model';
 import { BehaviorSubject } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class AuthService {
     private firestore: AngularFirestore,
     private fireStorageService: FireStorageService,
     private storage: AngularFireStorage,
-    private router: Router) { }
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoadingSubject.asObservable();
@@ -32,13 +34,12 @@ export class AuthService {
     }
     else {
       this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
-        if (res.user) {
+        if (res.user?.emailVerified == true) {
           const userId = res.user.uid;
           localStorage.setItem('token', 'true');
           this.router.navigate(['main-feed', userId]);
         } else {
-          // Handle the case where res.user is null
-          console.error('User is null after successful login');
+          this.sendEmailForVarification(res.user)
         }
       }, err => {
         alert(err.message);
@@ -73,7 +74,8 @@ export class AuthService {
         await this.firestore.collection('users').doc(uid).set(updatedUserDetails);
 
         this.isLoadingSubject.next(false);
-        alert('Registration Successful');
+        this.sendEmailForVarification(userCredential.user)
+        this.snackBar.open('Verification email sent!', 'Close', { duration: 10000 });
         this.router.navigate(['login']);
       }
     } catch (err: any) {
@@ -98,8 +100,8 @@ export class AuthService {
   // forgot password
   async forgotPassword(email: string) {
     await this.fireauth.sendPasswordResetEmail(email).then(() => {
-      console.log("nakadawat ko ani nga email: ", email)
-      //this.router.navigate(['/verify-email']); --------------ilisan ni nako
+      this.router.navigate(['/login']);
+      this.snackBar.open('Email sent!', 'Close', { duration: 2000 });
     }, err => {           
       alert('Something went wrong');
     })
@@ -107,9 +109,8 @@ export class AuthService {
 
   // email varification
   sendEmailForVarification(user: any) {
-    console.log(user);
     user.sendEmailVerification().then((res: any) => {
-      this.router.navigate(['/verify-email']);
+      this.snackBar.open('Email verification sent!', 'Close', { duration: 10000 });
     }, (err: any) => {
       alert('Something went wrong. Not able to send mail to your email.')
     })
